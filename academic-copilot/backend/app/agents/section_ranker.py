@@ -45,7 +45,8 @@ class SectionRankingAgent(BaseAgent):
         next_semester: SemesterPlan,
     ) -> list[ProposedSchedule]:
         """Find sections and generate ranked schedule proposals."""
-        course_ids = [c.course_id for c in next_semester.courses]
+        completed_ids = {course.course_id for course in student.completed_courses if course.grade != "NR"}
+        course_ids = [c.course_id for c in next_semester.courses if c.course_id not in completed_ids]
         semester = next_semester.semester
 
         # 1. Fetch all available sections

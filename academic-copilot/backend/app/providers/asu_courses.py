@@ -50,6 +50,7 @@ class ASUCourseProvider(CourseProvider):
                 seats_total=s.get("seats_total", 40),
                 seats_available=s.get("seats_available", 10),
                 semester=raw["semester"],
+                data_source="Seeded ASU demo section provider",
             )
             self._sections.setdefault(s["course_id"], []).append(section)
         self._loaded = True

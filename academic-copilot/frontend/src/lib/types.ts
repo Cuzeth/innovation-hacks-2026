@@ -216,6 +216,7 @@ export interface Section {
   seats_total: number;
   seats_available: number;
   semester: string;
+  data_source: string;
   notes: string;
 }
 

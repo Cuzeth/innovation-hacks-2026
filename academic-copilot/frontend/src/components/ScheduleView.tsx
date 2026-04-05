@@ -25,6 +25,10 @@ export default function ScheduleView({
   selectedScheduleId,
   onSelectSchedule,
 }: Props) {
+  const usesSeededSections = schedules.some((schedule) =>
+    schedule.entries.some((entry) => entry.section.section.data_source.toLowerCase().includes("demo"))
+  );
+
   if (!schedules.length) {
     return (
       <div className="text-center py-20 text-muted">
@@ -40,6 +44,12 @@ export default function ScheduleView({
           Schedule Recommendations for {schedules[0].semester}
         </h2>
       </div>
+
+      {usesSeededSections && (
+        <div className="bg-warning/10 border border-warning/30 rounded-xl p-3 text-xs text-warning">
+          Section availability and instructor assignments are coming from a seeded demo dataset right now, so treat them as planning guidance unless you connect a live ASU section source.
+        </div>
+      )}
 
       {/* Schedule cards */}
       <div className="grid gap-4">
@@ -248,6 +258,11 @@ function SectionDetail({ entry }: { entry: ScheduleEntry }) {
       {sec.notes && (
         <div className="mt-1.5 text-[10px] text-muted">
           Historical signal: {sec.notes}
+        </div>
+      )}
+      {sec.data_source && (
+        <div className="mt-1 text-[10px] text-warning">
+          Section source: {sec.data_source}
         </div>
       )}
     </div>

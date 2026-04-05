@@ -8,9 +8,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from app.models.student import StudentProfile, CompletedCourse, StudentPreferences
 from app.models.degree import DegreeRequirements, RequirementStatus
+from app.models.plan import SemesterPlan, PlannedCourse
 from app.providers.asu_requirements import ASURequirementsProvider
 from app.agents.credit_eval import CreditEvaluationAgent
 from app.agents.planner import PlanningAgent
+from app.agents.section_ranker import SectionRankingAgent
 
 
 def _load_sample_student() -> StudentProfile:
@@ -188,6 +190,69 @@ def test_what_if_failure_for_in_progress_course():
     print(f"    Scenario term: {analysis.scenario_graduation_term}")
 
 
+def test_course_id_normalization_prevents_repeat_suggestions():
+    """Messy course IDs should still count as completed."""
+    student = _load_sample_student()
+    student.completed_courses.append(
+        CompletedCourse(
+            course_id="cse360",
+            title="Introduction to Software Engineering",
+            credits=3,
+            grade="A",
+            semester="Spring 2026",
+            source="asu",
+        )
+    )
+    student.compute_credits()
+
+    provider = ASURequirementsProvider()
+    reqs = asyncio.run(provider.get_requirements("ESCSCI", "2024-2025"))
+    audit = asyncio.run(CreditEvaluationAgent().evaluate(student, reqs))
+    planner = PlanningAgent()
+    plan = asyncio.run(planner.generate_plan(student, audit))
+
+    assert not any(
+        course.course_id == "CSE 360"
+        for semester in plan.recommended_path.semesters
+        for course in semester.courses
+    )
+
+    print("  course_id_normalization: PASS")
+
+
+def test_schedule_ranker_filters_completed_courses():
+    """Schedule ranking should never re-recommend a completed course."""
+    student = _load_sample_student()
+    student.completed_courses.append(
+        CompletedCourse(
+            course_id="CSE 360",
+            title="Introduction to Software Engineering",
+            credits=3,
+            grade="A",
+            semester="Spring 2026",
+            source="asu",
+        )
+    )
+    next_semester = SemesterPlan(
+        semester="Fall 2026",
+        courses=[
+            PlannedCourse(course_id="CSE 360", title="Introduction to Software Engineering", credits=3),
+            PlannedCourse(course_id="CSE 330", title="Operating Systems", credits=3),
+        ],
+        total_credits=6,
+    )
+
+    schedules = asyncio.run(SectionRankingAgent().rank_schedules(student, next_semester))
+
+    assert len(schedules) > 0
+    assert all(
+        all(entry.section.section.course_id != "CSE 360" for entry in schedule.entries)
+        for schedule in schedules
+    )
+
+    print("  schedule_ranker_filter: PASS")
+
+
 if __name__ == "__main__":
     print("Running agent tests (no API key needed)...")
     test_credit_evaluation()
@@ -195,4 +260,6 @@ if __name__ == "__main__":
     test_bottleneck_detection()
     test_what_if_failure_for_upcoming_course()
     test_what_if_failure_for_in_progress_course()
+    test_course_id_normalization_prevents_repeat_suggestions()
+    test_schedule_ranker_filters_completed_courses()
     print("All agent tests passed!")

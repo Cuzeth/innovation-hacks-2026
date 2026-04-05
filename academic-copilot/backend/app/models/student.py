@@ -1,7 +1,8 @@
 """Student profile and preference models."""
 from __future__ import annotations
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from enum import Enum
+from app.utils.course_ids import normalize_course_id
 
 
 class Modality(str, Enum):
@@ -25,6 +26,16 @@ class CompletedCourse(BaseModel):
     semester: str = Field(default="", description="e.g. Fall 2024")
     source: str = Field(default="asu", description="asu | ap | transfer | test")
     transfer_institution: str = ""
+
+    @field_validator("course_id")
+    @classmethod
+    def validate_course_id(cls, value: str) -> str:
+        return normalize_course_id(value)
+
+    @field_validator("grade")
+    @classmethod
+    def validate_grade(cls, value: str) -> str:
+        return value.strip().upper()
 
 
 class StudentPreferences(BaseModel):
@@ -58,5 +69,29 @@ class StudentProfile(BaseModel):
     total_credits_completed: int = 0
 
     def compute_credits(self) -> int:
-        self.total_credits_completed = sum(c.credits for c in self.completed_courses)
+        non_credit_grades = {"E", "W", "EN", "I"}
+        latest_attempts: dict[str, CompletedCourse] = {}
+        for course in self.completed_courses:
+            existing = latest_attempts.get(course.course_id)
+            if existing is None or _semester_rank(course.semester) >= _semester_rank(existing.semester):
+                latest_attempts[course.course_id] = course
+
+        self.total_credits_completed = sum(
+            course.credits
+            for course in latest_attempts.values()
+            if course.source in {"ap", "transfer", "test"} or course.grade not in non_credit_grades
+        )
         return self.total_credits_completed
+
+
+def _semester_rank(semester: str) -> int:
+    parts = semester.split()
+    if len(parts) != 2:
+        return -1
+    season, year_str = parts
+    try:
+        year = int(year_str)
+    except ValueError:
+        return -1
+    season_rank = {"Spring": 0, "Summer": 1, "Fall": 2}.get(season, 0)
+    return year * 10 + season_rank

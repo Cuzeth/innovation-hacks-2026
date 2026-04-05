@@ -1,7 +1,8 @@
 """Degree requirement models."""
 from __future__ import annotations
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from enum import Enum
+from app.utils.course_ids import normalize_course_id
 
 
 class RequirementStatus(str, Enum):
@@ -14,6 +15,11 @@ class CourseOption(BaseModel):
     course_id: str
     title: str = ""
     credits: int = 3
+
+    @field_validator("course_id")
+    @classmethod
+    def validate_course_id(cls, value: str) -> str:
+        return normalize_course_id(value)
 
 
 class Requirement(BaseModel):

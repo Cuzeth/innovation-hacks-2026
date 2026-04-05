@@ -18,7 +18,13 @@ class CreditEvaluationAgent(BaseAgent):
 
     async def evaluate(self, student: StudentProfile, requirements: DegreeRequirements) -> DegreeAudit:
         """Evaluate student's credits against degree requirements."""
-        completed_map = {c.course_id: c for c in student.completed_courses}
+        deduped_courses: dict[str, CompletedCourse] = {}
+        for course in student.completed_courses:
+            existing = deduped_courses.get(course.course_id)
+            if existing is None or self._course_attempt_rank(course) >= self._course_attempt_rank(existing):
+                deduped_courses[course.course_id] = course
+
+        completed_map = deduped_courses
         in_progress_ids = {c.course_id for c in student.completed_courses if c.grade == "NR"}
         # D is not passing for most ASU major courses (C minimum required).
         # Only count courses with C- or better, or NR (in-progress).
@@ -106,6 +112,23 @@ class CreditEvaluationAgent(BaseAgent):
             unmet_count=total_unmet,
             explanations=explanations,
         )
+
+    def _course_attempt_rank(self, course: CompletedCourse) -> tuple[int, int]:
+        semester_rank = self._semester_rank(course.semester)
+        grade_rank = 1 if course.grade == "NR" else 0
+        return (semester_rank, grade_rank)
+
+    def _semester_rank(self, semester: str) -> int:
+        parts = semester.split()
+        if len(parts) != 2:
+            return -1
+        season, year_str = parts
+        try:
+            year = int(year_str)
+        except ValueError:
+            return -1
+        season_rank = {"Spring": 0, "Summer": 1, "Fall": 2}.get(season, 0)
+        return year * 10 + season_rank
 
     def _evaluate_requirement(
         self,

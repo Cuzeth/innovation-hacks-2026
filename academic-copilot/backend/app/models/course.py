@@ -1,12 +1,18 @@
 """Course and section models."""
 from __future__ import annotations
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+from app.utils.course_ids import normalize_course_id
 
 
 class CoursePrerequisite(BaseModel):
     course_id: str
     can_be_concurrent: bool = False
     min_grade: str = "D"
+
+    @field_validator("course_id")
+    @classmethod
+    def validate_course_id(cls, value: str) -> str:
+        return normalize_course_id(value)
 
 
 class Course(BaseModel):
@@ -18,6 +24,11 @@ class Course(BaseModel):
     corequisites: list[str] = Field(default_factory=list)
     typically_offered: list[str] = Field(default_factory=list, description="e.g. ['Fall', 'Spring']")
     is_upper_division: bool = False
+
+    @field_validator("course_id")
+    @classmethod
+    def validate_course_id(cls, value: str) -> str:
+        return normalize_course_id(value)
 
 
 class MeetingTime(BaseModel):
@@ -43,7 +54,13 @@ class Section(BaseModel):
     seats_total: int = 40
     seats_available: int = 10
     semester: str = ""
+    data_source: str = "Seeded demo section dataset"
     notes: str = ""
+
+    @field_validator("course_id")
+    @classmethod
+    def validate_course_id(cls, value: str) -> str:
+        return normalize_course_id(value)
 
 
 class SectionWithScore(BaseModel):
