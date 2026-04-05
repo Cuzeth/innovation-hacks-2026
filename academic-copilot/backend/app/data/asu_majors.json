@@ -1,0 +1,1933 @@
+[
+  {
+    "code": "ESCSCIBS",
+    "name": "Computer Science",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCSEBA",
+    "name": "Computer Science",
+    "degree": "BA",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCSEIBS",
+    "name": "Computer Science (Cybersecurity)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCSEIBA",
+    "name": "Computer Science (Cybersecurity)",
+    "degree": "BA",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCSESBS",
+    "name": "Computer Science (Software Engineering)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCSEBSE",
+    "name": "Computer Systems Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCSEIBSE",
+    "name": "Computer Systems Engineering (Cybersecurity)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESEMGBSE",
+    "name": "Engineering Management",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESIEEBSE",
+    "name": "Industrial Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCPIBS",
+    "name": "Informatics",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSSERBS",
+    "name": "Software Engineering",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESBMEBDBSE",
+    "name": "Biomedical Engineering (Biological Devices)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESBMEMDBSE",
+    "name": "Biomedical Engineering (Biomedical Devices)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESEEEBSE",
+    "name": "Electrical Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESEEEPBSE",
+    "name": "Electrical Engineering (Electric Power and Energy)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESAEROBSE",
+    "name": "Aerospace Engineering (Aeronautics)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESAEASBSE",
+    "name": "Aerospace Engineering (Astronautics)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESAEAVSBSE",
+    "name": "Aerospace Engineering (Autonomous Vehicle Systems)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCHEBSE",
+    "name": "Chemical Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESMSEBSE",
+    "name": "Materials Science and Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESMAEMBSE",
+    "name": "Mechanical Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESMAECBSE",
+    "name": "Mechanical Engineering (Computational Mechanics)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESMAEEBSE",
+    "name": "Mechanical Engineering (Energy and Environment)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESESCBUSBS",
+    "name": "Engineering Science (Business)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESESCMEBS",
+    "name": "Engineering Science (Microelectronics)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSMEGRBS",
+    "name": "Manufacturing Engineering",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESRASBSE",
+    "name": "Robotics and Autonomous Systems",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCONBSE",
+    "name": "Construction Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCONMGTBS",
+    "name": "Construction Management and Technology",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESEVEBSE",
+    "name": "Environmental Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCEEBSE",
+    "name": "Civil Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESCEESUBSE",
+    "name": "Civil Engineering (Sustainable Engineering)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESAMTATBS",
+    "name": "Aeronautical Management Technology (Air Traffic Management)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSAMTMBS",
+    "name": "Aeronautical Management Technology (Air Transportation Management)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSAMTFBS",
+    "name": "Aeronautical Management Technology (Professional Flight)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSAMTUASBS",
+    "name": "Aeronautical Management Technology (Unmanned Aerial Systems)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSAMTABAS",
+    "name": "Applied Science (Aviation)",
+    "degree": "BAS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSGITBAS",
+    "name": "Applied Science (Graphic Information Technology)",
+    "degree": "BAS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSIWDBAS",
+    "name": "Applied Science (Internet and Web Development)",
+    "degree": "BAS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSIMCOBAS",
+    "name": "Applied Science (Operations Management)",
+    "degree": "BAS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSEGRBSE",
+    "name": "Engineering",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSEGRASBSE",
+    "name": "Engineering (Automotive Systems)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESEGRCEBSE",
+    "name": "Engineering (Clean Energy Systems)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSEGRESBSE",
+    "name": "Engineering (Electrical Systems)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSEGRMEBSE",
+    "name": "Engineering (Mechanical Engineering Systems)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSEGRRBSE",
+    "name": "Engineering (Robotics)",
+    "degree": "BSE",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSETMBS",
+    "name": "Environmental and Resource Management",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSGITBS",
+    "name": "Graphic Information Technology",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESGITUEBS",
+    "name": "Graphic Information Technology (User Experience)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESGITFSWBS",
+    "name": "Graphic Information Technology (Full-Stack Web Development)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESHSEBS",
+    "name": "Human Systems Engineering",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESHSEUEBS",
+    "name": "Human Systems Engineering (User Experience)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSIFTBS",
+    "name": "Information Technology",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESIFTCSBS",
+    "name": "Information Technology (Cybersecurity)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "ESIFTNBS",
+    "name": "Information Technology (Networking)",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "TSTEMBS",
+    "name": "Technological Entrepreneurship and Management",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+  {
+    "code": "LSUSEXBS",
+    "name": "User Experience",
+    "degree": "BS",
+    "college": "Ira A. Fulton Schools of Engineering"
+  },
+
+  {
+    "code": "BAACCBS",
+    "name": "Accountancy",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAAIBBS",
+    "name": "Artificial Intelligence in Business",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABDABS",
+    "name": "Business Data Analytics",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUENTBS",
+    "name": "Business Entrepreneurship",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BACISBS",
+    "name": "Computer Information Systems",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAECNBS",
+    "name": "Economics",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAFINBS",
+    "name": "Finance",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAFINTBS",
+    "name": "Financial Technology",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAMGTBS",
+    "name": "Management",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAMKTBS",
+    "name": "Marketing",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAMKDIMCBS",
+    "name": "Marketing (Digital and Integrated Marketing Communications)",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAMKTPSBS",
+    "name": "Marketing (Professional Sales)",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAREAFBS",
+    "name": "Real Estate and Applied Finance",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BASCMBS",
+    "name": "Supply Chain Management",
+    "degree": "BS",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSCABA",
+    "name": "Business (Accounting and Business Decisions)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSGAGBA",
+    "name": "Business (Agribusiness Innovation and Technology)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAAPBTSBA",
+    "name": "Business (Applied Business and Technology Solutions)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSGLBA",
+    "name": "Business (Applied Supply Chains)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSBABA",
+    "name": "Business (Business Administration)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSCBA",
+    "name": "Business (Communication)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BAENTLBA",
+    "name": "Business (Entrepreneurial Leadership)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSFPBA",
+    "name": "Business (Financial Planning)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSFIMBA",
+    "name": "Business (Food Industry Management)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSGBA",
+    "name": "Business (Global Leadership)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSGPBA",
+    "name": "Business (Global Politics)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSHCBA",
+    "name": "Business (Health Care)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSHRBA",
+    "name": "Business (Human Resources)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSISBA",
+    "name": "Business (Information Security)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABSLACUBA",
+    "name": "Business (Language and Culture)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSLBA",
+    "name": "Business (Law)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSPBA",
+    "name": "Business (Public Service and Public Policy)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSRBA",
+    "name": "Business (Retail Management)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSMSBA",
+    "name": "Business (Sports Business)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSTABA",
+    "name": "Business (Statistics)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSSBA",
+    "name": "Business (Sustainability)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSTCBA",
+    "name": "Business (Technology)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+  {
+    "code": "BABUSTBA",
+    "name": "Business (Tourism)",
+    "degree": "BA",
+    "college": "W. P. Carey School of Business"
+  },
+
+  {
+    "code": "LAACTBS",
+    "name": "Actuarial Science",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAAFRBA",
+    "name": "African and African American Studies",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAAISBS",
+    "name": "American Indian Studies",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAASBBA",
+    "name": "Anthropology",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAASBBS",
+    "name": "Anthropology",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAHSTSABA",
+    "name": "Asia Studies (South Asia)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAHSTSEABA",
+    "name": "Asia Studies (Southeast Asia)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABCHBA",
+    "name": "Biochemistry",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABCHBS",
+    "name": "Biochemistry",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABCHMBS",
+    "name": "Biochemistry (Medicinal Chemistry)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABSCBS",
+    "name": "Biological Sciences",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABSCSBS",
+    "name": "Biological Sciences (Biology and Society)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABSCMBS",
+    "name": "Biological Sciences (Biomedical Sciences)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABSCCBS",
+    "name": "Biological Sciences (Conservation Biology and Ecology)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABSCGBS",
+    "name": "Biological Sciences (Genetics, Cell and Developmental Biology)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABSCABS",
+    "name": "Biological Sciences (Neurobiology, Physiology and Behavior)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABIPHBS",
+    "name": "Biophysics",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LACHMBA",
+    "name": "Chemistry",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LACHMBS",
+    "name": "Chemistry",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LACHMEBS",
+    "name": "Chemistry (Environmental Chemistry)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LACELBA",
+    "name": "Civic and Economic Thought and Leadership",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LACOMBA",
+    "name": "Communication",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LACOMBS",
+    "name": "Communication",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LACMSBS",
+    "name": "Computational Mathematical Sciences",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAEESBA",
+    "name": "Earth and Environmental Sciences",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASESBS",
+    "name": "Earth and Space Exploration",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASESABBS",
+    "name": "Earth and Space Exploration (Astrobiology and Biogeosciences)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASESABS",
+    "name": "Earth and Space Exploration (Astrophysics)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASESESDBS",
+    "name": "Earth and Space Exploration (Exploration Systems Design)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAECNBS",
+    "name": "Economics",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAECNPECBS",
+    "name": "Economics (Politics and the Economy)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAENGBA",
+    "name": "English",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAENGCBA",
+    "name": "English (Creative Writing)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAENGNBA",
+    "name": "English (Linguistics)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAENGTBA",
+    "name": "English (Literature)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAENGSEBA",
+    "name": "English (Secondary Education)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAENGWBA",
+    "name": "English (Writing, Rhetorics and Literacies)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAFASBS",
+    "name": "Family and Human Development",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAFMSBA",
+    "name": "Film (Film and Media Studies)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAFREBA",
+    "name": "French",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAWSTBA",
+    "name": "Gender, Women and Sexuality Studies",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAGISBS",
+    "name": "Geographic Information Science",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAGCUBA",
+    "name": "Geography",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAGCUBS",
+    "name": "Geography",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAGCUMBS",
+    "name": "Geography (Meteorology-Climatology)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAGERBA",
+    "name": "German",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASSHBA",
+    "name": "Global Health",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASGSBA",
+    "name": "Global Studies",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAHISBA",
+    "name": "History",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAHISSEBA",
+    "name": "History (Secondary Education)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAISTBA",
+    "name": "Integrated Studies",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAISTBS",
+    "name": "Integrated Studies",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASLCBA",
+    "name": "International Letters and Cultures",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASLCASBA",
+    "name": "International Letters and Cultures (Arabic Studies)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASLCVBA",
+    "name": "International Letters and Cultures (Classical Civilization)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASLCCBA",
+    "name": "International Letters and Cultures (Classics)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAITABA",
+    "name": "Italian",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAJSTBA",
+    "name": "Jewish Studies",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAJUSBA",
+    "name": "Justice Studies",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAJUSBS",
+    "name": "Justice Studies",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAMATBA",
+    "name": "Mathematics",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAMATBS",
+    "name": "Mathematics",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAMATSBS",
+    "name": "Mathematics (Secondary Education)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAMATTBS",
+    "name": "Mathematics (Statistics)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAMICBS",
+    "name": "Microbiology",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAMICMBS",
+    "name": "Microbiology (Medical Microbiology)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAMBBBS",
+    "name": "Molecular Biosciences and Biotechnology",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LABMENBS",
+    "name": "Neuroscience",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPHIBA",
+    "name": "Philosophy",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPHIMPBA",
+    "name": "Philosophy (Morality, Politics and Law)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPHYBA",
+    "name": "Physics",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPHYBS",
+    "name": "Physics",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPHYSEBS",
+    "name": "Physics (Secondary Education)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPOSBA",
+    "name": "Political Science",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPOSBS",
+    "name": "Political Science",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPECBS",
+    "name": "Politics and the Economy",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPGSBA",
+    "name": "Psychology",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPGSBS",
+    "name": "Psychology",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LAPGSPSBS",
+    "name": "Psychology (Psychological Science)",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LARELCPBA",
+    "name": "Religious Studies (Religion, Culture and Public Life)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LARELPGBA",
+    "name": "Religious Studies (Religion, Politics and Global Affairs)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LARUSBA",
+    "name": "Russian",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASOCBS",
+    "name": "Sociology",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASPABA",
+    "name": "Spanish",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LATECLDRBS",
+    "name": "Technological Leadership",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LATCLUBA",
+    "name": "Transborder Chicana/o and Latina/o Studies (U.S. and Mexican Regional Immigration Policy and Economy)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LATCLMBA",
+    "name": "Transborder Chicana/o and Latina/o Studies (Media and Expressive Culture)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LATCLTBA",
+    "name": "Transborder Chicana/o and Latina/o Studies (Transborder Community Development and Health)",
+    "degree": "BA",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+  {
+    "code": "LASHSBS",
+    "name": "Speech and Hearing Science",
+    "degree": "BS",
+    "college": "The College of Liberal Arts and Sciences"
+  },
+
+  {
+    "code": "CSJMCBA",
+    "name": "Journalism and Mass Communication",
+    "degree": "BA",
+    "college": "Walter Cronkite School of Journalism and Mass Communication"
+  },
+  {
+    "code": "CSSPJBA",
+    "name": "Sports Journalism",
+    "degree": "BA",
+    "college": "Walter Cronkite School of Journalism and Mass Communication"
+  },
+  {
+    "code": "CSDIGABS",
+    "name": "Digital Audiences",
+    "degree": "BS",
+    "college": "Walter Cronkite School of Journalism and Mass Communication"
+  },
+  {
+    "code": "CSMCMSTBA",
+    "name": "Mass Communication and Media Studies",
+    "degree": "BA",
+    "college": "Walter Cronkite School of Journalism and Mass Communication"
+  },
+  {
+    "code": "CSDMLBA",
+    "name": "Digital Media Literacy",
+    "degree": "BA",
+    "college": "Walter Cronkite School of Journalism and Mass Communication"
+  },
+
+  {
+    "code": "ARSTDBSD",
+    "name": "Design (Architectural Studies)",
+    "degree": "BSD",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIARTANBFA",
+    "name": "Art (Animation)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTEBFA",
+    "name": "Art (Art Education)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTHBA",
+    "name": "Art (Art History)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTSTDBA",
+    "name": "Art (Art Studies)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIARTATBFA",
+    "name": "Art (Art Therapy)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTCBFA",
+    "name": "Art (Ceramics)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTSBFA",
+    "name": "Art (Craft and Sculptural Practices)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIARTDPBFA",
+    "name": "Art (Digital Photography)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTIBFA",
+    "name": "Art (Expanded Arts)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTMSBA",
+    "name": "Art (Museum Curatorial Practices)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIARTPDBFA",
+    "name": "Art (Painting, Drawing and Printmaking)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAARTPHBFA",
+    "name": "Art (Photography)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIEDSBS",
+    "name": "Environmental Design",
+    "degree": "BS",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFSHBA",
+    "name": "Fashion",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFSHAPDBA",
+    "name": "Fashion (Apparel Product Development)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFSHATDBA",
+    "name": "Fashion (Apparel Technical Design)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFSHDBA",
+    "name": "Fashion (Design)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFSHMBA",
+    "name": "Fashion (Merchandising)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAFPRBA",
+    "name": "Film (Filmmaking Practices)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFMPBFA",
+    "name": "Film and Media Production",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFMPCBFA",
+    "name": "Film and Media Production (Cinematography)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFMPDBFA",
+    "name": "Film and Media Production (Directing)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFMPPBFA",
+    "name": "Film and Media Production (Post-Production)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIFMPSBFA",
+    "name": "Film and Media Production (Screenwriting)",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIGMDESBS",
+    "name": "Game Design",
+    "degree": "BS",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "ARGRABSD",
+    "name": "Graphic Design",
+    "degree": "BSD",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "ARINDBSD",
+    "name": "Industrial Design",
+    "degree": "BSD",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "ARINTBSD",
+    "name": "Interior Design",
+    "degree": "BSD",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "ARPLABSLA",
+    "name": "Landscape Architecture",
+    "degree": "BSLA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIDGCBA",
+    "name": "Media Arts and Sciences",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIDGCABA",
+    "name": "Media Arts and Sciences (Art)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIDGCDBA",
+    "name": "Media Arts and Sciences (Design)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIMASEDBA",
+    "name": "Media Arts and Sciences (Education)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIMASGIMBS",
+    "name": "Media Arts and Sciences (Games and Interactive Media)",
+    "degree": "BS",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIDGCTEBA",
+    "name": "Media Arts and Sciences (Graphic Information Technology)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIDGCMPBS",
+    "name": "Media Arts and Sciences (Media Processing)",
+    "degree": "BS",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIDGCFBA",
+    "name": "Media Arts and Sciences (Film)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIDGCMBA",
+    "name": "Media Arts and Sciences (Music)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSBA",
+    "name": "Music",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIMUSMCBA",
+    "name": "Music (Music and Culture)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIMUSPMBA",
+    "name": "Music (Popular Music)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSEBM",
+    "name": "Music Learning and Teaching",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSTHBM",
+    "name": "Music Therapy",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSPPBM",
+    "name": "Performance (Collaborative Piano)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSPGBM",
+    "name": "Performance (Guitar)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSPJBM",
+    "name": "Performance (Jazz)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSPKBM",
+    "name": "Performance (Keyboard)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSPMBM",
+    "name": "Performance (Music Theatre)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSPOBM",
+    "name": "Performance (Orchestral Instrument)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSPVBM",
+    "name": "Performance (Voice)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HIPERMVBA",
+    "name": "Performance and Movement",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FATHEBA",
+    "name": "Theatre",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FATHEABA",
+    "name": "Theatre (Acting)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FADSNPRBA",
+    "name": "Theatre (Design and Production)",
+    "degree": "BA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSTCBM",
+    "name": "Theory and Composition (Composition)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "FAMUSTTBM",
+    "name": "Theory and Composition (Theory)",
+    "degree": "BM",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+  {
+    "code": "HICOSBFA",
+    "name": "Costume Design and Technology for the Creative Industries",
+    "degree": "BFA",
+    "college": "Herberger Institute for Design and the Arts"
+  },
+
+  {
+    "code": "NHFNUENBS",
+    "name": "Applied Nutrition and Health",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "ESBMIBS",
+    "name": "Biomedical Informatics and Data Science",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "ECEXERBS",
+    "name": "Clinical Exercise Science",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHDIETCSBS",
+    "name": "Dietetics",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHHCDBS",
+    "name": "Health Care Administration and Policy",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHHEHPBS",
+    "name": "Health Education and Health Promotion",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHHSCBS",
+    "name": "Health Sciences",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NUHSCHLCBS",
+    "name": "Health Sciences (Healthy Lifestyles and Fitness Science)",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHIPHBIPH",
+    "name": "International Public Health",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NUKINBS",
+    "name": "Kinesiology",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHMEDBS",
+    "name": "Medical Studies",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHNUSCIBS",
+    "name": "Nutritional Science",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHPOPHLBS",
+    "name": "Population Health",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHPBHBS",
+    "name": "Public Health",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NHSPTSPPBS",
+    "name": "Sports Science and Performance Programming",
+    "degree": "BS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "ECNTRBAS",
+    "name": "Applied Science (Applied Nutrition and Health)",
+    "degree": "BAS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NUHSCBAS",
+    "name": "Applied Science (Health Sciences)",
+    "degree": "BAS",
+    "college": "College of Health Solutions"
+  },
+  {
+    "code": "NUMLSBAS",
+    "name": "Applied Science (Medical Laboratory Science)",
+    "degree": "BAS",
+    "college": "College of Health Solutions"
+  },
+
+  {
+    "code": "NUNURDBSN",
+    "name": "Nursing",
+    "degree": "BSN",
+    "college": "Edson College of Nursing and Health Innovation"
+  },
+  {
+    "code": "NUHEIBS",
+    "name": "Health Entrepreneurship and Innovation",
+    "degree": "BS",
+    "college": "Edson College of Nursing and Health Innovation"
+  },
+  {
+    "code": "NUCOMHBS",
+    "name": "Community Health",
+    "degree": "BS",
+    "college": "Edson College of Nursing and Health Innovation"
+  },
+  {
+    "code": "NUHCCRBS",
+    "name": "Health Care Compliance and Regulations",
+    "degree": "BS",
+    "college": "Edson College of Nursing and Health Innovation"
+  },
+  {
+    "code": "NUHCCOBS",
+    "name": "Health Care Coordination",
+    "degree": "BS",
+    "college": "Edson College of Nursing and Health Innovation"
+  },
+  {
+    "code": "NUINTHBS",
+    "name": "Integrative Health",
+    "degree": "BS",
+    "college": "Edson College of Nursing and Health Innovation"
+  },
+  {
+    "code": "NUHEIBAS",
+    "name": "Applied Science (Health Entrepreneurship and Innovation)",
+    "degree": "BAS",
+    "college": "Edson College of Nursing and Health Innovation"
+  },
+
+  {
+    "code": "LAAMLBS",
+    "name": "Complexity Science",
+    "degree": "BS",
+    "college": "Rob Walton College of Global Futures"
+  },
+  {
+    "code": "FIFISBA",
+    "name": "Innovation in Society",
+    "degree": "BA",
+    "college": "Rob Walton College of Global Futures"
+  },
+  {
+    "code": "FIFISBS",
+    "name": "Innovation in Society",
+    "degree": "BS",
+    "college": "Rob Walton College of Global Futures"
+  },
+  {
+    "code": "GFSEABS",
+    "name": "Ocean Futures",
+    "degree": "BS",
+    "college": "Rob Walton College of Global Futures"
+  },
+  {
+    "code": "GFSEACMSBS",
+    "name": "Ocean Futures (Coastal and Marine Sciences)",
+    "degree": "BS",
+    "college": "Rob Walton College of Global Futures"
+  },
+  {
+    "code": "SUSUSTBA",
+    "name": "Sustainability",
+    "degree": "BA",
+    "college": "Rob Walton College of Global Futures"
+  },
+  {
+    "code": "SUSUSTBS",
+    "name": "Sustainability",
+    "degree": "BS",
+    "college": "Rob Walton College of Global Futures"
+  },
+  {
+    "code": "SUSFOSYSBS",
+    "name": "Sustainable Food Systems",
+    "degree": "BS",
+    "college": "Rob Walton College of Global Futures"
+  },
+
+  {
+    "code": "TEEEDBAE",
+    "name": "Elementary Education",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+  {
+    "code": "TESPEBAE",
+    "name": "Special Education and Elementary Education",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+  {
+    "code": "TESEDBAE",
+    "name": "Secondary Education",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+  {
+    "code": "TEECDEDBAE",
+    "name": "Early Childhood Education",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+  {
+    "code": "TEECSEBAE",
+    "name": "Early Childhood and Early Childhood Special Education",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+  {
+    "code": "TEESECEBAE",
+    "name": "Educational Studies (Early Childhood Studies)",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+  {
+    "code": "EDSLSTBAE",
+    "name": "Educational Studies",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+  {
+    "code": "TEDLLBAE",
+    "name": "Elementary Multilingual Education",
+    "degree": "BAE",
+    "college": "Mary Lou Fulton College for Teaching and Learning Innovation"
+  },
+
+  {
+    "code": "PPCRIMJBS",
+    "name": "Criminology and Criminal Justice",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPCRJPOLBS",
+    "name": "Criminology and Criminal Justice (Policing)",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPPAFLPBS",
+    "name": "Public Service and Public Policy (Law and Policy)",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPPAFSSBS",
+    "name": "Public Service and Public Policy (Social Services Delivery)",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPNLMBS",
+    "name": "Nonprofit Leadership and Management",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPPRMBS",
+    "name": "Parks, Recreation and Sport Management",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPTDMBS",
+    "name": "Tourism Development and Management",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPTRMBS",
+    "name": "Tourism and Recreation Management",
+    "degree": "BS",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+  {
+    "code": "PPSWUSWU",
+    "name": "Social Work",
+    "degree": "BSW",
+    "college": "Watts College of Public Service and Community Solutions"
+  },
+
+  {
+    "code": "ASIASBA",
+    "name": "Interdisciplinary Arts and Sciences",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASBASBAS",
+    "name": "Applied Science",
+    "degree": "BAS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASACOBS",
+    "name": "Applied Computing",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASACOCBS",
+    "name": "Applied Computing (Cybersecurity)",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASLSCBA",
+    "name": "Biology",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASLSCBS",
+    "name": "Biology",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASCOMMBA",
+    "name": "Communication",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASCOMMBS",
+    "name": "Communication",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASENGBA",
+    "name": "English",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASENGSEBA",
+    "name": "English (Secondary Education)",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASENVBS",
+    "name": "Environmental Science",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASHISBA",
+    "name": "History",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASMATBS",
+    "name": "Applied Mathematics",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASPGSBA",
+    "name": "Psychology",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASPGSBS",
+    "name": "Psychology",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASPGSFPBA",
+    "name": "Psychology (Forensic Psychology)",
+    "degree": "BA",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASPGSFPBS",
+    "name": "Psychology (Forensic Psychology)",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASSBSBS",
+    "name": "Social and Behavioral Sciences",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASCPFBS",
+    "name": "Digital Forensics",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASFOREBS",
+    "name": "Forensic Science",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+  {
+    "code": "ASFOREDIBS",
+    "name": "Forensic Science (Death Investigations)",
+    "degree": "BS",
+    "college": "New College of Interdisciplinary Arts and Sciences"
+  },
+
+  {
+    "code": "ARPUPBSP",
+    "name": "Urban Planning",
+    "degree": "BSP",
+    "college": "College of Integrative Sciences and Arts"
+  },
+  {
+    "code": "FAATSBA",
+    "name": "Arts",
+    "degree": "BA",
+    "college": "College of Integrative Sciences and Arts"
+  },
+  {
+    "code": "AGBUABS",
+    "name": "Business Administration",
+    "degree": "BS",
+    "college": "College of Integrative Sciences and Arts"
+  }
+]

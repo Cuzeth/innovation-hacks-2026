@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import type { DegreeAudit, RequirementCategory, Requirement } from "@/lib/types";
 import { api } from "@/lib/api";
+import Markdown from "./Markdown";
 import clsx from "clsx";
 
 interface Props {
@@ -118,9 +119,9 @@ export default function AuditView({ audit, onRun }: Props) {
             : "Generate AI Summary"}
         </button>
         {explanation && (
-          <p className="text-sm text-foreground/80 mt-2 whitespace-pre-wrap">
-            {explanation}
-          </p>
+          <div className="text-sm text-foreground/80 mt-2">
+            <Markdown text={explanation} />
+          </div>
         )}
       </div>
 

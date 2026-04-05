@@ -31,16 +31,21 @@ const STEPS = [
   { label: "Preferences", icon: Settings },
 ];
 
-const SEMESTERS = [
-  "Fall 2021", "Spring 2022", "Summer 2022",
+const CURRENT_SEMESTERS = [
+  "Fall 2026", "Spring 2027", "Fall 2027", "Spring 2028",
+];
+
+const PAST_SEMESTERS = [
   "Fall 2022", "Spring 2023", "Summer 2023",
   "Fall 2023", "Spring 2024", "Summer 2024",
   "Fall 2024", "Spring 2025", "Summer 2025",
   "Fall 2025", "Spring 2026", "Summer 2026",
+  "Fall 2026",
 ];
 
 const GRAD_TARGETS = [
-  "Spring 2027", "Fall 2027", "Spring 2028", "Fall 2028", "Spring 2029",
+  "Spring 2027", "Fall 2027", "Spring 2028", "Fall 2028",
+  "Spring 2029", "Fall 2029", "Spring 2030",
 ];
 
 export default function Onboarding({ onComplete }: Props) {
@@ -50,8 +55,13 @@ export default function Onboarding({ onComplete }: Props) {
   // Step 1: Basic info
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [majorCode, setMajorCode] = useState("ESCSCI");
+  const [majorCode, setMajorCode] = useState("");
+  const [majorName, setMajorName] = useState("");
   const [catalogYear] = useState("2024-2025");
+  const [majors, setMajors] = useState<
+    { code: string; name: string; degree: string; college: string }[]
+  >([]);
+  const [majorSearch, setMajorSearch] = useState("");
   const [currentSemester, setCurrentSemester] = useState("Fall 2026");
 
   // Step 2: Courses
@@ -90,6 +100,7 @@ export default function Onboarding({ onComplete }: Props) {
   useEffect(() => {
     api.listCourses().then(setCourseCatalog).catch(() => {});
     api.listAPExams().then(setApExams).catch(() => {});
+    api.listMajors().then(setMajors).catch(() => {});
   }, []);
 
   const handleTranscriptUpload = async (file: File) => {
@@ -180,7 +191,7 @@ export default function Onboarding({ onComplete }: Props) {
         name,
         email,
         university: "Arizona State University",
-        major: "Computer Science",
+        major: majorName || "Computer Science",
         major_code: majorCode,
         catalog_year: catalogYear,
         current_semester: currentSemester,
@@ -271,15 +282,67 @@ export default function Onboarding({ onComplete }: Props) {
 
               <div>
                 <label className="block text-sm text-muted mb-1">Major</label>
-                <select
-                  value={majorCode}
-                  onChange={(e) => setMajorCode(e.target.value)}
-                  className="w-full px-3 py-2 bg-background border border-card-border rounded-lg text-sm focus:outline-none focus:border-accent"
-                >
-                  <option value="ESCSCI">
-                    Computer Science, BS — Fulton Schools of Engineering
-                  </option>
-                </select>
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-muted" />
+                  <input
+                    type="text"
+                    value={majorCode ? `${majorName} (${majorCode})` : majorSearch}
+                    onChange={(e) => {
+                      setMajorSearch(e.target.value);
+                      setMajorCode("");
+                      setMajorName("");
+                    }}
+                    onFocus={() => {
+                      if (majorCode) {
+                        setMajorSearch(majorName);
+                        setMajorCode("");
+                        setMajorName("");
+                      }
+                    }}
+                    placeholder="Search majors... (e.g. Computer Science, Biology)"
+                    className="w-full pl-8 pr-3 py-2 bg-background border border-card-border rounded-lg text-sm focus:outline-none focus:border-accent"
+                  />
+                </div>
+                {!majorCode && majorSearch.length >= 2 && (
+                  <div className="mt-1 bg-background border border-card-border rounded-lg max-h-48 overflow-auto">
+                    {majors
+                      .filter(
+                        (m) =>
+                          m.name.toLowerCase().includes(majorSearch.toLowerCase()) ||
+                          m.code.toLowerCase().includes(majorSearch.toLowerCase()) ||
+                          m.college.toLowerCase().includes(majorSearch.toLowerCase())
+                      )
+                      .slice(0, 15)
+                      .map((m) => (
+                        <button
+                          key={m.code}
+                          onClick={() => {
+                            setMajorCode(m.code);
+                            setMajorName(m.name);
+                            setMajorSearch("");
+                          }}
+                          className="w-full text-left px-3 py-2 hover:bg-card text-sm cursor-pointer border-b border-card-border/30 last:border-0"
+                        >
+                          <div className="font-medium">
+                            {m.name}
+                            <span className="text-muted font-normal ml-1">
+                              ({m.degree})
+                            </span>
+                          </div>
+                          <div className="text-xs text-muted">{m.college}</div>
+                        </button>
+                      ))}
+                    {majors.filter(
+                      (m) =>
+                        m.name.toLowerCase().includes(majorSearch.toLowerCase()) ||
+                        m.code.toLowerCase().includes(majorSearch.toLowerCase())
+                    ).length === 0 && (
+                      <div className="px-3 py-2 text-xs text-muted">
+                        No majors found for &quot;{majorSearch}&quot;
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div>
@@ -291,7 +354,7 @@ export default function Onboarding({ onComplete }: Props) {
                   onChange={(e) => setCurrentSemester(e.target.value)}
                   className="w-full px-3 py-2 bg-background border border-card-border rounded-lg text-sm focus:outline-none focus:border-accent"
                 >
-                  {SEMESTERS.map((s) => (
+                  {CURRENT_SEMESTERS.map((s) => (
                     <option key={s} value={s}>
                       {s}
                     </option>
@@ -526,7 +589,7 @@ export default function Onboarding({ onComplete }: Props) {
                               className="text-xs bg-card border border-card-border rounded px-1.5 py-0.5"
                             >
                               <option value="">Semester</option>
-                              {SEMESTERS.map((s) => (
+                              {PAST_SEMESTERS.map((s) => (
                                 <option key={s} value={s}>
                                   {s}
                                 </option>
@@ -808,10 +871,10 @@ export default function Onboarding({ onComplete }: Props) {
           {step < 2 ? (
             <button
               onClick={() => setStep((s) => s + 1)}
-              disabled={step === 0 && !name.trim()}
+              disabled={step === 0 && (!name.trim() || !majorCode)}
               className={clsx(
                 "flex items-center gap-1.5 px-6 py-2 rounded-lg text-sm font-medium transition cursor-pointer",
-                step === 0 && !name.trim()
+                step === 0 && (!name.trim() || !majorCode)
                   ? "bg-muted/20 text-muted/50 cursor-not-allowed"
                   : "bg-accent text-white hover:bg-accent/90"
               )}

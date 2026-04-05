@@ -6,7 +6,13 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(bun create:*)",
-      "Bash(bun add:*)"
+      "Bash(bun add:*)",
+      "WebSearch",
+      "WebFetch(domain:degrees.apps.asu.edu)",
+      "WebFetch(domain:education.asu.edu)",
+      "WebFetch(domain:newcollege.asu.edu)",
+      "WebFetch(domain:publicservice.asu.edu)",
+      "WebFetch(domain:forensics.asu.edu)"
     ]
   }
 }

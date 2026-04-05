@@ -8,7 +8,7 @@ class Settings(BaseSettings):
 
     # Gemini / Vertex AI
     gemini_api_key: str = ""
-    gemini_model: str = "gemini-2.0-flash"
+    gemini_model: str = "gemini-2.5-flash"
 
     # Google Calendar
     google_client_id: str = ""

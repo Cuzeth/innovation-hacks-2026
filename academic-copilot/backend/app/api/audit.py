@@ -1,5 +1,5 @@
 """Degree audit API routes."""
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.agents.orchestrator import OrchestratorAgent, WorkflowState
 from app.agents.credit_eval import CreditEvaluationAgent
 from app.api.student import get_student
@@ -24,7 +24,15 @@ async def run_full_audit():
     student = get_student()
     orchestrator = OrchestratorAgent()
 
-    state = await orchestrator.run_full_audit(student)
+    try:
+        state = await orchestrator.run_full_audit(student)
+    except Exception as e:
+        msg = str(e)
+        if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+            raise HTTPException(429, "Gemini API rate limit exceeded. Please wait a moment and try again.")
+        if "403" in msg or "PERMISSION_DENIED" in msg:
+            raise HTTPException(403, "Gemini API key issue. Check your GEMINI_API_KEY.")
+        raise HTTPException(500, f"Audit failed: {msg}")
     set_state(student.id, state)
 
     return {

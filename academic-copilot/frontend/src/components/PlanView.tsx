@@ -13,6 +13,7 @@ import {
   GitBranch,
 } from "lucide-react";
 import type { AcademicPlan, GraduationPath, Bottleneck } from "@/lib/types";
+import Markdown from "./Markdown";
 import clsx from "clsx";
 
 export default function PlanView({ plan }: { plan: AcademicPlan }) {
@@ -77,8 +78,8 @@ export default function PlanView({ plan }: { plan: AcademicPlan }) {
             <ShieldAlert className="w-4 h-4 text-warning" />
             Risk to Graduation Timeline
           </h3>
-          <div className="text-xs text-foreground/80 whitespace-pre-wrap">
-            {plan.risk_summary}
+          <div className="text-xs text-foreground/80">
+            <Markdown text={plan.risk_summary} />
           </div>
         </div>
       )}
@@ -102,9 +103,9 @@ export default function PlanView({ plan }: { plan: AcademicPlan }) {
             <Sparkles className="w-4 h-4" />
             Why This Plan
           </div>
-          <p className="text-sm text-foreground/80 whitespace-pre-wrap">
-            {path.explanation}
-          </p>
+          <div className="text-sm text-foreground/80">
+            <Markdown text={path.explanation} />
+          </div>
         </div>
       )}
 

@@ -91,9 +91,14 @@ async def remove_course(course_id: str):
 
 @router.get("/majors")
 async def list_majors():
-    return [
-        {"code": "ESCSCI", "name": "Computer Science", "degree": "BS", "college": "Ira A. Fulton Schools of Engineering"},
-    ]
+    """List all ASU undergraduate majors."""
+    try:
+        with open(DATA_DIR / "asu_majors.json") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return [
+            {"code": "ESCSCI", "name": "Computer Science", "degree": "BS", "college": "Ira A. Fulton Schools of Engineering"},
+        ]
 
 
 @router.post("/transcript/upload")
@@ -108,7 +113,15 @@ async def upload_transcript(file: UploadFile = File(...)):
 
     from app.agents.transcript import TranscriptParserAgent
     agent = TranscriptParserAgent()
-    courses = await agent.parse_transcript(pdf_bytes)
+    try:
+        courses = await agent.parse_transcript(pdf_bytes)
+    except Exception as e:
+        msg = str(e)
+        if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+            raise HTTPException(429, "Gemini API rate limit exceeded. Please wait a moment and try again.")
+        if "403" in msg or "PERMISSION_DENIED" in msg:
+            raise HTTPException(403, "Gemini API key issue. Check your GEMINI_API_KEY configuration.")
+        raise HTTPException(500, f"Failed to parse transcript: {msg}")
     return {"courses": courses}
 
 
