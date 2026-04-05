@@ -20,6 +20,7 @@ class CreditEvaluationAgent(BaseAgent):
         """Evaluate student's credits against degree requirements."""
         completed_ids = {c.course_id for c in student.completed_courses}
         completed_map = {c.course_id: c for c in student.completed_courses}
+        in_progress_ids = {c.course_id for c in student.completed_courses if c.grade == "NR"}
 
         audit_categories: list[RequirementCategory] = []
         explanations: list[AuditExplanation] = []
@@ -34,7 +35,7 @@ class CreditEvaluationAgent(BaseAgent):
 
             for req in category.requirements:
                 status, credits_applied, courses_applied, explanation = self._evaluate_requirement(
-                    req, completed_ids, completed_map
+                    req, completed_ids, completed_map, in_progress_ids
                 )
                 audited_req = req.model_copy()
                 audited_req.status = status
@@ -105,8 +106,10 @@ class CreditEvaluationAgent(BaseAgent):
         req: Requirement,
         completed_ids: set[str],
         completed_map: dict[str, CompletedCourse],
+        in_progress_ids: set[str] | None = None,
     ) -> tuple[RequirementStatus, int, list[str], str]:
         """Evaluate a single requirement. Returns (status, credits_applied, courses_applied, explanation)."""
+        ip = in_progress_ids or set()
 
         # Case 1: Specific required courses
         if req.courses_required:
@@ -114,6 +117,14 @@ class CreditEvaluationAgent(BaseAgent):
             matched = required_ids & completed_ids
             if matched == required_ids:
                 credits = sum(c.credits for c in req.courses_required if c.course_id in matched)
+                in_prog = matched & ip
+                if in_prog:
+                    return (
+                        RequirementStatus.PARTIALLY_FULFILLED,
+                        credits,
+                        list(matched),
+                        f"In progress: {', '.join(sorted(in_prog))}. Will be fulfilled when completed.",
+                    )
                 return (
                     RequirementStatus.FULFILLED,
                     credits,
@@ -144,6 +155,14 @@ class CreditEvaluationAgent(BaseAgent):
             if len(matched) >= req.pick_n:
                 applied = list(matched)[:req.pick_n]
                 credits = sum(next(c.credits for c in req.pick_from if c.course_id == cid) for cid in applied)
+                in_prog = set(applied) & ip
+                if in_prog:
+                    return (
+                        RequirementStatus.PARTIALLY_FULFILLED,
+                        credits,
+                        applied,
+                        f"In progress: {', '.join(sorted(in_prog))}. Completed: {', '.join(sorted(set(applied) - ip))}",
+                    )
                 return (
                     RequirementStatus.FULFILLED,
                     credits,

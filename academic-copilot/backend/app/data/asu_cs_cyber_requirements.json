@@ -1,0 +1,460 @@
+{
+  "university": "Arizona State University",
+  "major": "Computer Science (Cybersecurity)",
+  "major_code": "ESCSEIBS",
+  "degree": "BS",
+  "college": "Ira A. Fulton Schools of Engineering",
+  "catalog_year": "2022-2023",
+  "total_credits_required": 120,
+  "minimum_gpa": 2.0,
+  "major_gpa_minimum": 2.0,
+  "residency_credits": 30,
+  "upper_division_credits": 45,
+  "data_source": "ASU DARS Audit — Computer Science (Cybersecurity) BS (2022-2023 catalog)",
+  "data_source_url": "https://degrees.apps.asu.edu/major-map/ASU00/ESCSEIBS/null/ALL/2022",
+  "notes": [
+    "Students must earn a C or better in all CSE prefix courses used for the major",
+    "A minimum of 30 credit hours must be completed in residence at ASU",
+    "At least 45 credit hours must be upper-division (300-level or above)",
+    "Students must maintain a 2.0 cumulative GPA and a 2.0 major GPA",
+    "Courses in the CS Lower/Upper Division sections cannot be used toward a minor"
+  ],
+  "categories": [
+    {
+      "name": "general_studies",
+      "display_name": "University Requirements & General Studies",
+      "credits_required": 36,
+      "requirements": [
+        {
+          "id": "gs-asu101",
+          "name": "ASU Experience",
+          "category": "general_studies",
+          "credits_required": 1,
+          "courses_required": [{"course_id": "ASU 101", "title": "The ASU Experience", "credits": 1}]
+        },
+        {
+          "id": "gs-eng1",
+          "name": "First-Year Composition I",
+          "category": "general_studies",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "ENG 101", "title": "First-Year Composition", "credits": 3},
+            {"course_id": "ENG 107", "title": "First-Year Composition", "credits": 3},
+            {"course_id": "ENG 105", "title": "Advanced First-Year Composition", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-eng2",
+          "name": "First-Year Composition II",
+          "category": "general_studies",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "ENG 102", "title": "First-Year Composition", "credits": 3},
+            {"course_id": "ENG 108", "title": "First-Year Composition", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-ma",
+          "name": "Mathematical Studies (MA)",
+          "category": "general_studies",
+          "description": "Satisfied by MAT 117, MAT 170, MAT 265, or other MA-designated course",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "MAT 117", "title": "College Algebra", "credits": 3},
+            {"course_id": "MAT 170", "title": "Precalculus", "credits": 3},
+            {"course_id": "MAT 265", "title": "Calculus for Engineers I", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-cs",
+          "name": "Computer/Statistics/Quantitative Applications (CS)",
+          "category": "general_studies",
+          "description": "Satisfied by CSE 110 or other CS-designated course",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 110", "title": "Principles of Programming", "credits": 3}]
+        },
+        {
+          "id": "gs-hu",
+          "name": "Humanities, Arts and Design (HU)",
+          "category": "general_studies",
+          "credits_required": 6,
+          "description": "6 hours of HU-designated courses",
+          "pick_n": 2,
+          "pick_from": [
+            {"course_id": "ASB 222", "title": "Buried Cities and Lost Tribes", "credits": 3},
+            {"course_id": "REL 240", "title": "Introduction to Southeast Asia", "credits": 3},
+            {"course_id": "PHI 101", "title": "Introduction to Philosophy", "credits": 3},
+            {"course_id": "ARS 101", "title": "Introduction to the Arts", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-sb",
+          "name": "Social-Behavioral Sciences (SB)",
+          "category": "general_studies",
+          "credits_required": 6,
+          "description": "6 hours of SB-designated courses",
+          "pick_n": 2,
+          "pick_from": [
+            {"course_id": "ASB 230", "title": "Beginning Social Research", "credits": 3},
+            {"course_id": "PSY 101", "title": "Introduction to Psychology", "credits": 3},
+            {"course_id": "SOC 101", "title": "Introductory Sociology", "credits": 3},
+            {"course_id": "POS 110", "title": "American Government", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-hu-sb-upper",
+          "name": "Upper Division HU or SB",
+          "category": "general_studies",
+          "credits_required": 3,
+          "description": "3 hours upper-division HU or SB",
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "POS 364", "title": "Natl Security/Intell/Terrorism", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-sq1",
+          "name": "Natural Sciences Quantitative (SQ)",
+          "category": "general_studies",
+          "credits_required": 4,
+          "description": "4 hours of SQ-designated natural science",
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "ENV 130", "title": "Intro to Environmental Science", "credits": 4},
+            {"course_id": "AST 111", "title": "Intro to Solar Systems Astronomy", "credits": 4},
+            {"course_id": "AST 112", "title": "Intro Stars, Galaxies & Cosmo", "credits": 4},
+            {"course_id": "PHY 121", "title": "University Physics I", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-sq2",
+          "name": "Natural Sciences (SQ or SG)",
+          "category": "general_studies",
+          "credits_required": 4,
+          "description": "4 hours of SQ or SG-designated natural science",
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "AST 111", "title": "Intro to Solar Systems Astronomy", "credits": 4},
+            {"course_id": "AST 112", "title": "Intro Stars, Galaxies & Cosmo", "credits": 4},
+            {"course_id": "ENV 130", "title": "Intro to Environmental Science", "credits": 4},
+            {"course_id": "PHY 122", "title": "University Physics II", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-c",
+          "name": "Cultural Diversity in the US (C)",
+          "category": "general_studies",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "APA 210", "title": "Intro to Ethnic Studies in US", "credits": 3},
+            {"course_id": "ASB 210", "title": "Peoples and Cultures of the World", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-g",
+          "name": "Global Awareness (G)",
+          "category": "general_studies",
+          "credits_required": 3,
+          "description": "Can be double-counted with HU/SB",
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "ASB 222", "title": "Buried Cities and Lost Tribes", "credits": 3},
+            {"course_id": "GCU 121", "title": "World Regional Geography", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-h",
+          "name": "Historical Awareness (H)",
+          "category": "general_studies",
+          "credits_required": 3,
+          "description": "Can be double-counted with HU/SB",
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "ASB 222", "title": "Buried Cities and Lost Tribes", "credits": 3},
+            {"course_id": "HIS 102", "title": "Western Civilization 1600 to Present", "credits": 3}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "science",
+      "display_name": "Lab Science",
+      "credits_required": 12,
+      "requirements": [
+        {
+          "id": "sci-1",
+          "name": "Lab Science (12 hours SQ)",
+          "category": "science",
+          "description": "8 hours SQ from one subject area + 4 hours SQ from a different subject area",
+          "credits_required": 12,
+          "pick_n": 3,
+          "pick_from": [
+            {"course_id": "AST 111", "title": "Intro to Solar Systems Astronomy", "credits": 4},
+            {"course_id": "AST 112", "title": "Intro Stars, Galaxies & Cosmo", "credits": 4},
+            {"course_id": "ENV 130", "title": "Intro to Environmental Science", "credits": 4},
+            {"course_id": "PHY 121", "title": "University Physics I", "credits": 3},
+            {"course_id": "PHY 131", "title": "University Physics Lab I", "credits": 1},
+            {"course_id": "PHY 122", "title": "University Physics II", "credits": 3},
+            {"course_id": "PHY 132", "title": "University Physics Lab II", "credits": 1}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "math",
+      "display_name": "Mathematics Lower Division",
+      "credits_required": 12,
+      "requirements": [
+        {
+          "id": "ma-1",
+          "name": "Discrete Math (MAT 243)",
+          "category": "math",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "MAT 243", "title": "Discrete Mathematical Structures", "credits": 3}]
+        },
+        {
+          "id": "ma-2",
+          "name": "Calculus I (MAT 265)",
+          "category": "math",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "MAT 265", "title": "Calculus for Engineers I", "credits": 3}]
+        },
+        {
+          "id": "ma-3",
+          "name": "Calculus II (MAT 266)",
+          "category": "math",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "MAT 266", "title": "Calculus for Engineers II", "credits": 3}]
+        },
+        {
+          "id": "ma-4",
+          "name": "MAT 267 or CSE 259 or MAT 275",
+          "category": "math",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "MAT 267", "title": "Calculus for Engineers III", "credits": 3},
+            {"course_id": "CSE 259", "title": "Logic in Computer Science", "credits": 3},
+            {"course_id": "MAT 275", "title": "Modern Differential Equations", "credits": 3}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "major_core",
+      "display_name": "CS Lower Division",
+      "credits_required": 17,
+      "requirements": [
+        {
+          "id": "mc-1",
+          "name": "CSE 110 — Principles of Programming",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 110", "title": "Principles of Programming", "credits": 3}]
+        },
+        {
+          "id": "mc-2",
+          "name": "CSE 120 — Digital Design Fundamentals",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 120", "title": "Digital Design Fundamentals", "credits": 3}]
+        },
+        {
+          "id": "mc-3",
+          "name": "CSE 205 — Object-Oriented Programming & Data Structures",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 205", "title": "Object-Oriented Programming and Data Structures", "credits": 3}]
+        },
+        {
+          "id": "mc-4",
+          "name": "CSE 230 — Computer Organization & Assembly",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 230", "title": "Computer Organization and Assembly Language Programming", "credits": 3}]
+        },
+        {
+          "id": "mc-5",
+          "name": "CSE 240 — Intro to Programming Languages",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 240", "title": "Introduction to Programming Languages", "credits": 3}]
+        },
+        {
+          "id": "mc-6",
+          "name": "FSE 100 — Introduction to Engineering",
+          "category": "major_core",
+          "credits_required": 2,
+          "courses_required": [{"course_id": "FSE 100", "title": "Introduction to Engineering", "credits": 2}]
+        }
+      ]
+    },
+    {
+      "name": "major_upper",
+      "display_name": "CS Cybersecurity Upper Division",
+      "credits_required": 31,
+      "requirements": [
+        {
+          "id": "mu-1",
+          "name": "CSE 301 — Computing Ethics",
+          "category": "major_upper",
+          "credits_required": 1,
+          "courses_required": [{"course_id": "CSE 301", "title": "Computing Ethics", "credits": 1}]
+        },
+        {
+          "id": "mu-2",
+          "name": "CSE 310 — Data Structures and Algorithms",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 310", "title": "Data Structures and Algorithms", "credits": 3}]
+        },
+        {
+          "id": "mu-3",
+          "name": "CSE 330 — Operating Systems",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 330", "title": "Operating Systems", "credits": 3}]
+        },
+        {
+          "id": "mu-4",
+          "name": "CSE 340 — Principles of Programming Languages",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 340", "title": "Principles of Programming Languages", "credits": 3}]
+        },
+        {
+          "id": "mu-5",
+          "name": "CSE 355 — Intro to Theoretical Computer Science",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 355", "title": "Introduction to Theoretical Computer Science", "credits": 3}]
+        },
+        {
+          "id": "mu-6",
+          "name": "CSE 360 — Intro to Software Engineering",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 360", "title": "Introduction to Software Engineering", "credits": 3}]
+        },
+        {
+          "id": "mu-7",
+          "name": "CSE 365 — Information Assurance",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 365", "title": "Information Assurance", "credits": 3}]
+        },
+        {
+          "id": "mu-8",
+          "name": "CSE 485 — Capstone Project I (L)",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 485", "title": "Capstone Project I", "credits": 3}]
+        },
+        {
+          "id": "mu-9",
+          "name": "CSE 486 — Capstone Project II (L)",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 486", "title": "Capstone Project II", "credits": 3}]
+        },
+        {
+          "id": "mu-10",
+          "name": "MAT 343 — Applied Linear Algebra",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "MAT 343", "title": "Applied Linear Algebra", "credits": 3}]
+        },
+        {
+          "id": "mu-11",
+          "name": "IEE 380 — Probability & Statistics (CS)",
+          "category": "major_upper",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "IEE 380", "title": "Probability and Statistics for Engineering Problem Solving", "credits": 3}]
+        }
+      ]
+    },
+    {
+      "name": "major_elective",
+      "display_name": "CS Cybersecurity Electives",
+      "credits_required": 18,
+      "requirements": [
+        {
+          "id": "me-cyber1",
+          "name": "Cybersecurity Focus (6 hours)",
+          "category": "major_elective",
+          "credits_required": 6,
+          "description": "Choose 2 from cybersecurity focus courses",
+          "pick_n": 2,
+          "pick_from": [
+            {"course_id": "CSE 468", "title": "Computer Network Security", "credits": 3},
+            {"course_id": "CSE 469", "title": "Computer and Network Forensics", "credits": 3},
+            {"course_id": "CSE 466", "title": "Computer Systems Security", "credits": 3},
+            {"course_id": "CSE 463", "title": "Introduction to Cybersecurity", "credits": 3},
+            {"course_id": "CSE 464", "title": "Principles of Cyber-Physical System Security", "credits": 3}
+          ]
+        },
+        {
+          "id": "me-core-elect",
+          "name": "CSE 412 or CSE 434 or CSE 445 (3 hours)",
+          "category": "major_elective",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "CSE 412", "title": "Database Management", "credits": 3},
+            {"course_id": "CSE 434", "title": "Computer Networks", "credits": 3},
+            {"course_id": "CSE 445", "title": "Distributed Software Development", "credits": 3}
+          ]
+        },
+        {
+          "id": "me-cyber-upper",
+          "name": "Upper Division Cybersecurity Elective (6 hours)",
+          "category": "major_elective",
+          "credits_required": 6,
+          "description": "Choose 2 upper-division CS/engineering electives",
+          "pick_n": 2,
+          "pick_from": [
+            {"course_id": "CSE 471", "title": "Introduction to Artificial Intelligence", "credits": 3},
+            {"course_id": "CSE 466", "title": "Computer Systems Security", "credits": 3},
+            {"course_id": "CSE 475", "title": "Foundations of Machine Learning", "credits": 3},
+            {"course_id": "CSE 450", "title": "Design and Analysis of Algorithms", "credits": 3},
+            {"course_id": "CSE 460", "title": "Software Analysis and Design", "credits": 3},
+            {"course_id": "CSE 470", "title": "Computer Graphics", "credits": 3},
+            {"course_id": "CSE 420", "title": "Fundamentals of Computer Architecture", "credits": 3},
+            {"course_id": "CSE 494", "title": "Special Topics", "credits": 3}
+          ]
+        },
+        {
+          "id": "me-tech",
+          "name": "Upper Division Technical Elective (3 hours)",
+          "category": "major_elective",
+          "credits_required": 3,
+          "description": "Upper-division technical or engineering elective",
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "FSE 301", "title": "Entrepreneur & Value Creation", "credits": 3},
+            {"course_id": "CSE 484", "title": "Cybersecurity Capstone", "credits": 3},
+            {"course_id": "FSE 404", "title": "Engineering for Humanity", "credits": 3}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "free_elective",
+      "display_name": "Free Electives",
+      "credits_required": 2,
+      "requirements": [
+        {
+          "id": "fe-1",
+          "name": "Free Electives",
+          "category": "free_elective",
+          "description": "Any courses to reach 120 total credits",
+          "credits_required": 2
+        }
+      ]
+    }
+  ]
+}

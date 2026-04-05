@@ -11,14 +11,14 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 # Exact seed data files
 FILE_MAP = {
     "ESCSCI": "asu_cs_requirements.json",
+    "ESCSEIBS": "asu_cs_cyber_requirements.json",
 }
 
 # Majors that share a base curriculum — map to the closest seed data
 # These are CS-family programs that share ~80%+ of core requirements
 FAMILY_MAP = {
-    # CS Cybersecurity variants
-    "ESCSEIBS": "ESCSCI",
-    "ESCSEIBA": "ESCSCI",
+    # CS Cybersecurity BA uses the BS requirements as approximation
+    "ESCSEIBA": "ESCSEIBS",
     # CS base variants
     "ESCSCIBA": "ESCSCI",
     # Software Engineering

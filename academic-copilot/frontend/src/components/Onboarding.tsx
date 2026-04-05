@@ -571,6 +571,11 @@ export default function Onboarding({ onComplete }: Props) {
                               AP
                             </span>
                           )}
+                          {c.grade === "NR" && (
+                            <span className="text-[10px] px-1.5 py-0.5 bg-accent/20 text-accent-light rounded-full">
+                              In Progress
+                            </span>
+                          )}
                           <span className="text-xs text-muted truncate">
                             {c.title}
                           </span>
