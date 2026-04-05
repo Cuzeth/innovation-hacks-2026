@@ -18,9 +18,15 @@ class CreditEvaluationAgent(BaseAgent):
 
     async def evaluate(self, student: StudentProfile, requirements: DegreeRequirements) -> DegreeAudit:
         """Evaluate student's credits against degree requirements."""
-        completed_ids = {c.course_id for c in student.completed_courses}
         completed_map = {c.course_id: c for c in student.completed_courses}
         in_progress_ids = {c.course_id for c in student.completed_courses if c.grade == "NR"}
+        # D is not passing for most ASU major courses (C minimum required).
+        # Only count courses with C- or better, or NR (in-progress).
+        failing_grades = {"D+", "D", "D-", "E", "W", "EN"}
+        completed_ids = {
+            c.course_id for c in student.completed_courses
+            if c.grade not in failing_grades
+        }
 
         audit_categories: list[RequirementCategory] = []
         explanations: list[AuditExplanation] = []
