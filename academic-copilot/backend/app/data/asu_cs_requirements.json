@@ -1,0 +1,375 @@
+{
+  "university": "Arizona State University",
+  "major": "Computer Science",
+  "major_code": "ESCSCI",
+  "degree": "BS",
+  "college": "Ira A. Fulton Schools of Engineering",
+  "catalog_year": "2024-2025",
+  "total_credits_required": 120,
+  "minimum_gpa": 2.0,
+  "major_gpa_minimum": 2.0,
+  "residency_credits": 30,
+  "upper_division_credits": 45,
+  "data_source": "ASU Major Map - Computer Science BS (2024-2025)",
+  "data_source_url": "https://degrees.apps.asu.edu/major-map/ASU00/ESCSCI/null/ALL/2024",
+  "notes": [
+    "Students must earn a C or better in all CSE prefix courses",
+    "A minimum of 30 credit hours must be completed in residence at ASU",
+    "At least 45 credit hours must be upper-division (300-level or above)",
+    "Students must maintain a 2.0 GPA in major coursework"
+  ],
+  "categories": [
+    {
+      "name": "major_core",
+      "display_name": "Computer Science Core",
+      "credits_required": 40,
+      "requirements": [
+        {
+          "id": "mc-1",
+          "name": "Introduction to Programming",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 110", "title": "Principles of Programming", "credits": 3}]
+        },
+        {
+          "id": "mc-2",
+          "name": "Object-Oriented Programming",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 205", "title": "Object-Oriented Programming and Data Structures", "credits": 3}]
+        },
+        {
+          "id": "mc-3",
+          "name": "Programming for Computer Science",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 220", "title": "Programming for Computer Science", "credits": 3}]
+        },
+        {
+          "id": "mc-4",
+          "name": "Computer Organization and Assembly",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 230", "title": "Computer Organization and Assembly Language Programming", "credits": 3}]
+        },
+        {
+          "id": "mc-5",
+          "name": "Intro to Programming Languages",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 240", "title": "Introduction to Programming Languages", "credits": 3}]
+        },
+        {
+          "id": "mc-6",
+          "name": "Data Structures and Algorithms",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 310", "title": "Data Structures and Algorithms", "credits": 3}]
+        },
+        {
+          "id": "mc-7",
+          "name": "Operating Systems",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 330", "title": "Operating Systems", "credits": 3}]
+        },
+        {
+          "id": "mc-8",
+          "name": "Principles of Programming Languages",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 340", "title": "Principles of Programming Languages", "credits": 3}]
+        },
+        {
+          "id": "mc-9",
+          "name": "Introduction to Theoretical Computer Science",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 355", "title": "Introduction to Theoretical Computer Science", "credits": 3}]
+        },
+        {
+          "id": "mc-10",
+          "name": "Introduction to Software Engineering",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 360", "title": "Introduction to Software Engineering", "credits": 3}]
+        },
+        {
+          "id": "mc-11",
+          "name": "Information Assurance",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 365", "title": "Information Assurance", "credits": 3}]
+        },
+        {
+          "id": "mc-12",
+          "name": "Capstone I",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 485", "title": "Capstone Project I", "credits": 3}]
+        },
+        {
+          "id": "mc-13",
+          "name": "Capstone II",
+          "category": "major_core",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "CSE 486", "title": "Capstone Project II", "credits": 3}]
+        }
+      ]
+    },
+    {
+      "name": "major_elective",
+      "display_name": "CS Upper-Division Electives",
+      "credits_required": 9,
+      "requirements": [
+        {
+          "id": "me-1",
+          "name": "CS Elective 1",
+          "category": "major_elective",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "CSE 412", "title": "Database Management", "credits": 3},
+            {"course_id": "CSE 434", "title": "Computer Networks", "credits": 3},
+            {"course_id": "CSE 450", "title": "Design and Analysis of Algorithms", "credits": 3},
+            {"course_id": "CSE 460", "title": "Software Analysis and Design", "credits": 3},
+            {"course_id": "CSE 468", "title": "Computer Network Management", "credits": 3},
+            {"course_id": "CSE 470", "title": "Computer Graphics", "credits": 3},
+            {"course_id": "CSE 471", "title": "Introduction to Artificial Intelligence", "credits": 3},
+            {"course_id": "CSE 475", "title": "Foundations of Machine Learning", "credits": 3},
+            {"course_id": "CSE 476", "title": "Natural Language Processing", "credits": 3},
+            {"course_id": "CSE 477", "title": "Introduction to Computer Vision", "credits": 3},
+            {"course_id": "CSE 480", "title": "Introduction to Robotics", "credits": 3}
+          ]
+        },
+        {
+          "id": "me-2",
+          "name": "CS Elective 2",
+          "category": "major_elective",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "CSE 412", "title": "Database Management", "credits": 3},
+            {"course_id": "CSE 434", "title": "Computer Networks", "credits": 3},
+            {"course_id": "CSE 450", "title": "Design and Analysis of Algorithms", "credits": 3},
+            {"course_id": "CSE 460", "title": "Software Analysis and Design", "credits": 3},
+            {"course_id": "CSE 468", "title": "Computer Network Management", "credits": 3},
+            {"course_id": "CSE 470", "title": "Computer Graphics", "credits": 3},
+            {"course_id": "CSE 471", "title": "Introduction to Artificial Intelligence", "credits": 3},
+            {"course_id": "CSE 475", "title": "Foundations of Machine Learning", "credits": 3},
+            {"course_id": "CSE 476", "title": "Natural Language Processing", "credits": 3},
+            {"course_id": "CSE 477", "title": "Introduction to Computer Vision", "credits": 3},
+            {"course_id": "CSE 480", "title": "Introduction to Robotics", "credits": 3}
+          ]
+        },
+        {
+          "id": "me-3",
+          "name": "CS Elective 3",
+          "category": "major_elective",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "CSE 412", "title": "Database Management", "credits": 3},
+            {"course_id": "CSE 434", "title": "Computer Networks", "credits": 3},
+            {"course_id": "CSE 450", "title": "Design and Analysis of Algorithms", "credits": 3},
+            {"course_id": "CSE 460", "title": "Software Analysis and Design", "credits": 3},
+            {"course_id": "CSE 468", "title": "Computer Network Management", "credits": 3},
+            {"course_id": "CSE 470", "title": "Computer Graphics", "credits": 3},
+            {"course_id": "CSE 471", "title": "Introduction to Artificial Intelligence", "credits": 3},
+            {"course_id": "CSE 475", "title": "Foundations of Machine Learning", "credits": 3},
+            {"course_id": "CSE 476", "title": "Natural Language Processing", "credits": 3},
+            {"course_id": "CSE 477", "title": "Introduction to Computer Vision", "credits": 3},
+            {"course_id": "CSE 480", "title": "Introduction to Robotics", "credits": 3}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "math",
+      "display_name": "Mathematics",
+      "credits_required": 19,
+      "requirements": [
+        {
+          "id": "ma-1",
+          "name": "Calculus I",
+          "category": "math",
+          "credits_required": 4,
+          "courses_required": [{"course_id": "MAT 265", "title": "Calculus for Engineers I", "credits": 4}]
+        },
+        {
+          "id": "ma-2",
+          "name": "Calculus II",
+          "category": "math",
+          "credits_required": 4,
+          "courses_required": [{"course_id": "MAT 266", "title": "Calculus for Engineers II", "credits": 4}]
+        },
+        {
+          "id": "ma-3",
+          "name": "Calculus III",
+          "category": "math",
+          "credits_required": 4,
+          "courses_required": [{"course_id": "MAT 267", "title": "Calculus for Engineers III", "credits": 4}]
+        },
+        {
+          "id": "ma-4",
+          "name": "Discrete Mathematics",
+          "category": "math",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "MAT 243", "title": "Discrete Mathematical Structures", "credits": 3}]
+        },
+        {
+          "id": "ma-5",
+          "name": "Applied Linear Algebra",
+          "category": "math",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "MAT 343", "title": "Applied Linear Algebra", "credits": 3}]
+        },
+        {
+          "id": "ma-6",
+          "name": "Probability and Statistics",
+          "category": "math",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "STP 280", "title": "Elementary Statistics", "credits": 3}]
+        }
+      ]
+    },
+    {
+      "name": "science",
+      "display_name": "Science",
+      "credits_required": 8,
+      "requirements": [
+        {
+          "id": "sc-1",
+          "name": "Physics I with Lab",
+          "category": "science",
+          "credits_required": 4,
+          "courses_required": [
+            {"course_id": "PHY 121", "title": "University Physics I: Mechanics", "credits": 3},
+            {"course_id": "PHY 131", "title": "University Physics Lab I", "credits": 1}
+          ]
+        },
+        {
+          "id": "sc-2",
+          "name": "Physics II with Lab",
+          "category": "science",
+          "credits_required": 4,
+          "courses_required": [
+            {"course_id": "PHY 122", "title": "University Physics II: Electricity and Magnetism", "credits": 3},
+            {"course_id": "PHY 132", "title": "University Physics Lab II", "credits": 1}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "general_studies",
+      "display_name": "General Studies (GSBA)",
+      "credits_required": 29,
+      "requirements": [
+        {
+          "id": "gs-1",
+          "name": "First-Year Composition I",
+          "category": "general_studies",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "ENG 101", "title": "First-Year Composition", "credits": 3}]
+        },
+        {
+          "id": "gs-2",
+          "name": "First-Year Composition II",
+          "category": "general_studies",
+          "credits_required": 3,
+          "courses_required": [{"course_id": "ENG 102", "title": "First-Year Composition", "credits": 3}]
+        },
+        {
+          "id": "gs-3",
+          "name": "Humanities and Fine Arts (HU)",
+          "category": "general_studies",
+          "credits_required": 6,
+          "pick_n": 2,
+          "pick_from": [
+            {"course_id": "PHI 101", "title": "Introduction to Philosophy", "credits": 3},
+            {"course_id": "ARS 101", "title": "Introduction to the Arts", "credits": 3},
+            {"course_id": "HIS 100", "title": "History of the Modern World", "credits": 3},
+            {"course_id": "ENG 200", "title": "Introduction to Creative Writing", "credits": 3},
+            {"course_id": "MUP 100", "title": "Music Appreciation", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-4",
+          "name": "Social-Behavioral Sciences (SB)",
+          "category": "general_studies",
+          "credits_required": 6,
+          "pick_n": 2,
+          "pick_from": [
+            {"course_id": "PSY 101", "title": "Introduction to Psychology", "credits": 3},
+            {"course_id": "SOC 101", "title": "Introductory Sociology", "credits": 3},
+            {"course_id": "ECN 211", "title": "Macroeconomic Principles", "credits": 3},
+            {"course_id": "ECN 212", "title": "Microeconomic Principles", "credits": 3},
+            {"course_id": "POS 110", "title": "American Government", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-5",
+          "name": "Cultural Diversity in the US (C)",
+          "category": "general_studies",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "ASB 210", "title": "Peoples and Cultures of the World", "credits": 3},
+            {"course_id": "AIS 180", "title": "American Indian Societies", "credits": 3},
+            {"course_id": "AFS 200", "title": "Introduction to African American Studies", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-6",
+          "name": "Global Awareness (G)",
+          "category": "general_studies",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "GCU 121", "title": "World Regional Geography", "credits": 3},
+            {"course_id": "SPA 101", "title": "Elementary Spanish I", "credits": 3},
+            {"course_id": "JPN 101", "title": "Elementary Japanese I", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-7",
+          "name": "Historical Awareness (H)",
+          "category": "general_studies",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "HIS 101", "title": "Western Civilization to 1600", "credits": 3},
+            {"course_id": "HIS 102", "title": "Western Civilization 1600 to Present", "credits": 3},
+            {"course_id": "HIS 110", "title": "History of the United States to 1865", "credits": 3}
+          ]
+        },
+        {
+          "id": "gs-8",
+          "name": "Literacy and Critical Inquiry (L)",
+          "category": "general_studies",
+          "credits_required": 3,
+          "pick_n": 1,
+          "pick_from": [
+            {"course_id": "ENG 301", "title": "Technical Writing", "credits": 3},
+            {"course_id": "COM 230", "title": "Small Group Communication", "credits": 3},
+            {"course_id": "PHI 103", "title": "Logic and Critical Thinking", "credits": 3}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "free_elective",
+      "display_name": "Free Electives",
+      "credits_required": 15,
+      "requirements": [
+        {
+          "id": "fe-1",
+          "name": "Free Electives",
+          "category": "free_elective",
+          "description": "Any undergraduate courses to reach 120 total credits. Can include additional CS electives, minor courses, or courses of interest.",
+          "credits_required": 15
+        }
+      ]
+    }
+  ]
+}

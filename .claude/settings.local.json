@@ -4,7 +4,9 @@
       "Bash(bun install:*)",
       "Bash(bun run:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(bun create:*)",
+      "Bash(bun add:*)"
     ]
   }
 }

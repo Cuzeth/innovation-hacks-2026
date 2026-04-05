@@ -1,0 +1,167 @@
+{
+  "university": "Arizona State University",
+  "data_source": "ASU Transfer Credit Guide (demo data based on official ASU AP policies)",
+  "equivalencies": [
+    {
+      "exam": "AP Computer Science A",
+      "min_score": 3,
+      "asu_equivalent": "CSE 110",
+      "credits": 3,
+      "title": "Principles of Programming",
+      "confidence": "high",
+      "notes": "Score of 3+ awards credit for CSE 110"
+    },
+    {
+      "exam": "AP Computer Science A",
+      "min_score": 4,
+      "asu_equivalent": "CSE 110",
+      "credits": 3,
+      "title": "Principles of Programming",
+      "confidence": "high",
+      "notes": "Score of 4-5 awards credit for CSE 110"
+    },
+    {
+      "exam": "AP Computer Science Principles",
+      "min_score": 3,
+      "asu_equivalent": "GE-ELEC",
+      "credits": 3,
+      "title": "General Elective Credit",
+      "confidence": "high",
+      "notes": "Does not substitute for CSE 110, counts as elective"
+    },
+    {
+      "exam": "AP Calculus AB",
+      "min_score": 3,
+      "asu_equivalent": "MAT 265",
+      "credits": 4,
+      "title": "Calculus for Engineers I",
+      "confidence": "high",
+      "notes": "Score of 3+ awards credit for MAT 265"
+    },
+    {
+      "exam": "AP Calculus BC",
+      "min_score": 3,
+      "asu_equivalent": "MAT 265+MAT 266",
+      "credits": 8,
+      "title": "Calculus I and II",
+      "confidence": "high",
+      "notes": "Score of 3+ awards credit for both MAT 265 and MAT 266"
+    },
+    {
+      "exam": "AP Calculus BC",
+      "min_score": 4,
+      "asu_equivalent": "MAT 265+MAT 266",
+      "credits": 8,
+      "title": "Calculus I and II",
+      "confidence": "high",
+      "notes": "Score of 4-5 awards credit for both MAT 265 and MAT 266"
+    },
+    {
+      "exam": "AP Physics C: Mechanics",
+      "min_score": 3,
+      "asu_equivalent": "PHY 121",
+      "credits": 3,
+      "title": "University Physics I: Mechanics",
+      "confidence": "high",
+      "notes": "Score of 3+ awards credit for PHY 121. Lab (PHY 131) still required."
+    },
+    {
+      "exam": "AP Physics C: Electricity and Magnetism",
+      "min_score": 3,
+      "asu_equivalent": "PHY 122",
+      "credits": 3,
+      "title": "University Physics II",
+      "confidence": "high",
+      "notes": "Score of 3+ awards credit for PHY 122. Lab (PHY 132) still required."
+    },
+    {
+      "exam": "AP English Language and Composition",
+      "min_score": 3,
+      "asu_equivalent": "ENG 101",
+      "credits": 3,
+      "title": "First-Year Composition",
+      "confidence": "high",
+      "notes": "Score of 3+ satisfies ENG 101"
+    },
+    {
+      "exam": "AP English Literature and Composition",
+      "min_score": 3,
+      "asu_equivalent": "ENG 102",
+      "credits": 3,
+      "title": "First-Year Composition",
+      "confidence": "high",
+      "notes": "Score of 3+ satisfies ENG 102"
+    },
+    {
+      "exam": "AP Psychology",
+      "min_score": 3,
+      "asu_equivalent": "PSY 101",
+      "credits": 3,
+      "title": "Introduction to Psychology",
+      "confidence": "high",
+      "notes": "Score of 3+ satisfies PSY 101 and SB requirement"
+    },
+    {
+      "exam": "AP Macroeconomics",
+      "min_score": 3,
+      "asu_equivalent": "ECN 211",
+      "credits": 3,
+      "title": "Macroeconomic Principles",
+      "confidence": "high",
+      "notes": "Score of 3+ satisfies ECN 211 and SB requirement"
+    },
+    {
+      "exam": "AP Microeconomics",
+      "min_score": 3,
+      "asu_equivalent": "ECN 212",
+      "credits": 3,
+      "title": "Microeconomic Principles",
+      "confidence": "high"
+    },
+    {
+      "exam": "AP Statistics",
+      "min_score": 3,
+      "asu_equivalent": "STP 280",
+      "credits": 3,
+      "title": "Elementary Statistics",
+      "confidence": "medium",
+      "notes": "May satisfy STP 280. Advisor review recommended."
+    },
+    {
+      "exam": "AP US History",
+      "min_score": 3,
+      "asu_equivalent": "HIS 110",
+      "credits": 3,
+      "title": "History of the United States to 1865",
+      "confidence": "high",
+      "notes": "Satisfies H requirement"
+    },
+    {
+      "exam": "AP World History",
+      "min_score": 3,
+      "asu_equivalent": "HIS 102",
+      "credits": 3,
+      "title": "Western Civilization 1600 to Present",
+      "confidence": "high",
+      "notes": "Satisfies H requirement"
+    }
+  ],
+  "transfer_institutions": {
+    "Maricopa Community Colleges": {
+      "notes": "ASU has articulation agreements with all Maricopa colleges",
+      "common_equivalencies": [
+        {"transfer_course": "CSC 110", "asu_equivalent": "CSE 110", "credits": 3, "confidence": "high"},
+        {"transfer_course": "CSC 205", "asu_equivalent": "CSE 205", "credits": 3, "confidence": "high"},
+        {"transfer_course": "CSC 230", "asu_equivalent": "CSE 230", "credits": 3, "confidence": "high"},
+        {"transfer_course": "CSC 240", "asu_equivalent": "CSE 240", "credits": 3, "confidence": "high"},
+        {"transfer_course": "MAT 220", "asu_equivalent": "MAT 265", "credits": 4, "confidence": "high"},
+        {"transfer_course": "MAT 221", "asu_equivalent": "MAT 266", "credits": 4, "confidence": "high"},
+        {"transfer_course": "MAT 227", "asu_equivalent": "MAT 267", "credits": 4, "confidence": "high"},
+        {"transfer_course": "PHY 111", "asu_equivalent": "PHY 121", "credits": 3, "confidence": "high"},
+        {"transfer_course": "PHY 112", "asu_equivalent": "PHY 122", "credits": 3, "confidence": "high"},
+        {"transfer_course": "ENG 101", "asu_equivalent": "ENG 101", "credits": 3, "confidence": "high"},
+        {"transfer_course": "ENG 102", "asu_equivalent": "ENG 102", "credits": 3, "confidence": "high"}
+      ]
+    }
+  }
+}

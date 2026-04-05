@@ -3,3 +3,9 @@ dist/
 .env
 .env.local
 .DS_Store
+.venv*
+__pycache__/
+*.pyc
+.next/
+*.egg-info/
+bun.lock

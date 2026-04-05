@@ -1,0 +1,431 @@
+{
+  "courses": [
+    {
+      "course_id": "CSE 110",
+      "title": "Principles of Programming",
+      "credits": 3,
+      "description": "Introduces the fundamental concepts of computer programming in Java. Topics include variables, data types, control structures, methods, arrays, and basic OOP.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "CSE 205",
+      "title": "Object-Oriented Programming and Data Structures",
+      "credits": 3,
+      "description": "Object-oriented programming, data structures (linked lists, stacks, queues, trees), generics, interfaces, and exception handling in Java.",
+      "prerequisites": [{"course_id": "CSE 110", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "CSE 220",
+      "title": "Programming for Computer Science",
+      "credits": 3,
+      "description": "Systems programming in C/C++. Pointers, memory management, file I/O, Unix/Linux environment, makefiles, debugging tools.",
+      "prerequisites": [{"course_id": "CSE 205", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "CSE 230",
+      "title": "Computer Organization and Assembly Language Programming",
+      "credits": 3,
+      "description": "Computer organization, digital logic, assembly language programming, instruction sets, memory systems, and I/O.",
+      "prerequisites": [{"course_id": "CSE 110", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "CSE 240",
+      "title": "Introduction to Programming Languages",
+      "credits": 3,
+      "description": "Survey of programming paradigms: imperative, functional, logic, and object-oriented. Languages covered include C, C++, Prolog, Lisp/Scheme.",
+      "prerequisites": [{"course_id": "CSE 205", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "CSE 310",
+      "title": "Data Structures and Algorithms",
+      "credits": 3,
+      "description": "Advanced data structures (heaps, hash tables, graphs, balanced trees), algorithm design and analysis, sorting, searching, graph algorithms.",
+      "prerequisites": [
+        {"course_id": "CSE 220", "min_grade": "C"},
+        {"course_id": "CSE 205", "min_grade": "C"},
+        {"course_id": "MAT 243", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 330",
+      "title": "Operating Systems",
+      "credits": 3,
+      "description": "Process management, memory management, file systems, I/O, concurrency, synchronization, deadlocks.",
+      "prerequisites": [
+        {"course_id": "CSE 310", "min_grade": "C"},
+        {"course_id": "CSE 230", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 340",
+      "title": "Principles of Programming Languages",
+      "credits": 3,
+      "description": "Formal language theory, parsing, type systems, semantic analysis, runtime environments.",
+      "prerequisites": [
+        {"course_id": "CSE 310", "min_grade": "C"},
+        {"course_id": "CSE 240", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 355",
+      "title": "Introduction to Theoretical Computer Science",
+      "credits": 3,
+      "description": "Finite automata, regular languages, context-free grammars, Turing machines, computability, complexity theory (P vs NP).",
+      "prerequisites": [
+        {"course_id": "CSE 310", "min_grade": "C"},
+        {"course_id": "MAT 243", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 360",
+      "title": "Introduction to Software Engineering",
+      "credits": 3,
+      "description": "Software development lifecycle, requirements, design patterns, testing, agile methodologies, version control, team projects.",
+      "prerequisites": [{"course_id": "CSE 310", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 365",
+      "title": "Information Assurance",
+      "credits": 3,
+      "description": "Computer security fundamentals, cryptography, authentication, network security, vulnerability analysis, security policy.",
+      "prerequisites": [{"course_id": "CSE 310", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 412",
+      "title": "Database Management",
+      "credits": 3,
+      "description": "Relational model, SQL, database design, normalization, transactions, indexing, query optimization.",
+      "prerequisites": [{"course_id": "CSE 310", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 434",
+      "title": "Computer Networks",
+      "credits": 3,
+      "description": "Network architecture, TCP/IP, routing, switching, network security, wireless networks.",
+      "prerequisites": [{"course_id": "CSE 310", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 450",
+      "title": "Design and Analysis of Algorithms",
+      "credits": 3,
+      "description": "Advanced algorithm design techniques: divide and conquer, dynamic programming, greedy algorithms, NP-completeness.",
+      "prerequisites": [
+        {"course_id": "CSE 310", "min_grade": "C"},
+        {"course_id": "MAT 243", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 460",
+      "title": "Software Analysis and Design",
+      "credits": 3,
+      "description": "Advanced software engineering: architecture, design patterns, UML, system modeling, software quality.",
+      "prerequisites": [{"course_id": "CSE 360", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 468",
+      "title": "Computer Network Management",
+      "credits": 3,
+      "description": "Network management protocols, SNMP, network monitoring, configuration management, fault management.",
+      "prerequisites": [{"course_id": "CSE 434", "min_grade": "C"}],
+      "typically_offered": ["Fall"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 470",
+      "title": "Computer Graphics",
+      "credits": 3,
+      "description": "Graphics pipeline, transformations, rendering, shading, texture mapping, OpenGL/WebGL.",
+      "prerequisites": [
+        {"course_id": "CSE 310", "min_grade": "C"},
+        {"course_id": "MAT 343", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 471",
+      "title": "Introduction to Artificial Intelligence",
+      "credits": 3,
+      "description": "Search algorithms, game playing, knowledge representation, machine learning basics, neural networks, NLP fundamentals.",
+      "prerequisites": [{"course_id": "CSE 310", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 475",
+      "title": "Foundations of Machine Learning",
+      "credits": 3,
+      "description": "Supervised and unsupervised learning, regression, classification, clustering, neural networks, model evaluation.",
+      "prerequisites": [
+        {"course_id": "CSE 310", "min_grade": "C"},
+        {"course_id": "MAT 343", "min_grade": "C"},
+        {"course_id": "STP 280", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 476",
+      "title": "Natural Language Processing",
+      "credits": 3,
+      "description": "Text processing, language models, information extraction, sentiment analysis, machine translation.",
+      "prerequisites": [{"course_id": "CSE 471", "min_grade": "C"}],
+      "typically_offered": ["Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 477",
+      "title": "Introduction to Computer Vision",
+      "credits": 3,
+      "description": "Image formation, feature extraction, object detection, image segmentation, deep learning for vision.",
+      "prerequisites": [
+        {"course_id": "CSE 310", "min_grade": "C"},
+        {"course_id": "MAT 343", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 480",
+      "title": "Introduction to Robotics",
+      "credits": 3,
+      "description": "Robot kinematics, dynamics, sensors, control, path planning, localization, mapping.",
+      "prerequisites": [{"course_id": "CSE 310", "min_grade": "C"}],
+      "typically_offered": ["Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 485",
+      "title": "Capstone Project I",
+      "credits": 3,
+      "description": "First semester of senior capstone. Team formation, project proposal, requirements analysis, design phase.",
+      "prerequisites": [
+        {"course_id": "CSE 330", "min_grade": "C"},
+        {"course_id": "CSE 360", "min_grade": "C"}
+      ],
+      "typically_offered": ["Fall"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "CSE 486",
+      "title": "Capstone Project II",
+      "credits": 3,
+      "description": "Second semester of senior capstone. Implementation, testing, deployment, final presentation.",
+      "prerequisites": [{"course_id": "CSE 485", "min_grade": "C"}],
+      "typically_offered": ["Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "MAT 243",
+      "title": "Discrete Mathematical Structures",
+      "credits": 3,
+      "description": "Logic, sets, relations, functions, combinatorics, graph theory, proof techniques.",
+      "prerequisites": [{"course_id": "MAT 265", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "MAT 265",
+      "title": "Calculus for Engineers I",
+      "credits": 4,
+      "description": "Limits, derivatives, applications of differentiation, introduction to integration.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "MAT 266",
+      "title": "Calculus for Engineers II",
+      "credits": 4,
+      "description": "Integration techniques, applications of integration, sequences and series.",
+      "prerequisites": [{"course_id": "MAT 265", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "MAT 267",
+      "title": "Calculus for Engineers III",
+      "credits": 4,
+      "description": "Multivariable calculus: partial derivatives, multiple integrals, vector calculus.",
+      "prerequisites": [{"course_id": "MAT 266", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "MAT 343",
+      "title": "Applied Linear Algebra",
+      "credits": 3,
+      "description": "Matrices, vector spaces, linear transformations, eigenvalues, applications.",
+      "prerequisites": [{"course_id": "MAT 266", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "STP 280",
+      "title": "Elementary Statistics",
+      "credits": 3,
+      "description": "Descriptive statistics, probability, sampling distributions, hypothesis testing, regression.",
+      "prerequisites": [{"course_id": "MAT 265", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "PHY 121",
+      "title": "University Physics I: Mechanics",
+      "credits": 3,
+      "description": "Newtonian mechanics, kinematics, dynamics, energy, momentum, rotational motion.",
+      "prerequisites": [{"course_id": "MAT 265", "can_be_concurrent": true}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "PHY 131",
+      "title": "University Physics Lab I",
+      "credits": 1,
+      "description": "Laboratory experiments in mechanics.",
+      "prerequisites": [],
+      "corequisites": ["PHY 121"],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "PHY 122",
+      "title": "University Physics II: Electricity and Magnetism",
+      "credits": 3,
+      "description": "Electric fields, magnetic fields, circuits, electromagnetic waves, optics.",
+      "prerequisites": [{"course_id": "PHY 121", "min_grade": "C"}, {"course_id": "MAT 266", "can_be_concurrent": true}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "PHY 132",
+      "title": "University Physics Lab II",
+      "credits": 1,
+      "description": "Laboratory experiments in electricity, magnetism, and optics.",
+      "prerequisites": [],
+      "corequisites": ["PHY 122"],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "ENG 101",
+      "title": "First-Year Composition",
+      "credits": 3,
+      "description": "Academic writing, rhetorical analysis, research skills, argumentation.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "ENG 102",
+      "title": "First-Year Composition",
+      "credits": 3,
+      "description": "Research-based writing, multimodal composition, critical analysis.",
+      "prerequisites": [{"course_id": "ENG 101", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "ENG 301",
+      "title": "Technical Writing",
+      "credits": 3,
+      "description": "Writing for technical and professional audiences. Reports, proposals, documentation.",
+      "prerequisites": [{"course_id": "ENG 102", "min_grade": "C"}],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": true
+    },
+    {
+      "course_id": "PHI 101",
+      "title": "Introduction to Philosophy",
+      "credits": 3,
+      "description": "Survey of major philosophical questions and methods.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "PSY 101",
+      "title": "Introduction to Psychology",
+      "credits": 3,
+      "description": "Survey of psychology: behavior, cognition, development, social psychology, abnormal psychology.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "ECN 211",
+      "title": "Macroeconomic Principles",
+      "credits": 3,
+      "description": "National income, unemployment, inflation, monetary and fiscal policy.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "ASB 210",
+      "title": "Peoples and Cultures of the World",
+      "credits": 3,
+      "description": "Introduction to cultural anthropology: cultural diversity, globalization, identity.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "GCU 121",
+      "title": "World Regional Geography",
+      "credits": 3,
+      "description": "Physical and human geography of world regions.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "HIS 102",
+      "title": "Western Civilization 1600 to Present",
+      "credits": 3,
+      "description": "European and global history from 1600 to the present.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "COM 230",
+      "title": "Small Group Communication",
+      "credits": 3,
+      "description": "Theory and practice of communication in small groups.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    }
+  ]
+}

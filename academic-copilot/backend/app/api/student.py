@@ -1,0 +1,85 @@
+"""Student profile API routes."""
+from fastapi import APIRouter
+from app.models.student import StudentProfile, CompletedCourse, StudentPreferences
+import json
+from pathlib import Path
+
+router = APIRouter()
+DATA_DIR = Path(__file__).parent.parent / "data"
+
+# In-memory store
+_students: dict[str, StudentProfile] = {}
+
+
+def _load_sample():
+    if "demo-student" in _students:
+        return
+    with open(DATA_DIR / "sample_student.json") as f:
+        data = json.load(f)
+    courses = [CompletedCourse(**c) for c in data.get("completed_courses", [])]
+    prefs = StudentPreferences(**data.get("preferences", {}))
+    student = StudentProfile(
+        id=data["id"],
+        name=data["name"],
+        email=data.get("email", ""),
+        university=data["university"],
+        major=data["major"],
+        major_code=data["major_code"],
+        catalog_year=data.get("catalog_year", "2024-2025"),
+        current_semester=data.get("current_semester", "Fall 2026"),
+        completed_courses=courses,
+        preferences=prefs,
+    )
+    student.compute_credits()
+    _students["demo-student"] = student
+
+
+@router.get("/profile")
+async def get_profile():
+    _load_sample()
+    return _students["demo-student"]
+
+
+@router.put("/profile")
+async def update_profile(profile: StudentProfile):
+    profile.compute_credits()
+    _students[profile.id] = profile
+    return profile
+
+
+@router.put("/preferences")
+async def update_preferences(prefs: StudentPreferences):
+    _load_sample()
+    student = _students["demo-student"]
+    student.preferences = prefs
+    return student
+
+
+@router.post("/courses")
+async def add_course(course: CompletedCourse):
+    _load_sample()
+    student = _students["demo-student"]
+    student.completed_courses.append(course)
+    student.compute_credits()
+    return student
+
+
+@router.delete("/courses/{course_id}")
+async def remove_course(course_id: str):
+    _load_sample()
+    student = _students["demo-student"]
+    student.completed_courses = [c for c in student.completed_courses if c.course_id != course_id]
+    student.compute_credits()
+    return student
+
+
+@router.get("/majors")
+async def list_majors():
+    return [
+        {"code": "ESCSCI", "name": "Computer Science", "degree": "BS", "college": "Ira A. Fulton Schools of Engineering"},
+    ]
+
+
+def get_student(student_id: str = "demo-student") -> StudentProfile:
+    _load_sample()
+    return _students.get(student_id, _students["demo-student"])
