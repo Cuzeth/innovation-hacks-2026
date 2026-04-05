@@ -176,7 +176,7 @@ class PlanningAgent(BaseAgent):
         course_map: dict[str, Course],
         completed: set[str],
     ) -> list[str]:
-        """Sort remaining courses by prerequisite ordering."""
+        """Sort remaining courses by prerequisite ordering, prioritizing bottlenecks."""
         in_degree: dict[str, int] = {cid: 0 for cid in remaining}
         adj: dict[str, list[str]] = {cid: [] for cid in remaining}
 
@@ -190,17 +190,22 @@ class PlanningAgent(BaseAgent):
                     adj[pid].append(cid)
                     in_degree[cid] = in_degree.get(cid, 0) + 1
 
-        # Kahn's algorithm with priority: bottleneck courses first
-        from collections import deque
-        queue = deque(sorted([c for c, d in in_degree.items() if d == 0]))
+        # Count downstream dependents (courses that directly or indirectly need each course)
+        downstream: dict[str, int] = {cid: len(adj.get(cid, [])) for cid in remaining}
+
+        # Kahn's algorithm — prioritize courses that block the most others
+        import heapq
+        # Use (-downstream_count, course_id) for max-heap priority
+        heap = [(-downstream[c], c) for c, d in in_degree.items() if d == 0]
+        heapq.heapify(heap)
         result = []
-        while queue:
-            node = queue.popleft()
+        while heap:
+            _, node = heapq.heappop(heap)
             result.append(node)
             for neighbor in adj.get(node, []):
                 in_degree[neighbor] -= 1
                 if in_degree[neighbor] == 0:
-                    queue.append(neighbor)
+                    heapq.heappush(heap, (-downstream[neighbor], neighbor))
         # Add any remaining (cycles or missing prereqs)
         for cid in remaining:
             if cid not in result:
@@ -228,7 +233,7 @@ class PlanningAgent(BaseAgent):
         )
 
         remaining_ordered = list(ordered)
-        planned_so_far: set[str] = set()
+        planned_prior: set[str] = set()  # Courses planned in PREVIOUS semesters
 
         for sem_name in semester_names:
             if not remaining_ordered:
@@ -238,6 +243,7 @@ class PlanningAgent(BaseAgent):
             sem_courses: list[PlannedCourse] = []
             sem_credits = 0
             still_remaining = []
+            sem_planned: set[str] = set()  # Track courses in THIS semester
 
             for cid in remaining_ordered:
                 if sem_credits >= sem_max:
@@ -264,11 +270,12 @@ class PlanningAgent(BaseAgent):
                         still_remaining.append(cid)
                         continue
 
-                # Check prerequisites are met
+                # Check prerequisites are met (must be completed or in a PRIOR semester, not current)
                 prereqs_met = True
                 for prereq in course.prerequisites:
-                    if prereq.course_id not in completed and prereq.course_id not in planned_so_far:
-                        if not prereq.can_be_concurrent:
+                    if prereq.course_id not in completed and prereq.course_id not in planned_prior:
+                        # Allow concurrent only if explicitly marked
+                        if not prereq.can_be_concurrent or prereq.course_id not in sem_planned:
                             prereqs_met = False
                             break
                 if not prereqs_met:
@@ -297,9 +304,10 @@ class PlanningAgent(BaseAgent):
                     placement_reason=f"Placed in {sem_name} — prerequisites satisfied, course typically offered in {'Fall' if is_fall else 'Spring' if is_spring else 'Summer'}",
                 ))
                 sem_credits += course.credits
-                planned_so_far.add(cid)
+                sem_planned.add(cid)
 
             remaining_ordered = still_remaining
+            planned_prior.update(sem_planned)
             if sem_courses:
                 semesters.append(SemesterPlan(
                     semester=sem_name,

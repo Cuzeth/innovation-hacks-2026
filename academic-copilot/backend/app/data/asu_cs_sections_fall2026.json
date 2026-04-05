@@ -286,6 +286,97 @@
       "meeting_times": [{"days": ["Mon", "Wed"], "start_time": "10:30", "end_time": "11:45", "location": "BYENG 110", "building": "Brickyard Engineering", "campus": "Tempe"}],
       "seats_total": 40,
       "seats_available": 12
+    },
+    {
+      "section_id": "ASB210-83001",
+      "course_id": "ASB 210",
+      "title": "Peoples and Cultures of the World",
+      "credits": 3,
+      "instructor": "Amber Wutich",
+      "instructor_rating": 4.2,
+      "instructor_rating_source": "ratemyprofessors.com (demo data)",
+      "modality": "in_person",
+      "meeting_times": [{"days": ["Tue", "Thu"], "start_time": "15:00", "end_time": "16:15", "location": "COOR 174", "building": "Coor Hall", "campus": "Tempe"}],
+      "seats_total": 60,
+      "seats_available": 20
+    },
+    {
+      "section_id": "ASB210-83002",
+      "course_id": "ASB 210",
+      "title": "Peoples and Cultures of the World",
+      "credits": 3,
+      "instructor": "Takeyuki Tsuda",
+      "instructor_rating": 3.9,
+      "instructor_rating_source": "ratemyprofessors.com (demo data)",
+      "modality": "online",
+      "meeting_times": [{"days": ["Mon", "Wed"], "start_time": "10:30", "end_time": "11:45", "location": "Online", "building": "", "campus": "Online"}],
+      "seats_total": 80,
+      "seats_available": 35
+    },
+    {
+      "section_id": "MAT267-83010",
+      "course_id": "MAT 267",
+      "title": "Calculus for Engineers III",
+      "credits": 4,
+      "instructor": "Rosemary Renaut",
+      "instructor_rating": 3.6,
+      "instructor_rating_source": "ratemyprofessors.com (demo data)",
+      "modality": "in_person",
+      "meeting_times": [{"days": ["Mon", "Wed", "Fri"], "start_time": "09:00", "end_time": "09:50", "location": "WXLR 101", "building": "Wexler Hall", "campus": "Tempe"}],
+      "seats_total": 40,
+      "seats_available": 15
+    },
+    {
+      "section_id": "PHI101-83020",
+      "course_id": "PHI 101",
+      "title": "Introduction to Philosophy",
+      "credits": 3,
+      "instructor": "Peter French",
+      "instructor_rating": 4.1,
+      "instructor_rating_source": "ratemyprofessors.com (demo data)",
+      "modality": "in_person",
+      "meeting_times": [{"days": ["Tue", "Thu"], "start_time": "13:30", "end_time": "14:45", "location": "LL 165", "building": "Language & Literature", "campus": "Tempe"}],
+      "seats_total": 35,
+      "seats_available": 10
+    },
+    {
+      "section_id": "GCU121-83030",
+      "course_id": "GCU 121",
+      "title": "World Regional Geography",
+      "credits": 3,
+      "instructor": "Breadan Reardon",
+      "instructor_rating": 4.0,
+      "instructor_rating_source": "ratemyprofessors.com (demo data)",
+      "modality": "in_person",
+      "meeting_times": [{"days": ["Mon", "Wed", "Fri"], "start_time": "13:30", "end_time": "14:20", "location": "COOR 120", "building": "Coor Hall", "campus": "Tempe"}],
+      "seats_total": 50,
+      "seats_available": 18
+    },
+    {
+      "section_id": "HIS101-83040",
+      "course_id": "HIS 101",
+      "title": "Western Civilization to 1600",
+      "credits": 3,
+      "instructor": "Matthew Garcia",
+      "instructor_rating": 4.3,
+      "instructor_rating_source": "ratemyprofessors.com (demo data)",
+      "modality": "in_person",
+      "meeting_times": [{"days": ["Tue", "Thu"], "start_time": "10:30", "end_time": "11:45", "location": "LL 165", "building": "Language & Literature", "campus": "Tempe"}],
+      "seats_total": 40,
+      "seats_available": 12
+    },
+    {
+      "section_id": "ARS101-83050",
+      "course_id": "ARS 101",
+      "title": "Introduction to the Arts",
+      "credits": 3,
+      "instructor": "Adriene Jenik",
+      "instructor_rating": 4.4,
+      "instructor_rating_source": "ratemyprofessors.com (demo data)",
+      "modality": "in_person",
+      "meeting_times": [{"days": ["Mon", "Wed"], "start_time": "14:30", "end_time": "15:45", "location": "COOR 174", "building": "Coor Hall", "campus": "Tempe"}],
+      "seats_total": 45,
+      "seats_available": 15
     }
   ]
 }

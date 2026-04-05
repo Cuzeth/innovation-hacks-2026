@@ -27,7 +27,7 @@ A student signs in, selects their ASU major, enters completed courses and AP/tra
 └──────────────────────┘          │  └──────────┬─────────────────┘    │
                                   │             │                      │
                                   │  ┌──────────▼─────────────────┐    │
-                                  │  │   Gemini 2.0 Flash API     │    │
+                                  │  │   Gemini 2.5 Flash API     │    │
                                   │  │   (reasoning + explain)    │    │
                                   │  └────────────────────────────┘    │
                                   │                                    │
@@ -66,8 +66,8 @@ A student signs in, selects their ASU major, enters completed courses and AP/tra
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
 | Frontend | Next.js 16 + TypeScript + Tailwind CSS | Polished dark-mode UI |
-| Backend | FastAPI (Python 3.12) | REST API + agent orchestration |
-| AI | Gemini 2.0 Flash via google-genai | Reasoning, explanation, planning |
+| Backend | FastAPI (Python 3.13+) | REST API + agent orchestration |
+| AI | Gemini 2.5 Flash via google-genai | Reasoning, explanation, planning |
 | Maps | Google Maps Distance Matrix API | Commute estimation |
 | Calendar | Google Calendar API | Schedule export |
 | Deployment | Google Cloud Run + Docker | Production hosting |
@@ -75,7 +75,7 @@ A student signs in, selects their ASU major, enters completed courses and AP/tra
 ## Local Setup
 
 ### Prerequisites
-- Python 3.12+ (via conda or system)
+- Python 3.13+ (via conda or system — Python 3.14 not yet supported by pydantic)
 - Node.js 18+ or Bun
 - A [Gemini API key](https://aistudio.google.com/apikey)
 
@@ -93,7 +93,7 @@ cp .env.example backend/.env
 cd backend
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -173,7 +173,7 @@ gcloud run deploy academic-copilot-web \
 
 1. **Landing page** (15s) — Show the hero with four feature cards. "This is Academic Copilot — an AI academic advisor that replaces hours of manual degree planning."
 
-2. **Run the audit** (30s) — Click Get Started, expand the profile bar to show the demo student. Click Run Full Audit. Point out the Agent Activity log showing six specialized AI agents working in sequence.
+2. **Run the audit** (30s) — Click "Try Demo" to load the sample CS student. Expand the profile bar to show the demo student. Click Run Full Audit. Point out the Agent Activity log showing six specialized AI agents working in sequence.
 
 3. **Degree Audit** (45s) — Walk through the progress bar (40.8%). Expand categories to show fulfilled (green) vs unmet (empty circle) requirements. Click "Generate AI Summary" for the Gemini-powered explanation. Point out AP credits are tracked with source attribution.
 
@@ -195,7 +195,6 @@ This v1 is built specifically for **Arizona State University** with the **Comput
 
 ## Future Enhancements
 
-- Transcript PDF upload for automatic course extraction
 - Real-time ASU class search API integration
 - Multi-university support (provider swapping)
 - User authentication and persistent profiles
