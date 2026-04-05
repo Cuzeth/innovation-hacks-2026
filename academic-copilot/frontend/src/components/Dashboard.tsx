@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   GraduationCap,
   BookOpen,
@@ -23,6 +23,45 @@ import clsx from "clsx";
 
 type Tab = "audit" | "plan" | "schedule" | "calendar";
 
+const PREVIEW_STEPS: AgentStep[] = [
+  {
+    agent: "orchestrator",
+    action: "Assembling the advising workflow",
+    status: "pending",
+    detail: "Loading the student profile, constraints, and available tools.",
+  },
+  {
+    agent: "requirements_agent",
+    action: "Retrieving ASU degree requirements",
+    status: "pending",
+    detail: "Pulling the program audit structure and source trail.",
+  },
+  {
+    agent: "credit_eval_agent",
+    action: "Evaluating completed, AP, and transfer credit",
+    status: "pending",
+    detail: "Mapping past work to fulfilled and review-needed requirements.",
+  },
+  {
+    agent: "planning_agent",
+    action: "Generating the semester-by-semester plan",
+    status: "pending",
+    detail: "Checking bottlenecks, prerequisites, and graduation risk.",
+  },
+  {
+    agent: "section_ranking_agent",
+    action: "Ranking next-term schedule options",
+    status: "pending",
+    detail: "Balancing commute, professor quality, timing, and modality.",
+  },
+  {
+    agent: "orchestrator",
+    action: "Packaging recommendations for the dashboard",
+    status: "pending",
+    detail: "Finalizing the explainable demo output.",
+  },
+];
+
 interface DashboardProps {
   onReset?: () => void;
 }
@@ -34,20 +73,64 @@ export default function Dashboard({ onReset }: DashboardProps) {
   const [agentLog, setAgentLog] = useState<AgentStep[]>([]);
   const [error, setError] = useState("");
   const [showLog, setShowLog] = useState(false);
+  const [selectedScheduleId, setSelectedScheduleId] = useState<string | null>(null);
+  const activeStep = agentLog.find((step) => step.status === "in_progress");
 
   const runAudit = useCallback(async () => {
     setLoading(true);
     setError("");
-    setAgentLog([]);
+    setAgentLog(PREVIEW_STEPS);
     try {
       const data = await api.runAudit();
       setResult(data);
       setAgentLog(data.agent_log || []);
+      setSelectedScheduleId(data.schedules?.[0]?.id ?? null);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to run audit");
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      return;
+    }
+
+    let active = true;
+    let current = 0;
+    setAgentLog(
+      PREVIEW_STEPS.map((step, index) => ({
+        ...step,
+        status: index === 0 ? "in_progress" : "pending",
+      }))
+    );
+
+    const timer = window.setInterval(() => {
+      if (!active) return;
+      current = Math.min(current + 1, PREVIEW_STEPS.length - 1);
+      setAgentLog(
+        PREVIEW_STEPS.map((step, index) => ({
+          ...step,
+          status: index < current ? "completed" : index === current ? "in_progress" : "pending",
+        }))
+      );
+    }, 900);
+
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, [loading]);
+
+  const handleSelectSchedule = useCallback(async (id: string) => {
+    setSelectedScheduleId(id);
+    try {
+      await api.selectSchedule(id);
+    } catch {
+      // Keep the UX moving even if persistence fails locally.
+    }
+    setTab("calendar");
   }, []);
 
   const tabs: { id: Tab; label: string; icon: typeof BookOpen }[] = [
@@ -139,7 +222,7 @@ export default function Dashboard({ onReset }: DashboardProps) {
                 </p>
                 {agentLog.length > 0 && (
                   <div className="text-xs text-muted mt-2">
-                    Latest: {agentLog[agentLog.length - 1]?.action}
+                    Latest: {activeStep?.action || agentLog[agentLog.length - 1]?.action}
                   </div>
                 )}
               </div>
@@ -162,11 +245,16 @@ export default function Dashboard({ onReset }: DashboardProps) {
                 {tab === "schedule" && result?.schedules && (
                   <ScheduleView
                     schedules={result.schedules}
-                    onSelectSchedule={(id) => setTab("calendar")}
+                    selectedScheduleId={selectedScheduleId}
+                    onSelectSchedule={handleSelectSchedule}
                   />
                 )}
                 {tab === "calendar" && result?.schedules && (
-                  <CalendarView schedules={result.schedules} />
+                  <CalendarView
+                    schedules={result.schedules}
+                    selectedScheduleId={selectedScheduleId}
+                    onSelectSchedule={setSelectedScheduleId}
+                  />
                 )}
               </>
             )}

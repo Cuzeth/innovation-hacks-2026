@@ -49,6 +49,22 @@ class EquivalencyProvider(ABC):
         ...
 
 
+class ProfessorRatingProvider(ABC):
+    """Retrieves professor quality signals."""
+
+    @abstractmethod
+    async def get_rating(self, instructor: str, course_id: str = "") -> dict | None:
+        ...
+
+
+class SyllabusArchiveProvider(ABC):
+    """Retrieves historical syllabus context for a course."""
+
+    @abstractmethod
+    async def get_course_context(self, course_id: str) -> dict | None:
+        ...
+
+
 class CommuteProvider(ABC):
     """Estimates commute/travel time."""
 

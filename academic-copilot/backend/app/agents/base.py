@@ -22,6 +22,10 @@ class BaseAgent:
         self._client: genai.Client | None = None
 
     @property
+    def ai_enabled(self) -> bool:
+        return bool(self._api_key)
+
+    @property
     def client(self) -> genai.Client:
         if self._client is None:
             if not self._api_key:

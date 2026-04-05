@@ -209,6 +209,19 @@ class CreditEvaluationAgent(BaseAgent):
 
     async def explain_audit(self, audit: DegreeAudit) -> str:
         """Generate AI-powered explanation of the audit results."""
+        if not self.ai_enabled:
+            review_items = [e.requirement_name for e in audit.explanations if e.needs_advisor_review]
+            review_text = ", ".join(review_items[:3]) if review_items else "none right now"
+            return (
+                f"You have completed {audit.total_credits_completed} of "
+                f"{audit.degree_requirements.total_credits_required} credits "
+                f"({audit.overall_progress_pct}%). "
+                f"Right now {audit.fulfilled_count} requirements are fully met, "
+                f"{audit.partial_count} are in progress or partially satisfied, and "
+                f"{audit.unmet_count} still need action.\n\n"
+                f"Your next priorities are the unmet core and math requirements, with advisor review needed for {review_text}."
+            )
+
         ap_courses = []
         for exp in audit.explanations:
             if "AP Credit" in exp.source_used:

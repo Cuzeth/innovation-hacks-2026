@@ -1,21 +1,33 @@
 """Academic Copilot for ASU — FastAPI backend."""
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import get_settings
+from .db import init_db
 from .api import student as student_api
 from .api import audit as audit_api
 from .api import plan as plan_api
 from .api import schedule as schedule_api
 from .api import calendar as calendar_api
 from .api import auth as auth_api
+from .api import contracts as contracts_api
 
 settings = get_settings()
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    init_db()
+    yield
+
 
 app = FastAPI(
     title="Academic Copilot API",
     description="AI-powered academic advisor for ASU students",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -32,6 +44,7 @@ app.include_router(audit_api.router, prefix="/api/audit", tags=["audit"])
 app.include_router(plan_api.router, prefix="/api/plan", tags=["plan"])
 app.include_router(schedule_api.router, prefix="/api/schedule", tags=["schedule"])
 app.include_router(calendar_api.router, prefix="/api/calendar", tags=["calendar"])
+app.include_router(contracts_api.router, prefix="/api/contracts", tags=["contracts"])
 
 
 @app.get("/api/health")

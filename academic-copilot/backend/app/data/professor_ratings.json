@@ -1,0 +1,74 @@
+{
+  "ratings": [
+    {
+      "instructor": "Yinong Chen",
+      "course_id": "CSE 330",
+      "rating": 4.1,
+      "source": "Demo professor data",
+      "summary": "Clear operating systems lectures and approachable office hours."
+    },
+    {
+      "instructor": "Partha Dasgupta",
+      "course_id": "CSE 330",
+      "rating": 3.5,
+      "source": "Demo professor data",
+      "summary": "Strong theory coverage, but students report heavier independent study."
+    },
+    {
+      "instructor": "Robert Heinrichs",
+      "course_id": "CSE 340",
+      "rating": 4.3,
+      "source": "Demo professor data",
+      "summary": "Consistent pacing and detailed examples for language concepts."
+    },
+    {
+      "instructor": "Ajay Bansal",
+      "course_id": "CSE 340",
+      "rating": 3.8,
+      "source": "Demo professor data",
+      "summary": "Practical assignments with a moderate weekly workload."
+    },
+    {
+      "instructor": "Charles Colbourn",
+      "course_id": "CSE 355",
+      "rating": 4.5,
+      "source": "Demo professor data",
+      "summary": "Highly rated for clarity on proofs and exam prep."
+    },
+    {
+      "instructor": "Rida Bazzi",
+      "course_id": "CSE 355",
+      "rating": 3.2,
+      "source": "Demo professor data",
+      "summary": "Content is solid, but the early start time and pace are common complaints."
+    },
+    {
+      "instructor": "Kevin Gary",
+      "course_id": "CSE 360",
+      "rating": 4.4,
+      "source": "Demo professor data",
+      "summary": "Strong project mentorship and organized team deliverables."
+    },
+    {
+      "instructor": "Srividya Bansal",
+      "course_id": "CSE 360",
+      "rating": 4.0,
+      "source": "Demo professor data",
+      "summary": "Flexible hybrid delivery and steady milestone feedback."
+    },
+    {
+      "instructor": "Adam Doupé",
+      "course_id": "CSE 365",
+      "rating": 4.7,
+      "source": "Demo professor data",
+      "summary": "Excellent security content with strong real-world examples."
+    },
+    {
+      "instructor": "Gail-Joon Ahn",
+      "course_id": "CSE 365",
+      "rating": 3.6,
+      "source": "Demo professor data",
+      "summary": "Respected researcher, but assignments can feel less structured."
+    }
+  ]
+}

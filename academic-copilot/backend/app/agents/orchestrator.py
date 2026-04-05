@@ -1,6 +1,7 @@
 """Orchestrator Agent — coordinates the full advising workflow."""
 from __future__ import annotations
 import logging
+from pydantic import BaseModel
 from app.models.student import StudentProfile
 from app.models.degree import DegreeAudit
 from app.models.plan import AcademicPlan
@@ -31,15 +32,14 @@ class WorkflowState:
         self.agent_log.append(AgentStep(agent=agent, action=action, status=status, detail=detail))
 
 
-class AgentStep:
-    def __init__(self, agent: str, action: str, status: str, detail: str = ""):
-        self.agent = agent
-        self.action = action
-        self.status = status
-        self.detail = detail
+class AgentStep(BaseModel):
+    agent: str
+    action: str
+    status: str
+    detail: str = ""
 
     def to_dict(self):
-        return {"agent": self.agent, "action": self.action, "status": self.status, "detail": self.detail}
+        return self.model_dump()
 
 
 class OrchestratorAgent(BaseAgent):

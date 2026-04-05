@@ -135,7 +135,17 @@ export default function AuditView({ audit, onRun }: Props) {
       {/* Data source */}
       <div className="text-xs text-muted flex items-center gap-1">
         <Info className="w-3 h-3" />
-        Source: {audit.degree_requirements.data_source}
+        <span>Source: {audit.degree_requirements.data_source}</span>
+        {audit.degree_requirements.data_source_url && (
+          <a
+            href={audit.degree_requirements.data_source_url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline"
+          >
+            Open source page
+          </a>
+        )}
       </div>
     </div>
   );

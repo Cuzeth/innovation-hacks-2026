@@ -1,6 +1,6 @@
 "use client";
 
-import { Bot, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Bot, CheckCircle, AlertCircle, Loader2, Circle } from "lucide-react";
 import type { AgentStep } from "@/lib/types";
 import clsx from "clsx";
 
@@ -52,6 +52,9 @@ export default function AgentLog({ steps }: { steps: AgentStep[] }) {
               )}
               {step.status === "failed" && (
                 <AlertCircle className="w-3.5 h-3.5 text-danger" />
+              )}
+              {step.status === "pending" && (
+                <Circle className="w-3.5 h-3.5 text-muted" />
               )}
             </div>
             <div className="min-w-0">

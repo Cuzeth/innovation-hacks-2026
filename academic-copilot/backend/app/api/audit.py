@@ -3,19 +3,17 @@ from fastapi import APIRouter, HTTPException
 from app.agents.orchestrator import OrchestratorAgent, WorkflowState
 from app.agents.credit_eval import CreditEvaluationAgent
 from app.api.student import get_student
+from app.db.repository import get_workflow_state, save_workflow_state
 
 router = APIRouter()
 
-# In-memory workflow state
-_states: dict[str, WorkflowState] = {}
-
 
 def get_state(student_id: str = "demo-student") -> WorkflowState | None:
-    return _states.get(student_id)
+    return get_workflow_state(student_id)
 
 
 def set_state(student_id: str, state: WorkflowState):
-    _states[student_id] = state
+    save_workflow_state(student_id, state)
 
 
 @router.post("/run")
@@ -33,7 +31,7 @@ async def run_full_audit():
         if "403" in msg or "PERMISSION_DENIED" in msg:
             raise HTTPException(403, "Gemini API key issue. Check your GEMINI_API_KEY.")
         raise HTTPException(500, f"Audit failed: {msg}")
-    set_state(student.id, state)
+    save_workflow_state(student.id, state)
 
     return {
         "audit": state.audit.model_dump() if state.audit else None,

@@ -51,6 +51,13 @@ class GoogleMapsCommuteProvider(CommuteProvider):
         # Default: assume 15 min commute from off-campus to campus
         return 15.0
 
+    def estimate_campus_walk(self, origin: str, destination: str) -> float:
+        origin_abbr = self._extract_building(origin)
+        dest_abbr = self._extract_building(destination)
+        if origin_abbr and dest_abbr:
+            return _get_walk_time(origin_abbr, dest_abbr)
+        return 0.0
+
     def _extract_building(self, location: str) -> str | None:
         for name, info in ASU_BUILDINGS.items():
             if info["abbr"] in location or name.lower() in location.lower():

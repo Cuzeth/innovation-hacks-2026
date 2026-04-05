@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from app.agents.orchestrator import OrchestratorAgent
 from app.api.audit import get_state
 from app.api.auth import get_credentials
+from app.db.repository import save_workflow_state
 
 router = APIRouter()
 
@@ -41,4 +42,5 @@ async def export_to_calendar(req: ExportRequest):
         credentials,
         req.include_commute,
     )
+    save_workflow_state(state.student.id, state)
     return result.model_dump()

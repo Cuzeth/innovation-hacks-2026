@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f0d1a;
-  --foreground: #e8e6f0;
-  --card: #1a1726;
-  --card-border: #2d2640;
-  --accent: #8b5cf6;
-  --accent-light: #a78bfa;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --muted: #6b7280;
+  --background: #f5efe3;
+  --foreground: #1f1a16;
+  --card: rgba(255, 251, 244, 0.88);
+  --card-border: #dcc8a3;
+  --accent: #0f766e;
+  --accent-light: #0a8f86;
+  --success: #2d8f5a;
+  --warning: #b87014;
+  --danger: #c2413b;
+  --muted: #6f6456;
   --maroon: #8c1d40;
   --gold: #ffc627;
+  --shadow: 0 20px 60px rgba(87, 50, 12, 0.08);
 }
 
 @theme inline {
@@ -28,19 +29,36 @@
   --color-muted: var(--muted);
   --color-maroon: var(--maroon);
   --color-gold: var(--gold);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", "Monaco", "Menlo", monospace;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top left, rgba(255, 198, 39, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(140, 29, 64, 0.16), transparent 28%),
+    linear-gradient(180deg, #faf4e6 0%, #f2e7d2 100%);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.glass-panel {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.2); }
 ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 

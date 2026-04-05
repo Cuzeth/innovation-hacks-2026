@@ -3,6 +3,23 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 
 
+class TravelWarning(BaseModel):
+    day: str
+    from_course_id: str
+    to_course_id: str
+    gap_minutes: float
+    required_minutes: float
+    message: str
+
+
+class ScheduleScoreBreakdown(BaseModel):
+    section_average: float = 0.0
+    compactness: float = 0.0
+    travel_feasibility: float = 0.0
+    professor_quality: float = 0.0
+    preference_alignment: float = 0.0
+
+
 class ScheduleEntry(BaseModel):
     section: "SectionWithScore"
     commute_before_minutes: float = 0.0
@@ -17,6 +34,8 @@ class ProposedSchedule(BaseModel):
     total_credits: int = 0
     overall_score: float = 0.0
     weekly_commute_minutes: float = 0.0
+    score_breakdown: ScheduleScoreBreakdown = Field(default_factory=ScheduleScoreBreakdown)
+    travel_warnings: list[TravelWarning] = Field(default_factory=list)
     explanation: str = ""
     tradeoffs: str = ""
 

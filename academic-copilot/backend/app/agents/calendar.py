@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 from app.models.schedule import ProposedSchedule, CalendarEvent, CalendarExportRequest, CalendarExportResult
 from app.providers.google_calendar import GoogleCalendarProvider, MockCalendarProvider
+from app.providers.google_maps import GoogleMapsCommuteProvider
 from app.config import get_settings
 from .base import BaseAgent
 
@@ -31,6 +32,7 @@ class CalendarAgent(BaseAgent):
     def __init__(self):
         super().__init__()
         settings = get_settings()
+        self.commute_provider = GoogleMapsCommuteProvider()
         if settings.google_client_id and settings.google_client_secret:
             self.calendar_provider = GoogleCalendarProvider()
         else:
@@ -42,6 +44,7 @@ class CalendarAgent(BaseAgent):
         semester_dates = SEMESTER_DATES.get(schedule.semester, {"start": "2026-08-20", "end": "2026-12-04"})
         sem_start = datetime.strptime(semester_dates["start"], "%Y-%m-%d")
         sem_end = datetime.strptime(semester_dates["end"], "%Y-%m-%d")
+        meetings_by_day: dict[str, list[dict]] = {}
 
         for entry in schedule.entries:
             section = entry.section.section
@@ -85,22 +88,83 @@ class CalendarAgent(BaseAgent):
                     color_id="9",  # Blueberry
                     is_commute_block=False,
                 ))
+                for day_abbr in mt.days:
+                    meetings_by_day.setdefault(day_abbr, []).append(
+                        {
+                            "entry": entry,
+                            "section": section,
+                            "meeting": mt,
+                            "location": location,
+                            "day_abbr": day_abbr,
+                        }
+                    )
 
-                # Commute block before class
-                if include_commute and entry.commute_before_minutes > 0 and section.modality != "online":
-                    commute_min = int(entry.commute_before_minutes)
-                    c_start_minutes = _time_to_minutes(mt.start_time) - commute_min
-                    c_start_h, c_start_m = divmod(c_start_minutes, 60)
-                    c_start_time = f"{c_start_h:02d}:{c_start_m:02d}"
+        if include_commute:
+            for day_abbr, meetings in meetings_by_day.items():
+                meetings.sort(key=lambda item: _time_to_minutes(item["meeting"].start_time))
+                first_date = _first_date_for_day(sem_start, day_abbr)
+                rrule = _recurrence_for_day(day_abbr, sem_end)
 
+                in_person = [meeting for meeting in meetings if meeting["section"].modality != "online"]
+                if not in_person:
+                    continue
+
+                first_meeting = in_person[0]
+                commute_before = int(first_meeting["entry"].commute_before_minutes)
+                if commute_before > 0:
+                    start_minutes = _time_to_minutes(first_meeting["meeting"].start_time) - commute_before
+                    start_time = _minutes_to_time(start_minutes)
                     events.append(CalendarEvent(
-                        summary=f"🚗 Commute → {section.course_id}",
-                        description=f"Travel to {location} for {section.course_id}",
+                        summary=f"Commute → {first_meeting['section'].course_id}",
+                        description=f"Travel to {first_meeting['location']} before class.",
                         location="",
-                        start_datetime=f"{first_date.strftime('%Y-%m-%d')}T{c_start_time}:00",
-                        end_datetime=f"{first_date.strftime('%Y-%m-%d')}T{mt.start_time}:00",
+                        start_datetime=f"{first_date.strftime('%Y-%m-%d')}T{start_time}:00",
+                        end_datetime=f"{first_date.strftime('%Y-%m-%d')}T{first_meeting['meeting'].start_time}:00",
                         recurrence=[rrule],
-                        color_id="6",  # Tangerine
+                        color_id="6",
+                        is_commute_block=True,
+                    ))
+
+                for idx in range(len(in_person) - 1):
+                    current = in_person[idx]
+                    upcoming = in_person[idx + 1]
+                    current_end = _time_to_minutes(current["meeting"].end_time)
+                    next_start = _time_to_minutes(upcoming["meeting"].start_time)
+                    if next_start <= current_end:
+                        continue
+                    required_minutes = int(
+                        self.commute_provider.estimate_campus_walk(
+                            current["location"], upcoming["location"]
+                        )
+                    )
+                    if required_minutes <= 0:
+                        continue
+                    block_end = min(next_start, current_end + required_minutes)
+                    events.append(CalendarEvent(
+                        summary=f"Walk to {upcoming['section'].course_id}",
+                        description=(
+                            f"Transition from {current['section'].course_id} to {upcoming['section'].course_id}."
+                        ),
+                        location="",
+                        start_datetime=f"{first_date.strftime('%Y-%m-%d')}T{_minutes_to_time(current_end)}:00",
+                        end_datetime=f"{first_date.strftime('%Y-%m-%d')}T{_minutes_to_time(block_end)}:00",
+                        recurrence=[rrule],
+                        color_id="5",
+                        is_commute_block=True,
+                    ))
+
+                last_meeting = in_person[-1]
+                commute_after = int(last_meeting["entry"].commute_after_minutes)
+                if commute_after > 0:
+                    last_end = _time_to_minutes(last_meeting["meeting"].end_time)
+                    events.append(CalendarEvent(
+                        summary=f"Commute home ← {last_meeting['section'].course_id}",
+                        description="Return commute block after your last on-campus class.",
+                        location="",
+                        start_datetime=f"{first_date.strftime('%Y-%m-%d')}T{last_meeting['meeting'].end_time}:00",
+                        end_datetime=f"{first_date.strftime('%Y-%m-%d')}T{_minutes_to_time(last_end + commute_after)}:00",
+                        recurrence=[rrule],
+                        color_id="6",
                         is_commute_block=True,
                     ))
 
@@ -152,3 +216,22 @@ class CalendarAgent(BaseAgent):
 def _time_to_minutes(t: str) -> int:
     h, m = t.split(":")
     return int(h) * 60 + int(m)
+
+
+def _minutes_to_time(minutes: int) -> str:
+    minutes = max(0, minutes)
+    hours, mins = divmod(minutes, 60)
+    return f"{hours:02d}:{mins:02d}"
+
+
+def _first_date_for_day(semester_start: datetime, day_abbr: str) -> datetime:
+    _, py_weekday = DAY_MAP.get(day_abbr, ("MO", 0))
+    first_date = semester_start
+    while first_date.weekday() != py_weekday:
+        first_date += timedelta(days=1)
+    return first_date
+
+
+def _recurrence_for_day(day_abbr: str, semester_end: datetime) -> str:
+    ical_day, _ = DAY_MAP.get(day_abbr, ("MO", 0))
+    return f"RRULE:FREQ=WEEKLY;BYDAY={ical_day};UNTIL={semester_end.strftime('%Y%m%dT235959Z')}"

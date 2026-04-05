@@ -17,11 +17,17 @@ import clsx from "clsx";
 
 interface Props {
   schedules: ProposedSchedule[];
+  selectedScheduleId?: string | null;
+  onSelectSchedule?: (id: string) => void;
 }
 
-export default function CalendarView({ schedules }: Props) {
+export default function CalendarView({
+  schedules,
+  selectedScheduleId: externalSelectedScheduleId,
+  onSelectSchedule,
+}: Props) {
   const [selectedScheduleId, setSelectedScheduleId] = useState(
-    schedules[0]?.id || ""
+    externalSelectedScheduleId || schedules[0]?.id || ""
   );
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [includeCommute, setIncludeCommute] = useState(true);
@@ -42,6 +48,12 @@ export default function CalendarView({ schedules }: Props) {
   useEffect(() => {
     api.getAuthStatus().then(setAuthStatus).catch(() => {});
   }, []);
+
+  useEffect(() => {
+    if (externalSelectedScheduleId) {
+      setSelectedScheduleId(externalSelectedScheduleId);
+    }
+  }, [externalSelectedScheduleId]);
 
   useEffect(() => {
     if (!selectedScheduleId) return;
@@ -86,6 +98,7 @@ export default function CalendarView({ schedules }: Props) {
             key={s.id}
             onClick={() => {
               setSelectedScheduleId(s.id);
+              onSelectSchedule?.(s.id);
               setExported(false);
               setExportResult(null);
             }}

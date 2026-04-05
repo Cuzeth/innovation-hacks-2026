@@ -1,0 +1,39 @@
+{
+  "courses": [
+    {
+      "course_id": "CSE 330",
+      "workload": "high",
+      "signal": "Expect weekly labs and one larger systems project. Pairing this with two other heavy technical courses increases risk."
+    },
+    {
+      "course_id": "CSE 340",
+      "workload": "medium",
+      "signal": "Programming languages is concept-heavy early, then settles into smaller interpreter-style assignments."
+    },
+    {
+      "course_id": "CSE 355",
+      "workload": "medium",
+      "signal": "Theoretical CS is lighter on programming but heavier on proof practice before exams."
+    },
+    {
+      "course_id": "CSE 360",
+      "workload": "medium",
+      "signal": "Software engineering has team deliverables that benefit from longer gaps between class and work hours."
+    },
+    {
+      "course_id": "CSE 365",
+      "workload": "high",
+      "signal": "Information assurance includes hands-on security work and can spike around project deadlines."
+    },
+    {
+      "course_id": "MAT 343",
+      "workload": "medium",
+      "signal": "Linear algebra stays manageable if you keep a steady weekly problem-set rhythm."
+    },
+    {
+      "course_id": "STP 280",
+      "workload": "low",
+      "signal": "Statistics usually adds lower risk and pairs well with project-based CSE courses."
+    }
+  ]
+}

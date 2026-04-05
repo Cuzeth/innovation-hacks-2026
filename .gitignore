@@ -9,3 +9,4 @@ __pycache__/
 .next/
 *.egg-info/
 bun.lock
+*.db

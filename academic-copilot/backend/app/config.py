@@ -6,6 +6,9 @@ class Settings(BaseSettings):
     app_name: str = "Academic Copilot"
     debug: bool = False
 
+    # Persistence
+    database_url: str = "sqlite:///./academic_copilot.db"
+
     # Gemini / Vertex AI
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.5-flash"

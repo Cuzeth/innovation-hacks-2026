@@ -23,6 +23,17 @@ class RequirementsAgent(BaseAgent):
 
     async def explain_requirements(self, requirements: DegreeRequirements) -> str:
         """Generate a student-friendly summary of the requirements."""
+        if not self.ai_enabled:
+            key_rules = ", ".join(requirements.notes[:2]) if requirements.notes else "Meet catalog, GPA, and residency rules."
+            return (
+                f"{requirements.degree} in {requirements.major} requires "
+                f"{requirements.total_credits_required} total credits across "
+                f"{len(requirements.categories)} major categories. "
+                f"The biggest milestones are completing the major core, finishing the math/science sequence, "
+                f"and staying on top of upper-division credits.\n\n"
+                f"Important ASU rules: {key_rules}"
+            )
+
         prompt = f"""Summarize these degree requirements for a student in 3-4 concise paragraphs.
 
 Degree: {requirements.degree} in {requirements.major} at {requirements.university}

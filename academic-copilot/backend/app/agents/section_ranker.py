@@ -4,8 +4,17 @@ import itertools
 from app.models.student import StudentProfile, ScheduleStyle
 from app.models.course import Section, SectionWithScore, MeetingTime
 from app.models.plan import SemesterPlan
-from app.models.schedule import ProposedSchedule, ScheduleEntry
+from app.models.schedule import (
+    ProposedSchedule,
+    ScheduleEntry,
+    ScheduleScoreBreakdown,
+    TravelWarning,
+)
 from app.providers.asu_courses import ASUCourseProvider
+from app.providers.academic_enrichment import (
+    DemoProfessorRatingProvider,
+    DemoSyllabusArchiveProvider,
+)
 from app.providers.google_maps import GoogleMapsCommuteProvider
 from .base import BaseAgent
 
@@ -27,6 +36,8 @@ class SectionRankingAgent(BaseAgent):
         super().__init__()
         self.course_provider = ASUCourseProvider()
         self.commute_provider = GoogleMapsCommuteProvider()
+        self.professor_provider = DemoProfessorRatingProvider()
+        self.syllabus_provider = DemoSyllabusArchiveProvider()
 
     async def rank_schedules(
         self,
@@ -45,19 +56,34 @@ class SectionRankingAgent(BaseAgent):
         for cid, sections in all_sections.items():
             scored = []
             for section in sections:
+                await self._enrich_section(section)
                 s = await self._score_section(section, student)
                 scored.append(s)
             scored.sort(key=lambda x: -x.score)
             scored_sections[cid] = scored
 
         # 3. Generate schedule combinations (limited for performance)
-        schedules = self._generate_schedules(scored_sections, student, semester)
+        schedules = await self._generate_schedules(scored_sections, student, semester)
 
         # 4. Use Gemini to explain top schedules
         for sched in schedules[:3]:
             sched.explanation = await self._explain_schedule(sched, student)
 
         return schedules
+
+    async def _enrich_section(self, section: Section):
+        rating = await self.professor_provider.get_rating(section.instructor, section.course_id)
+        if rating:
+            section.instructor_rating = rating.get("rating", section.instructor_rating)
+            section.instructor_rating_source = rating.get("source", section.instructor_rating_source)
+            if rating.get("summary"):
+                section.notes = rating["summary"]
+
+        syllabus_context = await self.syllabus_provider.get_course_context(section.course_id)
+        if syllabus_context:
+            signal = syllabus_context.get("signal", "")
+            if signal:
+                section.notes = f"{section.notes} {signal}".strip()
 
     async def _score_section(self, section: Section, student: StudentProfile) -> SectionWithScore:
         """Score a single section based on student preferences."""
@@ -90,6 +116,8 @@ class SectionRankingAgent(BaseAgent):
         )
         if commute_minutes is not None:
             explanation += f", Commute={commute_minutes:.0f}min"
+        if section.notes:
+            explanation += f". Context: {section.notes}"
 
         return SectionWithScore(
             section=section,
@@ -147,7 +175,7 @@ class SectionRankingAgent(BaseAgent):
             return 0.65
         return max(0.1, rating / 5.0)
 
-    def _generate_schedules(
+    async def _generate_schedules(
         self,
         scored_sections: dict[str, list[SectionWithScore]],
         student: StudentProfile,
@@ -176,6 +204,8 @@ class SectionRankingAgent(BaseAgent):
             total_score = 0
             total_credits = 0
             total_commute = 0
+            preference_alignment = 0.0
+            professor_quality = 0.0
             for scored in combo:
                 commute_before = scored.commute_minutes or 0
                 entries.append(ScheduleEntry(
@@ -185,6 +215,10 @@ class SectionRankingAgent(BaseAgent):
                 ))
                 total_score += scored.score
                 total_credits += scored.section.credits
+                preference_alignment += (
+                    scored.time_score + scored.day_score + scored.modality_score
+                ) / 3.0
+                professor_quality += scored.instructor_score
                 if scored.commute_minutes:
                     # Estimate weekly commute based on meeting days
                     days_per_week = sum(len(m.days) for m in scored.section.meeting_times)
@@ -192,7 +226,12 @@ class SectionRankingAgent(BaseAgent):
 
             avg_score = total_score / len(combo) if combo else 0
             compactness = self._score_compactness(combo, student.preferences.schedule_style)
-            final_score = avg_score * 0.7 + compactness * 0.3
+            travel_score, travel_warnings, transition_minutes = await self._analyze_travel(combo)
+            total_commute += transition_minutes
+            preference_alignment = preference_alignment / len(combo) if combo else 0
+            professor_quality = professor_quality / len(combo) if combo else 0
+            final_score = avg_score * 0.65 + compactness * 0.15 + travel_score * 0.20
+            tradeoffs = self._build_tradeoff_summary(travel_warnings, combo)
 
             valid_schedules.append(ProposedSchedule(
                 id=f"schedule-{i+1}",
@@ -202,6 +241,15 @@ class SectionRankingAgent(BaseAgent):
                 total_credits=total_credits,
                 overall_score=round(final_score, 3),
                 weekly_commute_minutes=round(total_commute, 1),
+                score_breakdown=ScheduleScoreBreakdown(
+                    section_average=round(avg_score, 3),
+                    compactness=round(compactness, 3),
+                    travel_feasibility=round(travel_score, 3),
+                    professor_quality=round(professor_quality, 3),
+                    preference_alignment=round(preference_alignment, 3),
+                ),
+                travel_warnings=travel_warnings,
+                tradeoffs=tradeoffs,
             ))
 
         # Sort and name top 3
@@ -212,6 +260,88 @@ class SectionRankingAgent(BaseAgent):
             sched.id = f"schedule-{i+1}"
 
         return valid_schedules[:3]
+
+    async def _analyze_travel(self, combo: tuple[SectionWithScore, ...]) -> tuple[float, list[TravelWarning], float]:
+        """Score how realistic the inter-class travel is for a given schedule."""
+        meetings_by_day: dict[str, list[tuple[int, int, SectionWithScore]]] = {}
+        for scored in combo:
+            for mt in scored.section.meeting_times:
+                for day in mt.days:
+                    meetings_by_day.setdefault(day, []).append(
+                        (_time_to_minutes(mt.start_time), _time_to_minutes(mt.end_time), scored)
+                    )
+
+        warnings: list[TravelWarning] = []
+        total_required = 0.0
+        total_available = 0.0
+        transition_minutes = 0.0
+
+        for day, slots in meetings_by_day.items():
+            slots.sort(key=lambda item: item[0])
+            for idx in range(len(slots) - 1):
+                _, current_end, current = slots[idx]
+                next_start, _, upcoming = slots[idx + 1]
+                gap = max(0, next_start - current_end)
+                required = await self._estimate_transition_minutes(current.section, upcoming.section)
+                total_available += gap
+                total_required += required
+                transition_minutes += required
+
+                if required > 0 and gap < required:
+                    warnings.append(
+                        TravelWarning(
+                            day=day,
+                            from_course_id=current.section.course_id,
+                            to_course_id=upcoming.section.course_id,
+                            gap_minutes=gap,
+                            required_minutes=required,
+                            message=(
+                                f"{day}: {current.section.course_id} to {upcoming.section.course_id} leaves "
+                                f"{gap:.0f} minutes for a {required:.0f}-minute cross-campus transition."
+                            ),
+                        )
+                    )
+
+        if total_required == 0:
+            return 1.0, warnings, transition_minutes
+
+        shortfall = sum(max(0.0, warning.required_minutes - warning.gap_minutes) for warning in warnings)
+        score = max(0.0, 1.0 - shortfall / total_required)
+        return score, warnings, transition_minutes
+
+    async def _estimate_transition_minutes(self, current: Section, upcoming: Section) -> float:
+        if current.modality == "online" or upcoming.modality == "online":
+            return 0.0
+        current_location = (
+            current.meeting_times[0].building or current.meeting_times[0].location
+            if current.meeting_times
+            else ""
+        )
+        next_location = (
+            upcoming.meeting_times[0].building or upcoming.meeting_times[0].location
+            if upcoming.meeting_times
+            else ""
+        )
+        if not current_location or not next_location:
+            return 0.0
+        return await self.commute_provider.estimate_commute(current_location, next_location)
+
+    def _build_tradeoff_summary(
+        self,
+        travel_warnings: list[TravelWarning],
+        combo: tuple[SectionWithScore, ...],
+    ) -> str:
+        early_classes = [
+            scored.section.course_id
+            for scored in combo
+            if scored.section.meeting_times and _time_to_minutes(scored.section.meeting_times[0].start_time) < 9 * 60
+        ]
+        notes = []
+        if travel_warnings:
+            notes.append("Cross-campus transitions are tight on at least one day.")
+        if early_classes:
+            notes.append(f"Includes earlier starts for {', '.join(sorted(set(early_classes)))}.")
+        return " ".join(notes)
 
     def _has_conflict(self, combo: tuple[SectionWithScore, ...]) -> bool:
         """Check if any two sections overlap in time."""
@@ -267,6 +397,17 @@ class SectionRankingAgent(BaseAgent):
         return 0.7
 
     async def _explain_schedule(self, schedule: ProposedSchedule, student: StudentProfile) -> str:
+        if not self.ai_enabled:
+            warnings = schedule.travel_warnings[0].message if schedule.travel_warnings else "No cross-campus crunch points were detected."
+            top_course = max(schedule.entries, key=lambda entry: entry.section.instructor_score)
+            return (
+                f"{schedule.name} ranks well because it balances professor strength, timing, and commute for "
+                f"{student.preferences.schedule_style.value} scheduling. "
+                f"The strongest instructor fit is {top_course.section.section.course_id} with a "
+                f"{top_course.section.section.instructor_rating or 0:.1f} rating when available. "
+                f"{warnings}"
+            )
+
         sections_info = "\n".join(
             f"- {e.section.section.course_id} ({e.section.section.section_id}): "
             f"{e.section.section.instructor} (rating: {e.section.section.instructor_rating}), "
@@ -274,16 +415,27 @@ class SectionRankingAgent(BaseAgent):
             f"{'/'.join(','.join(m.days) for m in e.section.section.meeting_times)} "
             f"{e.section.section.meeting_times[0].start_time if e.section.section.meeting_times else 'TBA'}-"
             f"{e.section.section.meeting_times[0].end_time if e.section.section.meeting_times else 'TBA'}, "
-            f"score: {e.section.score:.0%}"
+            f"score: {e.section.score:.0%}, "
+            f"context: {e.section.section.notes or 'No historical note'}"
             for e in schedule.entries
         )
+        warning_summary = "\n".join(f"- {warning.message}" for warning in schedule.travel_warnings) or "None"
         prompt = f"""Explain why this schedule was ranked #{schedule.name} for the student. Be specific.
 
 Schedule: {schedule.name} (score: {schedule.overall_score:.0%})
 Weekly commute: {schedule.weekly_commute_minutes:.0f} minutes
+Score breakdown:
+- Section average: {schedule.score_breakdown.section_average:.0%}
+- Compactness: {schedule.score_breakdown.compactness:.0%}
+- Travel feasibility: {schedule.score_breakdown.travel_feasibility:.0%}
+- Professor quality: {schedule.score_breakdown.professor_quality:.0%}
+- Preference alignment: {schedule.score_breakdown.preference_alignment:.0%}
 
 Sections:
 {sections_info}
+
+Travel warnings:
+{warning_summary}
 
 Student preferences:
 - Preferred time: {student.preferences.preferred_start_time} - {student.preferences.preferred_end_time}

@@ -185,6 +185,7 @@ export interface Section {
   seats_total: number;
   seats_available: number;
   semester: string;
+  notes: string;
 }
 
 export interface SectionWithScore {
@@ -205,6 +206,23 @@ export interface ScheduleEntry {
   commute_after_minutes: number;
 }
 
+export interface TravelWarning {
+  day: string;
+  from_course_id: string;
+  to_course_id: string;
+  gap_minutes: number;
+  required_minutes: number;
+  message: string;
+}
+
+export interface ScheduleScoreBreakdown {
+  section_average: number;
+  compactness: number;
+  travel_feasibility: number;
+  professor_quality: number;
+  preference_alignment: number;
+}
+
 export interface ProposedSchedule {
   id: string;
   name: string;
@@ -213,6 +231,8 @@ export interface ProposedSchedule {
   total_credits: number;
   overall_score: number;
   weekly_commute_minutes: number;
+  score_breakdown: ScheduleScoreBreakdown;
+  travel_warnings: TravelWarning[];
   explanation: string;
   tradeoffs: string;
 }

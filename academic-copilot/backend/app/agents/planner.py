@@ -388,6 +388,20 @@ class PlanningAgent(BaseAgent):
         return risks
 
     async def _explain_path(self, path: GraduationPath, student: StudentProfile) -> str:
+        if not self.ai_enabled:
+            bottleneck_text = (
+                ", ".join(b.course_id for b in path.bottlenecks[:3])
+                if path.bottlenecks
+                else "no major bottlenecks"
+            )
+            return (
+                f"This path reaches {path.graduation_term} in {path.total_semesters} more semesters by "
+                f"front-loading bottlenecks like {bottleneck_text}. "
+                f"Courses are placed only after prerequisites clear and according to typical term availability.\n\n"
+                f"The plan stays aligned with your {student.preferences.max_credits_per_semester}-credit preference "
+                f"and surfaces any heavier semesters as explicit risks."
+            )
+
         sem_summary = "\n".join(
             f"- {s.semester}: {', '.join(c.course_id for c in s.courses)} ({s.total_credits} cr)"
             for s in path.semesters
@@ -413,6 +427,22 @@ Keep it under 150 words, encouraging but honest."""
         return await self._generate(prompt)
 
     async def _generate_risk_summary(self, path: GraduationPath, bottlenecks: list[Bottleneck], ap_impact: APCreditImpact) -> str:
+        if not self.ai_enabled:
+            bullets = []
+            if bottlenecks:
+                first = bottlenecks[0]
+                bullets.append(
+                    f"- {first.course_id} is the biggest bottleneck and should stay on schedule."
+                )
+            if any(r.level == RiskLevel.HIGH for r in path.risk_factors):
+                bullets.append("- A missed bottleneck or capstone prerequisite would likely delay graduation.")
+            if ap_impact.credits_saved:
+                bullets.append(
+                    f"- AP credit already removed about {ap_impact.semesters_saved} semester(s) of pressure from the path."
+                )
+            bullets.append("- If workload feels too high, move one technical course into summer or a later elective term.")
+            return "\n".join(bullets[:4])
+
         prompt = f"""Write a brief "Risk to Graduation Timeline" summary (3-5 bullet points).
 
 Graduation target: {path.graduation_term}

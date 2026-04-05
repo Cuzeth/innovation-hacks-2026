@@ -1,6 +1,7 @@
 """Schedule recommendation API routes."""
 from fastapi import APIRouter
 from app.api.audit import get_state
+from app.db.repository import save_workflow_state
 
 router = APIRouter()
 
@@ -38,5 +39,6 @@ async def select_schedule(schedule_id: str):
     for s in state.schedules:
         if s.id == schedule_id:
             state.selected_schedule = s
+            save_workflow_state(state.student.id, state)
             return {"message": f"Selected {s.name}", "schedule": s.model_dump()}
     return {"error": f"Schedule {schedule_id} not found"}

@@ -16,12 +16,15 @@ import clsx from "clsx";
 
 interface Props {
   schedules: ProposedSchedule[];
+  selectedScheduleId?: string | null;
   onSelectSchedule: (id: string) => void;
 }
 
-export default function ScheduleView({ schedules, onSelectSchedule }: Props) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-
+export default function ScheduleView({
+  schedules,
+  selectedScheduleId,
+  onSelectSchedule,
+}: Props) {
   if (!schedules.length) {
     return (
       <div className="text-center py-20 text-muted">
@@ -45,11 +48,8 @@ export default function ScheduleView({ schedules, onSelectSchedule }: Props) {
             key={sched.id}
             schedule={sched}
             rank={i + 1}
-            selected={selectedId === sched.id}
-            onSelect={() => {
-              setSelectedId(sched.id);
-              onSelectSchedule(sched.id);
-            }}
+            selected={selectedScheduleId === sched.id}
+            onSelect={() => onSelectSchedule(sched.id)}
           />
         ))}
       </div>
@@ -150,6 +150,36 @@ function ScheduleCard({
 
       {expanded && (
         <div className="border-t border-card-border p-4 space-y-3 animate-fade-in">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+            <ScorePill label="Sections" value={schedule.score_breakdown.section_average} />
+            <ScorePill label="Compactness" value={schedule.score_breakdown.compactness} />
+            <ScorePill label="Travel" value={schedule.score_breakdown.travel_feasibility} />
+            <ScorePill label="Professors" value={schedule.score_breakdown.professor_quality} />
+            <ScorePill label="Preferences" value={schedule.score_breakdown.preference_alignment} />
+          </div>
+
+          {schedule.travel_warnings.length > 0 && (
+            <div className="bg-warning/10 border border-warning/30 rounded-lg p-3">
+              <div className="text-xs font-medium text-warning mb-1">
+                Travel Watchouts
+              </div>
+              <div className="space-y-1">
+                {schedule.travel_warnings.map((warning) => (
+                  <p key={warning.message} className="text-xs text-foreground/80">
+                    {warning.message}
+                  </p>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {schedule.tradeoffs && (
+            <div className="bg-card border border-card-border rounded-lg p-3 text-xs text-muted">
+              <span className="font-medium text-foreground">Tradeoff:</span>{" "}
+              {schedule.tradeoffs}
+            </div>
+          )}
+
           {/* Section details */}
           {schedule.entries.map((entry) => (
             <SectionDetail key={entry.section.section.section_id} entry={entry} />
@@ -215,13 +245,25 @@ function SectionDetail({ entry }: { entry: ScheduleEntry }) {
           ~{Math.round(entry.commute_before_minutes)} min commute each way
         </div>
       )}
+      {sec.notes && (
+        <div className="mt-1.5 text-[10px] text-muted">
+          Historical signal: {sec.notes}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ScorePill({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="bg-background rounded-lg px-3 py-2">
+      <div className="text-[10px] uppercase tracking-[0.12em] text-muted">{label}</div>
+      <div className="text-sm font-semibold">{Math.round(value * 100)}%</div>
     </div>
   );
 }
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-const HOURS = Array.from({ length: 11 }, (_, i) => i + 8); // 8 AM to 6 PM
-
 const DAY_COLORS = [
   "bg-blue-500/30",
   "bg-emerald-500/30",
