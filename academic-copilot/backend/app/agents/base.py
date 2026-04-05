@@ -52,6 +52,28 @@ class BaseAgent:
             logger.error(f"Agent {self.name} Gemini call failed: {e}")
             raise
 
+    async def _generate_multimodal(self, parts: list, response_schema: dict | None = None) -> str:
+        """Call Gemini with multimodal parts (e.g. PDF + text prompt)."""
+        config_kwargs: dict = {}
+        if self.system_prompt:
+            config_kwargs["system_instruction"] = self.system_prompt
+        if response_schema:
+            config_kwargs["response_mime_type"] = "application/json"
+            config_kwargs["response_schema"] = response_schema
+
+        config = types.GenerateContentConfig(**config_kwargs)
+
+        try:
+            response = self.client.models.generate_content(
+                model=self.model,
+                contents=parts,
+                config=config,
+            )
+            return response.text
+        except Exception as e:
+            logger.error(f"Agent {self.name} Gemini multimodal call failed: {e}")
+            raise
+
     async def _generate_json(self, prompt: str, response_schema: dict | None = None) -> dict:
         """Call Gemini and parse JSON response."""
         text = await self._generate(prompt, response_schema)

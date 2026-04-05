@@ -49,6 +49,21 @@ export const api = {
     fetchAPI<{ exam: string; asu_equivalent: string; credits: number }[]>(
       "/api/student/ap-exams"
     ),
+  uploadTranscript: async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await fetch(`${API_BASE}/api/student/transcript/upload`, {
+      method: "POST",
+      body: formData,
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Upload failed: ${text}`);
+    }
+    return res.json() as Promise<{
+      courses: import("./types").CompletedCourse[];
+    }>;
+  },
 
   // Audit (triggers full workflow)
   runAudit: () =>

@@ -1,5 +1,5 @@
 """Student profile API routes."""
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File, HTTPException
 from app.models.student import StudentProfile, CompletedCourse, StudentPreferences
 import json
 from pathlib import Path
@@ -94,6 +94,22 @@ async def list_majors():
     return [
         {"code": "ESCSCI", "name": "Computer Science", "degree": "BS", "college": "Ira A. Fulton Schools of Engineering"},
     ]
+
+
+@router.post("/transcript/upload")
+async def upload_transcript(file: UploadFile = File(...)):
+    """Upload a transcript PDF and extract courses using Gemini."""
+    if file.content_type and "pdf" not in file.content_type:
+        raise HTTPException(400, "Only PDF files are supported")
+
+    pdf_bytes = await file.read()
+    if len(pdf_bytes) > 10 * 1024 * 1024:  # 10MB limit
+        raise HTTPException(400, "File too large (max 10MB)")
+
+    from app.agents.transcript import TranscriptParserAgent
+    agent = TranscriptParserAgent()
+    courses = await agent.parse_transcript(pdf_bytes)
+    return {"courses": courses}
 
 
 @router.get("/courses/catalog")

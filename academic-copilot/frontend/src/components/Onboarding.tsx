@@ -14,6 +14,8 @@ import {
   Check,
   Search,
   Loader2,
+  FileUp,
+  FileCheck,
 } from "lucide-react";
 import { api } from "@/lib/api";
 import type { CompletedCourse, StudentPreferences } from "@/lib/types";
@@ -63,6 +65,9 @@ export default function Onboarding({ onComplete }: Props) {
   const [courseSearch, setCourseSearch] = useState("");
   const [showAddCourse, setShowAddCourse] = useState(false);
   const [showAddAP, setShowAddAP] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const [uploadedCount, setUploadedCount] = useState(0);
 
   // Step 3: Preferences
   const [prefs, setPrefs] = useState<StudentPreferences>({
@@ -86,6 +91,31 @@ export default function Onboarding({ onComplete }: Props) {
     api.listCourses().then(setCourseCatalog).catch(() => {});
     api.listAPExams().then(setApExams).catch(() => {});
   }, []);
+
+  const handleTranscriptUpload = async (file: File) => {
+    setUploading(true);
+    setUploadError("");
+    setUploadedCount(0);
+    try {
+      const result = await api.uploadTranscript(file);
+      const newCourses = result.courses.filter(
+        (nc) => !courses.some((c) => c.course_id === nc.course_id)
+      );
+      setCourses((prev) => [...prev, ...newCourses.map((c) => ({
+        course_id: c.course_id,
+        title: c.title || "",
+        credits: c.credits || 3,
+        grade: c.grade || "",
+        semester: c.semester || "",
+        source: "asu" as const,
+        transfer_institution: "",
+      }))]);
+      setUploadedCount(newCourses.length);
+    } catch (e) {
+      setUploadError(e instanceof Error ? e.message : "Failed to parse transcript");
+    }
+    setUploading(false);
+  };
 
   const addCourse = (courseId: string, title: string, credits: number) => {
     if (courses.some((c) => c.course_id === courseId)) return;
@@ -273,30 +303,107 @@ export default function Onboarding({ onComplete }: Props) {
 
           {step === 1 && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Your Courses</h2>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => {
-                      setShowAddAP(true);
-                      setShowAddCourse(false);
-                    }}
-                    className="flex items-center gap-1 px-3 py-1.5 text-xs bg-gold/20 text-gold border border-gold/30 rounded-lg cursor-pointer hover:bg-gold/30"
-                  >
-                    <Award className="w-3 h-3" />
-                    Add AP Credit
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowAddCourse(true);
-                      setShowAddAP(false);
-                    }}
-                    className="flex items-center gap-1 px-3 py-1.5 text-xs bg-accent/20 text-accent-light border border-accent/30 rounded-lg cursor-pointer hover:bg-accent/30"
-                  >
-                    <Plus className="w-3 h-3" />
-                    Add Course
-                  </button>
+              <h2 className="text-lg font-semibold">Your Courses</h2>
+
+              {/* Transcript upload */}
+              <div
+                className={clsx(
+                  "relative border-2 border-dashed rounded-xl p-5 text-center transition",
+                  uploading
+                    ? "border-accent/50 bg-accent/5"
+                    : uploadedCount > 0
+                    ? "border-success/50 bg-success/5"
+                    : "border-card-border hover:border-accent/40 hover:bg-accent/5"
+                )}
+              >
+                {uploading ? (
+                  <div className="flex flex-col items-center gap-2">
+                    <Loader2 className="w-6 h-6 text-accent animate-spin" />
+                    <p className="text-sm text-accent-light font-medium">
+                      Parsing transcript with AI...
+                    </p>
+                    <p className="text-xs text-muted">
+                      This may take a few seconds
+                    </p>
+                  </div>
+                ) : uploadedCount > 0 ? (
+                  <div className="flex flex-col items-center gap-2">
+                    <FileCheck className="w-6 h-6 text-success" />
+                    <p className="text-sm text-success font-medium">
+                      Extracted {uploadedCount} courses from transcript
+                    </p>
+                    <label className="text-xs text-muted underline cursor-pointer">
+                      Upload a different transcript
+                      <input
+                        type="file"
+                        accept=".pdf,application/pdf"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) handleTranscriptUpload(f);
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
+                  </div>
+                ) : (
+                  <label className="flex flex-col items-center gap-2 cursor-pointer">
+                    <FileUp className="w-6 h-6 text-muted" />
+                    <p className="text-sm font-medium">
+                      Upload your unofficial transcript
+                    </p>
+                    <p className="text-xs text-muted">
+                      PDF only — AI will extract your courses automatically
+                    </p>
+                    <input
+                      type="file"
+                      accept=".pdf,application/pdf"
+                      className="hidden"
+                      onChange={(e) => {
+                        const f = e.target.files?.[0];
+                        if (f) handleTranscriptUpload(f);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                )}
+              </div>
+
+              {uploadError && (
+                <div className="text-xs text-danger bg-danger/10 border border-danger/30 rounded-lg p-2">
+                  {uploadError}
                 </div>
+              )}
+
+              {/* Divider */}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px bg-card-border" />
+                <span className="text-xs text-muted">or add manually</span>
+                <div className="flex-1 h-px bg-card-border" />
+              </div>
+
+              {/* Manual add buttons */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    setShowAddAP(true);
+                    setShowAddCourse(false);
+                  }}
+                  className="flex items-center gap-1 px-3 py-1.5 text-xs bg-gold/20 text-gold border border-gold/30 rounded-lg cursor-pointer hover:bg-gold/30"
+                >
+                  <Award className="w-3 h-3" />
+                  Add AP Credit
+                </button>
+                <button
+                  onClick={() => {
+                    setShowAddCourse(true);
+                    setShowAddAP(false);
+                  }}
+                  className="flex items-center gap-1 px-3 py-1.5 text-xs bg-accent/20 text-accent-light border border-accent/30 rounded-lg cursor-pointer hover:bg-accent/30"
+                >
+                  <Plus className="w-3 h-3" />
+                  Add Course
+                </button>
               </div>
 
               {/* AP credit picker */}
