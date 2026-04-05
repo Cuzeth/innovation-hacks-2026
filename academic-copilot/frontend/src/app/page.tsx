@@ -1,14 +1,55 @@
 "use client";
 
-import { useState } from "react";
-import { GraduationCap, Sparkles, ArrowRight, BookOpen, Calendar, Map, Brain } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  GraduationCap,
+  Sparkles,
+  ArrowRight,
+  BookOpen,
+  Calendar,
+  Map,
+  Brain,
+  User,
+  Loader2,
+} from "lucide-react";
+import { api } from "@/lib/api";
 import Dashboard from "@/components/Dashboard";
+import Onboarding from "@/components/Onboarding";
+
+type Mode = "landing" | "onboarding" | "dashboard";
 
 export default function Home() {
-  const [started, setStarted] = useState(false);
+  const [mode, setMode] = useState<Mode>("landing");
+  const [checking, setChecking] = useState(true);
 
-  if (started) {
-    return <Dashboard />;
+  // Check if profile already exists
+  useEffect(() => {
+    api
+      .getProfile()
+      .then((p) => {
+        if (p && !("not_setup" in p && p.not_setup)) {
+          // Profile exists, go straight to dashboard
+          setMode("dashboard");
+        }
+        setChecking(false);
+      })
+      .catch(() => setChecking(false));
+  }, []);
+
+  if (checking) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="w-6 h-6 text-accent animate-spin" />
+      </div>
+    );
+  }
+
+  if (mode === "onboarding") {
+    return <Onboarding onComplete={() => setMode("dashboard")} />;
+  }
+
+  if (mode === "dashboard") {
+    return <Dashboard onReset={() => { api.resetProfile(); setMode("landing"); }} />;
   }
 
   return (
@@ -55,17 +96,28 @@ export default function Home() {
           ))}
         </div>
 
-        <button
-          onClick={() => setStarted(true)}
-          className="inline-flex items-center gap-2 px-8 py-4 bg-maroon hover:bg-maroon/90 text-white font-semibold rounded-xl text-lg transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-        >
-          Get Started
-          <ArrowRight className="w-5 h-5" />
-        </button>
+        {/* Two buttons: Set up vs Demo */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            onClick={() => {
+              api.resetProfile().then(() => setMode("onboarding"));
+            }}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-maroon hover:bg-maroon/90 text-white font-semibold rounded-xl text-lg transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+          >
+            <User className="w-5 h-5" />
+            Set Up My Profile
+          </button>
 
-        <p className="text-xs text-muted mt-4">
-          Demo mode — pre-loaded with a sample CS student profile
-        </p>
+          <button
+            onClick={() => {
+              api.loadDemo().then(() => setMode("dashboard"));
+            }}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-card hover:bg-card-border/30 text-foreground font-semibold rounded-xl text-lg border border-card-border transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+          >
+            Try Demo
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       {/* Footer */}

@@ -17,7 +17,10 @@ export const api = {
   health: () => fetchAPI<{ status: string }>("/api/health"),
 
   // Student
-  getProfile: () => fetchAPI<import("./types").StudentProfile>("/api/student/profile"),
+  getProfile: () =>
+    fetchAPI<import("./types").StudentProfile & { not_setup?: boolean }>(
+      "/api/student/profile"
+    ),
   updateProfile: (profile: import("./types").StudentProfile) =>
     fetchAPI<import("./types").StudentProfile>("/api/student/profile", {
       method: "PUT",
@@ -28,9 +31,23 @@ export const api = {
       method: "PUT",
       body: JSON.stringify(prefs),
     }),
+  resetProfile: () =>
+    fetchAPI<{ ok: boolean }>("/api/student/profile/reset", { method: "POST" }),
+  loadDemo: () =>
+    fetchAPI<import("./types").StudentProfile>("/api/student/profile/load-demo", {
+      method: "POST",
+    }),
   listMajors: () =>
     fetchAPI<{ code: string; name: string; degree: string; college: string }[]>(
       "/api/student/majors"
+    ),
+  listCourses: () =>
+    fetchAPI<{ course_id: string; title: string; credits: number }[]>(
+      "/api/student/courses/catalog"
+    ),
+  listAPExams: () =>
+    fetchAPI<{ exam: string; asu_equivalent: string; credits: number }[]>(
+      "/api/student/ap-exams"
     ),
 
   // Audit (triggers full workflow)

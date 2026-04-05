@@ -36,6 +36,22 @@ def _load_sample():
 
 @router.get("/profile")
 async def get_profile():
+    if "demo-student" not in _students:
+        return {"not_setup": True}
+    return _students["demo-student"]
+
+
+@router.post("/profile/reset")
+async def reset_profile():
+    """Clear the profile so onboarding runs again."""
+    _students.pop("demo-student", None)
+    return {"ok": True}
+
+
+@router.post("/profile/load-demo")
+async def load_demo():
+    """Load the pre-built demo student profile."""
+    _students.pop("demo-student", None)
     _load_sample()
     return _students["demo-student"]
 
@@ -78,6 +94,29 @@ async def list_majors():
     return [
         {"code": "ESCSCI", "name": "Computer Science", "degree": "BS", "college": "Ira A. Fulton Schools of Engineering"},
     ]
+
+
+@router.get("/courses/catalog")
+async def list_courses():
+    """List all courses in the catalog for the course picker."""
+    with open(DATA_DIR / "asu_cs_courses.json") as f:
+        data = json.load(f)
+    return [{"course_id": c["course_id"], "title": c["title"], "credits": c["credits"]} for c in data["courses"]]
+
+
+@router.get("/ap-exams")
+async def list_ap_exams():
+    """List available AP exams for the AP credit picker."""
+    with open(DATA_DIR / "ap_equivalencies.json") as f:
+        data = json.load(f)
+    # Deduplicate exam names
+    seen = set()
+    exams = []
+    for eq in data["equivalencies"]:
+        if eq["exam"] not in seen:
+            seen.add(eq["exam"])
+            exams.append({"exam": eq["exam"], "asu_equivalent": eq["asu_equivalent"], "credits": eq["credits"]})
+    return exams
 
 
 def get_student(student_id: str = "demo-student") -> StudentProfile:

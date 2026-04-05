@@ -9,6 +9,7 @@ import {
   LayoutGrid,
   Activity,
   Loader2,
+  LogOut,
 } from "lucide-react";
 import { api } from "@/lib/api";
 import type { FullAuditResult, AgentStep } from "@/lib/types";
@@ -22,7 +23,11 @@ import clsx from "clsx";
 
 type Tab = "audit" | "plan" | "schedule" | "calendar";
 
-export default function Dashboard() {
+interface DashboardProps {
+  onReset?: () => void;
+}
+
+export default function Dashboard({ onReset }: DashboardProps) {
   const [tab, setTab] = useState<Tab>("audit");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<FullAuditResult | null>(null);
@@ -65,6 +70,15 @@ export default function Dashboard() {
             </span>
           </div>
           <div className="flex items-center gap-3">
+            {onReset && (
+              <button
+                onClick={onReset}
+                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-card-border text-muted hover:text-foreground transition cursor-pointer"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                New Profile
+              </button>
+            )}
             <button
               onClick={() => setShowLog((v) => !v)}
               className={clsx(
