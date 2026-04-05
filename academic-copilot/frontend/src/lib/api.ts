@@ -84,6 +84,15 @@ export const api = {
     }>("/api/plan/bottlenecks"),
   getPaths: () =>
     fetchAPI<{ paths: import("./types").GraduationPath[] }>("/api/plan/paths"),
+  getWhatIfOptions: () =>
+    fetchAPI<{ options: import("./types").WhatIfCandidate[] }>(
+      "/api/plan/what-if/options"
+    ),
+  analyzeWhatIf: (payload: { question?: string; target_course_id?: string }) =>
+    fetchAPI<import("./types").WhatIfAnalysis>("/api/plan/what-if", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
 
   // Schedule
   getSchedules: () =>

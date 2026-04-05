@@ -71,5 +71,37 @@ class AcademicPlan(BaseModel):
     explanation: str = ""
 
 
+class WhatIfCandidate(BaseModel):
+    course_id: str
+    title: str = ""
+    source: str = Field(description="in_progress | upcoming")
+    semester: str = ""
+    reason: str = ""
+
+
+class RecoveryAction(BaseModel):
+    title: str
+    detail: str
+    urgency: RiskLevel = RiskLevel.MEDIUM
+
+
+class WhatIfAnalysis(BaseModel):
+    question: str = ""
+    scenario_type: str = "fail_course"
+    target_course_id: str
+    target_course_title: str = ""
+    target_context: str = Field(description="in_progress | upcoming")
+    baseline_graduation_term: str = ""
+    scenario_graduation_term: str = ""
+    delay_semesters: int = 0
+    impacted_courses: list[str] = Field(default_factory=list)
+    blocked_courses: list[str] = Field(default_factory=list)
+    recovery_actions: list[RecoveryAction] = Field(default_factory=list)
+    revised_path: GraduationPath
+    explanation: str = ""
+    confidence: str = "high"
+
+
 # Rebuild forward refs
 GraduationPath.model_rebuild()
+WhatIfAnalysis.model_rebuild()

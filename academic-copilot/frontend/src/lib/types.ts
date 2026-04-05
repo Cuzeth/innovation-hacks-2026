@@ -163,6 +163,37 @@ export interface AcademicPlan {
   explanation: string;
 }
 
+export interface WhatIfCandidate {
+  course_id: string;
+  title: string;
+  source: "in_progress" | "upcoming";
+  semester: string;
+  reason: string;
+}
+
+export interface RecoveryAction {
+  title: string;
+  detail: string;
+  urgency: "low" | "medium" | "high";
+}
+
+export interface WhatIfAnalysis {
+  question: string;
+  scenario_type: string;
+  target_course_id: string;
+  target_course_title: string;
+  target_context: "in_progress" | "upcoming";
+  baseline_graduation_term: string;
+  scenario_graduation_term: string;
+  delay_semesters: number;
+  impacted_courses: string[];
+  blocked_courses: string[];
+  recovery_actions: RecoveryAction[];
+  revised_path: GraduationPath;
+  explanation: string;
+  confidence: string;
+}
+
 export interface MeetingTime {
   days: string[];
   start_time: string;

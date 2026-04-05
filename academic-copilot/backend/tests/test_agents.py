@@ -114,9 +114,85 @@ def test_bottleneck_detection():
         print(f"    {bn.course_id}: blocks {bn.blocks}, depth {bn.depth}")
 
 
+def test_what_if_failure_for_upcoming_course():
+    """Test failure simulation for an upcoming bottleneck course."""
+    student = _load_sample_student()
+    provider = ASURequirementsProvider()
+    reqs = asyncio.run(provider.get_requirements("ESCSCI", "2024-2025"))
+
+    eval_agent = CreditEvaluationAgent()
+    audit = asyncio.run(eval_agent.evaluate(student, reqs))
+
+    planner = PlanningAgent()
+    baseline = asyncio.run(planner.generate_plan(student, audit))
+    analysis = asyncio.run(
+        planner.analyze_failure_scenario(
+            student,
+            audit,
+            baseline,
+            "CSE 330",
+            "What if I fail CSE 330?",
+        )
+    )
+
+    assert analysis.target_course_id == "CSE 330"
+    assert analysis.target_context == "upcoming"
+    assert planner._semester_rank(analysis.scenario_graduation_term) >= planner._semester_rank(analysis.baseline_graduation_term)
+    assert "CSE 485" in analysis.blocked_courses or "CSE 485" in analysis.impacted_courses
+    assert len(analysis.recovery_actions) > 0
+
+    print("  what_if_upcoming_course: PASS")
+    print(f"    Delay: {analysis.delay_semesters} semester(s)")
+    print(f"    Blocked: {analysis.blocked_courses}")
+
+
+def test_what_if_failure_for_in_progress_course():
+    """Test failure simulation for an in-progress course."""
+    student = _load_sample_student()
+    student.completed_courses.append(
+        CompletedCourse(
+            course_id="CSE 330",
+            title="Operating Systems",
+            credits=3,
+            grade="NR",
+            semester="Fall 2026",
+            source="asu",
+        )
+    )
+    student.compute_credits()
+
+    provider = ASURequirementsProvider()
+    reqs = asyncio.run(provider.get_requirements("ESCSCI", "2024-2025"))
+
+    eval_agent = CreditEvaluationAgent()
+    audit = asyncio.run(eval_agent.evaluate(student, reqs))
+
+    planner = PlanningAgent()
+    baseline = asyncio.run(planner.generate_plan(student, audit))
+    analysis = asyncio.run(
+        planner.analyze_failure_scenario(
+            student,
+            audit,
+            baseline,
+            "CSE 330",
+            "What if I fail my in-progress CSE 330 course?",
+        )
+    )
+
+    assert analysis.target_context == "in_progress"
+    assert planner._semester_rank(analysis.scenario_graduation_term) >= planner._semester_rank(analysis.baseline_graduation_term)
+    assert len(analysis.recovery_actions) > 0
+
+    print("  what_if_in_progress_course: PASS")
+    print(f"    Delay: {analysis.delay_semesters} semester(s)")
+    print(f"    Scenario term: {analysis.scenario_graduation_term}")
+
+
 if __name__ == "__main__":
     print("Running agent tests (no API key needed)...")
     test_credit_evaluation()
     test_planner_remaining_courses()
     test_bottleneck_detection()
+    test_what_if_failure_for_upcoming_course()
+    test_what_if_failure_for_in_progress_course()
     print("All agent tests passed!")

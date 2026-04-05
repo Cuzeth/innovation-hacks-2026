@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AlertTriangle,
   Zap,
@@ -11,8 +11,17 @@ import {
   Sparkles,
   ShieldAlert,
   GitBranch,
+  MessageSquareMore,
+  Loader2,
 } from "lucide-react";
-import type { AcademicPlan, GraduationPath, Bottleneck } from "@/lib/types";
+import { api } from "@/lib/api";
+import type {
+  AcademicPlan,
+  GraduationPath,
+  Bottleneck,
+  WhatIfAnalysis,
+  WhatIfCandidate,
+} from "@/lib/types";
 import Markdown from "./Markdown";
 import clsx from "clsx";
 
@@ -89,6 +98,8 @@ export default function PlanView({ plan }: { plan: AcademicPlan }) {
         <BottleneckPanel bottlenecks={plan.bottlenecks} />
       )}
 
+      <WhatIfPanel baselinePlan={plan} />
+
       {/* Semester timeline */}
       <div className="space-y-3">
         {path.semesters.map((sem, i) => (
@@ -133,6 +144,208 @@ export default function PlanView({ plan }: { plan: AcademicPlan }) {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function WhatIfPanel({ baselinePlan }: { baselinePlan: AcademicPlan }) {
+  const [options, setOptions] = useState<WhatIfCandidate[]>([]);
+  const [selectedCourseId, setSelectedCourseId] = useState("");
+  const [question, setQuestion] = useState("");
+  const [analysis, setAnalysis] = useState<WhatIfAnalysis | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    api
+      .getWhatIfOptions()
+      .then((data) => {
+        setOptions(data.options || []);
+        if (data.options?.length) {
+          setSelectedCourseId(data.options[0].course_id);
+          setQuestion(`What if I fail ${data.options[0].course_id}?`);
+        }
+      })
+      .catch(() => {});
+  }, [baselinePlan.student_id]);
+
+  const submit = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const result = await api.analyzeWhatIf({
+        question,
+        target_course_id: selectedCourseId,
+      });
+      setAnalysis(result);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Unable to analyze scenario");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="bg-card border border-card-border rounded-xl p-4 space-y-4">
+      <div>
+        <h3 className="flex items-center gap-2 text-sm font-semibold">
+          <MessageSquareMore className="w-4 h-4 text-accent" />
+          What-If Copilot
+        </h3>
+        <p className="text-xs text-muted mt-1">
+          Ask what happens if you fail an in-progress or upcoming course, and get a recovery plan.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-[0.9fr_1.1fr_auto] gap-3">
+        <select
+          value={selectedCourseId}
+          onChange={(e) => {
+            const nextCourseId = e.target.value;
+            setSelectedCourseId(nextCourseId);
+            if (!question.trim() || question.toLowerCase().includes("what if i fail")) {
+              setQuestion(`What if I fail ${nextCourseId}?`);
+            }
+          }}
+          className="w-full px-3 py-2 bg-background border border-card-border rounded-lg text-sm focus:outline-none focus:border-accent"
+        >
+          {options.map((option) => (
+            <option key={`${option.source}-${option.course_id}`} value={option.course_id}>
+              {option.course_id} · {option.source === "in_progress" ? "In Progress" : option.semester}
+            </option>
+          ))}
+        </select>
+
+        <input
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          placeholder="What if I fail CSE 330?"
+          className="w-full px-3 py-2 bg-background border border-card-border rounded-lg text-sm focus:outline-none focus:border-accent"
+        />
+
+        <button
+          onClick={submit}
+          disabled={loading || (!selectedCourseId && !question.trim())}
+          className="px-4 py-2 rounded-lg bg-maroon text-white text-sm font-medium hover:bg-maroon/90 disabled:opacity-60 cursor-pointer"
+        >
+          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Analyze"}
+        </button>
+      </div>
+
+      {options.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {options.slice(0, 5).map((option) => (
+            <button
+              key={`${option.source}-${option.course_id}-chip`}
+              onClick={() => {
+                setSelectedCourseId(option.course_id);
+                setQuestion(`What if I fail ${option.course_id}?`);
+              }}
+              className="px-2.5 py-1 rounded-full border border-card-border text-xs text-muted hover:text-foreground cursor-pointer"
+            >
+              {option.course_id} · {option.source === "in_progress" ? "In Progress" : option.semester}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {error && (
+        <div className="bg-danger/10 border border-danger/30 rounded-lg p-3 text-xs text-danger">
+          {error}
+        </div>
+      )}
+
+      {analysis && (
+        <div className="space-y-3 animate-fade-in">
+          <div className="grid md:grid-cols-3 gap-3">
+            <ScenarioCard
+              label="Baseline"
+              value={analysis.baseline_graduation_term}
+              sub="original graduation term"
+            />
+            <ScenarioCard
+              label="Scenario"
+              value={analysis.scenario_graduation_term}
+              sub={`after failing ${analysis.target_course_id}`}
+            />
+            <ScenarioCard
+              label="Delay"
+              value={`${analysis.delay_semesters}`}
+              sub="semester(s) added"
+              danger={analysis.delay_semesters > 0}
+            />
+          </div>
+
+          <div className="bg-accent/5 border border-accent/20 rounded-xl p-4">
+            <div className="text-sm font-medium text-accent-light mb-2">
+              What changes
+            </div>
+            <div className="text-sm text-foreground/80">
+              <Markdown text={analysis.explanation} />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-3">
+            <div className="bg-background rounded-xl p-4">
+              <div className="text-xs uppercase tracking-[0.12em] text-muted mb-2">
+                First Courses Affected
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {(analysis.impacted_courses.length > 0
+                  ? analysis.impacted_courses
+                  : analysis.blocked_courses
+                ).slice(0, 6).map((courseId) => (
+                  <span
+                    key={courseId}
+                    className="px-2 py-1 rounded-full bg-warning/10 text-warning text-xs"
+                  >
+                    {courseId}
+                  </span>
+                ))}
+                {analysis.impacted_courses.length === 0 && analysis.blocked_courses.length === 0 && (
+                  <span className="text-xs text-muted">No direct downstream blockers detected.</span>
+                )}
+              </div>
+            </div>
+
+            <div className="bg-background rounded-xl p-4">
+              <div className="text-xs uppercase tracking-[0.12em] text-muted mb-2">
+                Recovery Plan
+              </div>
+              <div className="space-y-2">
+                {analysis.recovery_actions.map((action) => (
+                  <div key={action.title} className="text-xs">
+                    <div className="font-medium">{action.title}</div>
+                    <div className="text-muted mt-0.5">{action.detail}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ScenarioCard({
+  label,
+  value,
+  sub,
+  danger = false,
+}: {
+  label: string;
+  value: string;
+  sub: string;
+  danger?: boolean;
+}) {
+  return (
+    <div className="bg-background rounded-xl p-4">
+      <div className="text-xs text-muted">{label}</div>
+      <div className={clsx("text-2xl font-bold mt-1", danger ? "text-danger" : "text-foreground")}>
+        {value}
+      </div>
+      <div className="text-xs text-muted mt-1">{sub}</div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ from app.models.degree import DegreeAudit, RequirementStatus
 from app.models.plan import (
     AcademicPlan, GraduationPath, SemesterPlan, PlannedCourse,
     Bottleneck, RiskFactor, RiskLevel, APCreditImpact,
+    WhatIfAnalysis, WhatIfCandidate, RecoveryAction,
 )
 from app.models.course import Course
 from app.providers.asu_courses import ASUCourseProvider
@@ -25,7 +26,12 @@ class PlanningAgent(BaseAgent):
         super().__init__()
         self.course_provider = ASUCourseProvider()
 
-    async def generate_plan(self, student: StudentProfile, audit: DegreeAudit) -> AcademicPlan:
+    async def generate_plan(
+        self,
+        student: StudentProfile,
+        audit: DegreeAudit,
+        force_not_before: dict[str, int] | None = None,
+    ) -> AcademicPlan:
         """Generate a complete academic plan with bottleneck analysis."""
         # 1. Collect remaining courses
         remaining = self._get_remaining_courses(audit)
@@ -50,6 +56,7 @@ class PlanningAgent(BaseAgent):
             ordered, course_map, student, audit,
             plan_name="Recommended Plan",
             max_credits=student.preferences.max_credits_per_semester,
+            force_not_before=force_not_before or {},
         )
         primary_path.bottlenecks = bottlenecks
         primary_path.ap_credit_impact = ap_impact
@@ -59,6 +66,7 @@ class PlanningAgent(BaseAgent):
             ordered, course_map, student, audit,
             plan_name="Accelerated Plan",
             max_credits=min(19, student.preferences.max_credits_per_semester + 3),
+            force_not_before=force_not_before or {},
         )
         alt_path.bottlenecks = bottlenecks
         alt_path.ap_credit_impact = ap_impact
@@ -82,6 +90,119 @@ class PlanningAgent(BaseAgent):
             ap_credit_impact=ap_impact,
             risk_summary=risk_summary,
             explanation=primary_path.explanation,
+        )
+
+    async def get_what_if_candidates(
+        self,
+        student: StudentProfile,
+        plan: AcademicPlan,
+    ) -> list[WhatIfCandidate]:
+        candidates: list[WhatIfCandidate] = []
+        seen: set[str] = set()
+
+        for course in student.completed_courses:
+            if course.grade == "NR" and course.course_id not in seen:
+                seen.add(course.course_id)
+                candidates.append(WhatIfCandidate(
+                    course_id=course.course_id,
+                    title=course.title,
+                    source="in_progress",
+                    semester=course.semester or student.current_semester,
+                    reason="Currently in progress. Failing it could change prerequisite clearance immediately.",
+                ))
+
+        for semester in plan.recommended_path.semesters[:2]:
+            for course in semester.courses:
+                if course.course_id in seen:
+                    continue
+                seen.add(course.course_id)
+                candidates.append(WhatIfCandidate(
+                    course_id=course.course_id,
+                    title=course.title,
+                    source="upcoming",
+                    semester=semester.semester,
+                    reason="Scheduled soon in the recommended path, so failure would have visible downstream impact.",
+                ))
+
+        return candidates
+
+    async def analyze_failure_scenario(
+        self,
+        student: StudentProfile,
+        audit: DegreeAudit,
+        baseline_plan: AcademicPlan,
+        course_id: str,
+        question: str = "",
+    ) -> WhatIfAnalysis:
+        target_context = "upcoming"
+        target_title = self._lookup_course_title(course_id, baseline_plan)
+
+        in_progress = any(c.course_id == course_id and c.grade == "NR" for c in student.completed_courses)
+        if in_progress:
+            target_context = "in_progress"
+            simulated_student = student.model_copy(deep=True)
+            for course in simulated_student.completed_courses:
+                if course.course_id == course_id and course.grade == "NR":
+                    course.grade = "E"
+
+            from .credit_eval import CreditEvaluationAgent
+
+            credit_agent = CreditEvaluationAgent()
+            simulated_audit = await credit_agent.evaluate(simulated_student, audit.degree_requirements)
+            scenario_plan = await self.generate_plan(simulated_student, simulated_audit)
+        else:
+            forced_index = self._planned_semester_index(baseline_plan.recommended_path, course_id)
+            scenario_plan = await self.generate_plan(
+                student,
+                audit,
+                force_not_before={course_id: forced_index + 1 if forced_index >= 0 else 1},
+            )
+
+        baseline_term = baseline_plan.recommended_path.graduation_term
+        scenario_term = scenario_plan.recommended_path.graduation_term
+        delay_semesters = max(
+            0,
+            self._semester_rank(scenario_term) - self._semester_rank(baseline_term),
+        )
+        impacted_courses = self._diff_course_placements(
+            baseline_plan.recommended_path,
+            scenario_plan.recommended_path,
+        )
+        blocked_courses = self._blocked_courses_for_target(
+            course_id,
+            baseline_plan.bottlenecks or scenario_plan.bottlenecks,
+        )
+        recovery_actions = self._build_recovery_actions(
+            course_id,
+            target_context,
+            delay_semesters,
+            impacted_courses,
+            student,
+        )
+        explanation = await self._explain_failure_scenario(
+            course_id,
+            target_title,
+            target_context,
+            baseline_plan,
+            scenario_plan,
+            blocked_courses,
+            recovery_actions,
+            question,
+        )
+
+        return WhatIfAnalysis(
+            question=question,
+            target_course_id=course_id,
+            target_course_title=target_title,
+            target_context=target_context,
+            baseline_graduation_term=baseline_term,
+            scenario_graduation_term=scenario_term,
+            delay_semesters=delay_semesters,
+            impacted_courses=impacted_courses,
+            blocked_courses=blocked_courses,
+            recovery_actions=recovery_actions,
+            revised_path=scenario_plan.recommended_path,
+            explanation=explanation,
         )
 
     def _get_remaining_courses(self, audit: DegreeAudit) -> dict[str, str]:
@@ -220,6 +341,7 @@ class PlanningAgent(BaseAgent):
         audit: DegreeAudit,
         plan_name: str,
         max_credits: int,
+        force_not_before: dict[str, int],
     ) -> GraduationPath:
         """Assign courses to semesters respecting constraints."""
         completed = {c.course_id for c in student.completed_courses}
@@ -235,7 +357,7 @@ class PlanningAgent(BaseAgent):
         remaining_ordered = list(ordered)
         planned_prior: set[str] = set()  # Courses planned in PREVIOUS semesters
 
-        for sem_name in semester_names:
+        for sem_index, sem_name in enumerate(semester_names):
             if not remaining_ordered:
                 break
             is_summer = "Summer" in sem_name
@@ -252,6 +374,11 @@ class PlanningAgent(BaseAgent):
 
                 course = course_map.get(cid)
                 if not course:
+                    still_remaining.append(cid)
+                    continue
+
+                min_semester_index = force_not_before.get(cid, 0)
+                if sem_index < min_semester_index:
                     still_remaining.append(cid)
                     continue
 
@@ -359,6 +486,148 @@ class PlanningAgent(BaseAgent):
             if len(semesters) > 12:
                 break
         return semesters
+
+    def _semester_rank(self, semester: str) -> int:
+        parts = semester.split()
+        if len(parts) != 2:
+            return 0
+        season, year_str = parts
+        year = int(year_str)
+        season_rank = {"Spring": 0, "Summer": 1, "Fall": 2}.get(season, 0)
+        return year * 10 + season_rank
+
+    def _planned_semester_index(self, path: GraduationPath, course_id: str) -> int:
+        for idx, semester in enumerate(path.semesters):
+            if any(course.course_id == course_id for course in semester.courses):
+                return idx
+        return -1
+
+    def _lookup_course_title(self, course_id: str, plan: AcademicPlan) -> str:
+        for semester in plan.recommended_path.semesters:
+            for course in semester.courses:
+                if course.course_id == course_id:
+                    return course.title
+        return ""
+
+    def _diff_course_placements(self, baseline: GraduationPath, scenario: GraduationPath) -> list[str]:
+        baseline_map = {
+            course.course_id: idx
+            for idx, semester in enumerate(baseline.semesters)
+            for course in semester.courses
+        }
+        scenario_map = {
+            course.course_id: idx
+            for idx, semester in enumerate(scenario.semesters)
+            for course in semester.courses
+        }
+
+        delayed = []
+        for course_id, baseline_idx in baseline_map.items():
+            scenario_idx = scenario_map.get(course_id)
+            if scenario_idx is not None and scenario_idx > baseline_idx:
+                delayed.append((scenario_idx - baseline_idx, course_id))
+
+        delayed.sort(reverse=True)
+        return [course_id for _, course_id in delayed[:6]]
+
+    def _blocked_courses_for_target(self, course_id: str, bottlenecks: list[Bottleneck]) -> list[str]:
+        for bottleneck in bottlenecks:
+            if bottleneck.course_id == course_id:
+                return bottleneck.blocks
+        return []
+
+    def _build_recovery_actions(
+        self,
+        course_id: str,
+        target_context: str,
+        delay_semesters: int,
+        impacted_courses: list[str],
+        student: StudentProfile,
+    ) -> list[RecoveryAction]:
+        actions = [
+            RecoveryAction(
+                title=f"Retake {course_id} at the earliest offering",
+                detail=(
+                    "Prioritize the next available term for a retake so downstream prerequisites reopen as soon as possible."
+                ),
+                urgency=RiskLevel.HIGH,
+            )
+        ]
+
+        if target_context == "in_progress":
+            actions.append(RecoveryAction(
+                title="Use the current term before final grades lock",
+                detail=(
+                    "Meet the instructor, use tutoring, and decide early whether recovery is realistic before deadlines pass."
+                ),
+                urgency=RiskLevel.HIGH,
+            ))
+
+        if delay_semesters > 0:
+            actions.append(RecoveryAction(
+                title="Backfill the delayed term with flexible requirements",
+                detail=(
+                    "Shift general studies, elective, or lighter support courses into the open slot so you still make credit progress."
+                ),
+                urgency=RiskLevel.MEDIUM,
+            ))
+
+        if not student.preferences.include_summer:
+            actions.append(RecoveryAction(
+                title="Consider a summer catch-up term",
+                detail=(
+                    "A summer retake or elective can reduce the timeline hit if you want to protect your original graduation target."
+                ),
+                urgency=RiskLevel.MEDIUM,
+            ))
+
+        if impacted_courses:
+            actions.append(RecoveryAction(
+                title="Protect the downstream chain",
+                detail=(
+                    f"Watch {', '.join(impacted_courses[:3])} because they are the first courses likely to shift if {course_id} slips."
+                ),
+                urgency=RiskLevel.MEDIUM,
+            ))
+
+        return actions[:4]
+
+    async def _explain_failure_scenario(
+        self,
+        course_id: str,
+        course_title: str,
+        target_context: str,
+        baseline_plan: AcademicPlan,
+        scenario_plan: AcademicPlan,
+        blocked_courses: list[str],
+        recovery_actions: list[RecoveryAction],
+        question: str,
+    ) -> str:
+        if not self.ai_enabled:
+            blocked_text = ", ".join(blocked_courses) if blocked_courses else "no immediate downstream courses"
+            action_text = " ".join(action.detail for action in recovery_actions[:2])
+            return (
+                f"If {course_id} ({course_title or 'target course'}) is failed in the {target_context.replace('_', ' ')} scenario, "
+                f"graduation moves from {baseline_plan.recommended_path.graduation_term} to "
+                f"{scenario_plan.recommended_path.graduation_term}. "
+                f"The first blocked courses are {blocked_text}. {action_text}"
+            )
+
+        prompt = f"""A student asked an academic what-if question. Explain the impact clearly and honestly.
+
+Student question: {question or f"What if I fail {course_id}?"}
+Target course: {course_id} {course_title}
+Scenario context: {target_context}
+Baseline graduation term: {baseline_plan.recommended_path.graduation_term}
+Scenario graduation term: {scenario_plan.recommended_path.graduation_term}
+Blocked downstream courses: {blocked_courses or ['None']}
+Recommended actions: {json.dumps([action.model_dump() for action in recovery_actions])}
+
+Write 2 short paragraphs:
+1. What changes if the student fails this course
+2. What they should do next to recover as much timeline as possible
+Keep it direct, supportive, and specific."""
+        return await self._generate(prompt)
 
     def _assess_risks(self, path: GraduationPath, student: StudentProfile, bottlenecks: list[Bottleneck]) -> list[RiskFactor]:
         risks = []

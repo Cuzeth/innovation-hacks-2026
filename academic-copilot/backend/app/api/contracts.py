@@ -13,6 +13,8 @@ API_ROUTES = [
     {"method": "GET", "path": "/api/audit/result", "description": "Fetch the latest degree audit"},
     {"method": "GET", "path": "/api/plan/result", "description": "Fetch the latest graduation plan"},
     {"method": "GET", "path": "/api/schedule/recommendations", "description": "Fetch ranked next-term schedules"},
+    {"method": "GET", "path": "/api/plan/what-if/options", "description": "List scenario-analysis candidate courses"},
+    {"method": "POST", "path": "/api/plan/what-if", "description": "Simulate failing an in-progress or upcoming course"},
     {"method": "POST", "path": "/api/schedule/{schedule_id}/select", "description": "Persist the chosen schedule"},
     {"method": "POST", "path": "/api/calendar/preview", "description": "Preview Google Calendar events"},
     {"method": "POST", "path": "/api/calendar/export", "description": "Export the selected schedule to Google Calendar"},
