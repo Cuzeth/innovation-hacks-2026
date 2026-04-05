@@ -336,12 +336,7 @@ class PlanningAgent(BaseAgent):
         while year < target_year + 2:  # Safety limit
             semesters.append(f"{season} {year}")
             if season == "Fall":
-                if include_summer:
-                    season = "Summer"
-                    # Actually next goes Spring
-                    season = "Spring"
-                else:
-                    season = "Spring"
+                season = "Spring"
                 year += 1
             elif season == "Spring":
                 if include_summer:

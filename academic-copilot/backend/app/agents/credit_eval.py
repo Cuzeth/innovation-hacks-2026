@@ -160,7 +160,8 @@ class CreditEvaluationAgent(BaseAgent):
             matched = option_ids & completed_ids
             if len(matched) >= req.pick_n:
                 applied = list(matched)[:req.pick_n]
-                credits = sum(next(c.credits for c in req.pick_from if c.course_id == cid) for cid in applied)
+                pick_map = {c.course_id: c.credits for c in req.pick_from}
+                credits = sum(pick_map.get(cid, 3) for cid in applied)
                 in_prog = set(applied) & ip
                 if in_prog:
                     return (
@@ -176,7 +177,8 @@ class CreditEvaluationAgent(BaseAgent):
                     f"Satisfied by completing {', '.join(applied)} (needed {req.pick_n} from elective list)",
                 )
             elif matched:
-                credits = sum(next(c.credits for c in req.pick_from if c.course_id == cid) for cid in matched)
+                pick_map = {c.course_id: c.credits for c in req.pick_from}
+                credits = sum(pick_map.get(cid, 3) for cid in matched)
                 remaining = req.pick_n - len(matched)
                 return (
                     RequirementStatus.PARTIALLY_FULFILLED,

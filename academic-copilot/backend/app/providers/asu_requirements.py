@@ -72,9 +72,15 @@ def _load_major_info(major_code: str) -> dict:
     """Look up major name and college from catalog."""
     try:
         with open(DATA_DIR / "asu_majors.json") as f:
-            for m in json.load(f):
-                if m["code"] == major_code:
-                    return m
+            majors = json.load(f)
+        # Exact match first
+        for m in majors:
+            if m["code"] == major_code:
+                return m
+        # Prefix match (e.g. ESCSCI matches ESCSCIBS)
+        for m in majors:
+            if m["code"].startswith(major_code) or major_code.startswith(m["code"]):
+                return m
     except FileNotFoundError:
         pass
     return {"code": major_code, "name": major_code, "degree": "BS", "college": ""}
@@ -219,13 +225,20 @@ Important:
             response_schema=REQUIREMENTS_SCHEMA,
         )
 
-        response = client.models.generate_content(
-            model=settings.gemini_model,
-            contents=prompt,
-            config=config,
-        )
-
-        text = response.text.strip()
+        try:
+            response = client.models.generate_content(
+                model=settings.gemini_model,
+                contents=prompt,
+                config=config,
+            )
+            text = response.text.strip()
+        except Exception as e:
+            logger.error(f"Gemini web lookup failed for {major_code}: {e}")
+            raise ValueError(
+                f"Failed to look up requirements for {major_name} via Gemini. "
+                f"Ensure your GEMINI_API_KEY is valid and the model '{settings.gemini_model}' is accessible. "
+                f"Error: {e}"
+            )
         if text.startswith("```"):
             text = text.split("\n", 1)[-1]
             if text.endswith("```"):

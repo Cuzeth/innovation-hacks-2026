@@ -271,7 +271,7 @@ class SectionRankingAgent(BaseAgent):
             f"- {e.section.section.course_id} ({e.section.section.section_id}): "
             f"{e.section.section.instructor} (rating: {e.section.section.instructor_rating}), "
             f"{e.section.section.modality}, "
-            f"{''.join(m.days[0] for m in e.section.section.meeting_times)} "
+            f"{'/'.join(','.join(m.days) for m in e.section.section.meeting_times)} "
             f"{e.section.section.meeting_times[0].start_time if e.section.section.meeting_times else 'TBA'}-"
             f"{e.section.section.meeting_times[0].end_time if e.section.section.meeting_times else 'TBA'}, "
             f"score: {e.section.score:.0%}"

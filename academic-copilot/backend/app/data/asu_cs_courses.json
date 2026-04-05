@@ -426,6 +426,42 @@
       "prerequisites": [],
       "typically_offered": ["Fall", "Spring"],
       "is_upper_division": false
-    }
+    },
+    {
+      "course_id": "ARS 101",
+      "title": "Introduction to the Arts",
+      "credits": 3,
+      "description": "Survey of visual and performing arts across cultures and time periods.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "HIS 101",
+      "title": "Western Civilization to 1600",
+      "credits": 3,
+      "description": "European civilization from antiquity through the Renaissance and Reformation.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "HIS 110",
+      "title": "History of the United States to 1865",
+      "credits": 3,
+      "description": "American history from colonization through the Civil War.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring"],
+      "is_upper_division": false
+    },
+    {
+      "course_id": "SOC 101",
+      "title": "Introductory Sociology",
+      "credits": 3,
+      "description": "Introduction to sociological perspectives, social institutions, and social change.",
+      "prerequisites": [],
+      "typically_offered": ["Fall", "Spring", "Summer"],
+      "is_upper_division": false
+    },
   ]
 }

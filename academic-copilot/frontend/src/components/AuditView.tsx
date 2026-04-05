@@ -141,6 +141,13 @@ export default function AuditView({ audit, onRun }: Props) {
   );
 }
 
+const COLOR_MAP: Record<string, string> = {
+  accent: "text-accent",
+  success: "text-success",
+  warning: "text-warning",
+  danger: "text-danger",
+};
+
 function SummaryCard({
   label,
   value,
@@ -155,7 +162,7 @@ function SummaryCard({
   return (
     <div className="bg-card border border-card-border rounded-xl p-4">
       <div className="text-xs text-muted">{label}</div>
-      <div className={`text-2xl font-bold mt-1 text-${color}`}>{value}</div>
+      <div className={`text-2xl font-bold mt-1 ${COLOR_MAP[color] ?? "text-foreground"}`}>{value}</div>
       <div className="text-xs text-muted mt-0.5">{sub}</div>
     </div>
   );
